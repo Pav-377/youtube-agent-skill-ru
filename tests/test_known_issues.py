@@ -109,7 +109,7 @@ SMOKE = {
 
 
 class P7_SelfContainedSkills(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 1: shared/ + tools/build.py."""
     def test_p7_each_skill_runs_alone(self):
         failures = []
         for skill in sorted(os.listdir(SKILLS)):
@@ -123,7 +123,6 @@ class P7_SelfContainedSkills(unittest.TestCase):
                             failures.append(f"{skill}/{name}: {p.stderr.strip().splitlines()[-1:]}")
         self.assertEqual(failures, [])
 
-    @unittest.expectedFailure
     def test_p7_skill_docs_stay_inside_their_folder(self):
         bad = []
         for skill in sorted(os.listdir(SKILLS)):
@@ -132,7 +131,6 @@ class P7_SelfContainedSkills(unittest.TestCase):
                     bad.append(skill)
         self.assertEqual(bad, [])
 
-    @unittest.expectedFailure
     def test_p7_skills_using_shared_tools_carry_them(self):
         need = {"yt-shorts": ["hookscore.py", "hooks.json"], "yt-audit": ["hookscore.py", "hooks.json", "title.py"],
                 "yt-viral": ["hooks.json"]}

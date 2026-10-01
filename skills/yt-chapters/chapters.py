@@ -14,8 +14,7 @@ the pause was and how much the vocabulary changes across it. It is a first draft
 summariser.
 """
 import json, os, re, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "yt-edit"))
-from deadair import load, parse_ts  # noqa: E402  (same parser, one implementation)
+from transcript import load  # same parser as yt-edit, copied into this folder by tools/build.py
 
 STOP = set("the a an of for to in on and or is are was were be been with this that it as at by from "
            "you your i my we our they them he she but so if then than there here what which who how "
