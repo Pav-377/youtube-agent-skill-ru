@@ -186,17 +186,19 @@ EDIT_RU = [
     (8.60, 11.00, "Вот этот файл, типа, главный."),
 ]
 
+# The exact shape YouTube's automatic captions have, including the lines that hold one space
+# ("{SP}" below) - editors like to trim those, so they are written in explicitly.
 AUTO_VTT_RU = """WEBVTT
 Kind: captions
 Language: ru
 
 00:00:00.160 --> 00:00:02.869 align:start position:0%
-
+{SP}
 ну<00:00:00.400><c> короче</c><00:00:00.880><c> смотри</c><00:00:01.360><c> сегодня</c>
 
 00:00:02.869 --> 00:00:02.879 align:start position:0%
 ну короче смотри сегодня
-
+{SP}
 
 00:00:02.879 --> 00:00:05.990 align:start position:0%
 ну короче смотри сегодня
@@ -204,8 +206,9 @@ Language: ru
 
 00:00:05.990 --> 00:00:06.000 align:start position:0%
 про монтаж роликов
+{SP}
 
-"""
+""".replace("{SP}", " ")
 
 # title -> the formula a Russian reader would name. Used by the swipe known-issue test.
 SWIPE_RU = [

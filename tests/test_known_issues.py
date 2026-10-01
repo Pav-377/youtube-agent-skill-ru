@@ -170,7 +170,8 @@ class N_Encoding(unittest.TestCase):
 
 
 class N_YouTubeAutoCaptions(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3: shared/transcript.py."""
+
     def test_n3_tags_stripped_and_rolling_lines_merged(self):
         cues = load_cues(fixture("ru", "auto_ru.vtt"))
         text = " ".join(t for _, _, t in cues)
