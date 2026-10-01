@@ -27,7 +27,7 @@ Why each piece exists:
 - setup_output / read_text: on a Russian Windows the defaults are cp1251/cp866, so UTF-8 files
   came out as mojibake and an emoji in the output crashed the script.
 """
-import codecs, json, os, re, sys
+import codecs, functools, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(HERE, "lang.json"), encoding="utf-8") as _fh:
@@ -212,6 +212,7 @@ def _stem_ru(w):
     return w
 
 
+@functools.lru_cache(maxsize=65536)
 def stem(word):
     """Stem for comparing words. Russian words go through Snowball; others are only normalised.
     Hyphenated words are stemmed part by part: "слова-паразиты" -> "слов-паразит"."""

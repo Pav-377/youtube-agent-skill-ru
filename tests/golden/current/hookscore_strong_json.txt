@@ -11,7 +11,8 @@ exit=0
   },
   "verdict": 65,
   "band": "WORKABLE",
-  "formula": "The Question"
+  "formula": "The Question",
+  "lang": "en"
  },
  {
   "hook": "Your first 30 seconds are why nobody finishes your videos. It is not the topic.",
@@ -24,7 +25,8 @@ exit=0
   },
   "verdict": 57,
   "band": "WORKABLE",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "97% of the people who start a channel quit before video 30. Here is what the other 3% do differently.",
@@ -37,7 +39,8 @@ exit=0
   },
   "verdict": 55,
   "band": "WORKABLE",
-  "formula": "The Statistic"
+  "formula": "The Statistic",
+  "lang": "en"
  },
  {
   "hook": "YouTube tells you which videos are underperforming. Almost nobody opens the report.",
@@ -50,7 +53,8 @@ exit=0
   },
   "verdict": 46,
   "band": "WEAK",
-  "formula": "The Insider"
+  "formula": "The Insider",
+  "lang": "en"
  },
  {
   "hook": "Claude plus your YouTube Studio export gives you next week's upload schedule in one prompt.",
@@ -63,7 +67,8 @@ exit=0
   },
   "verdict": 43,
   "band": "WEAK",
-  "formula": "The Stack"
+  "formula": "The Stack",
+  "lang": "en"
  },
  {
   "hook": "This is the analytics page. This video did 40% of the channel's watch time. Here is why.",
@@ -76,7 +81,8 @@ exit=0
   },
   "verdict": 42,
   "band": "WEAK",
-  "formula": "The Statistic"
+  "formula": "The Statistic",
+  "lang": "en"
  },
  {
   "hook": "This channel went from 400 subscribers to 200,000 in seven months on one format. I mapped it.",
@@ -89,7 +95,8 @@ exit=0
   },
   "verdict": 41,
   "band": "WEAK",
-  "formula": "Someone Else's Result"
+  "formula": "Someone Else's Result",
+  "lang": "en"
  },
  {
   "hook": "In the next six minutes you will have a working title, thumbnail and script for your next video.",
@@ -102,7 +109,8 @@ exit=0
   },
   "verdict": 41,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "I pulled the nine most-viewed AI videos of the month and broke down what the titles share.",
@@ -115,7 +123,8 @@ exit=0
   },
   "verdict": 41,
   "band": "WEAK",
-  "formula": "The Teardown"
+  "formula": "The Teardown",
+  "lang": "en"
  },
  {
   "hook": "If you have under a thousand subscribers, this is the only video you need this week.",
@@ -128,7 +137,8 @@ exit=0
   },
   "verdict": 41,
   "band": "WEAK",
-  "formula": "The Superlative"
+  "formula": "The Superlative",
+  "lang": "en"
  },
  {
   "hook": "You can write, title, thumbnail and schedule a week of videos without opening a single editor.",
@@ -141,7 +151,8 @@ exit=0
   },
   "verdict": 40,
   "band": "WEAK",
-  "formula": "The Impossible Claim"
+  "formula": "The Impossible Claim",
+  "lang": "en"
  },
  {
   "hook": "I am going to show you the exact prompt, on screen, that wrote this video.",
@@ -154,7 +165,8 @@ exit=0
   },
   "verdict": 39,
   "band": "WEAK",
-  "formula": "The Reveal"
+  "formula": "The Reveal",
+  "lang": "en"
  },
  {
   "hook": "I let an AI run my channel for 30 days. I did not touch the uploads.",
@@ -167,7 +179,8 @@ exit=0
   },
   "verdict": 39,
   "band": "WEAK",
-  "formula": "I Tried It"
+  "formula": "I Tried It",
+  "lang": "en"
  },
  {
   "hook": "Seven things I would do differently if I started a channel in 2026.",
@@ -180,7 +193,8 @@ exit=0
   },
   "verdict": 39,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "I wrote the same video three ways. One of them held 62% and the other two did not.",
@@ -193,7 +207,8 @@ exit=0
   },
   "verdict": 39,
   "band": "WEAK",
-  "formula": "The Statistic"
+  "formula": "The Statistic",
+  "lang": "en"
  },
  {
   "hook": "Every video on this channel starts in the same 12-line file. Here it is.",
@@ -206,7 +221,8 @@ exit=0
   },
   "verdict": 38,
   "band": "WEAK",
-  "formula": "Someone Else's Result"
+  "formula": "Someone Else's Result",
+  "lang": "en"
  },
  {
   "hook": "Do not upload another video until you check this one setting.",
@@ -219,7 +235,8 @@ exit=0
   },
   "verdict": 37,
   "band": "WEAK",
-  "formula": "The Question"
+  "formula": "The Question",
+  "lang": "en"
  },
  {
   "hook": "The old description format stops mattering this month. Here is what replaces it.",
@@ -232,7 +249,8 @@ exit=0
   },
   "verdict": 36,
   "band": "WEAK",
-  "formula": "The Deadline"
+  "formula": "The Deadline",
+  "lang": "en"
  },
  {
   "hook": "Everyone says post daily. I posted once a week for a year and tripled the channel.",
@@ -245,7 +263,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Contrarian Flip"
+  "formula": "Contrarian Flip",
+  "lang": "en"
  },
  {
   "hook": "This is the fastest way to turn one long video into thirty Shorts.",
@@ -258,7 +277,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "The Superlative"
+  "formula": "The Superlative",
+  "lang": "en"
  },
  {
   "hook": "This was my thumbnail. This is my thumbnail now. Same video, four times the click-through.",
@@ -271,6 +291,7 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Before and After"
+  "formula": "Before and After",
+  "lang": "en"
  }
 ]

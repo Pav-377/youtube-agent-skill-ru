@@ -32,7 +32,8 @@ def load_cues(path):
 
 
 class P1_HookscoreRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3 (mechanics); calibration on the reviewed set follows."""
+
     def test_p1_phrase_scored_as_russian(self):
         ru, en = hook(P1_RU), hook(P1_EN)
         self.assertGreater(ru["properties"]["ADDRESS"], 26, "твой / тебя not seen as address")
