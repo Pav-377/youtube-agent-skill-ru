@@ -30,7 +30,10 @@ YOU = re.compile(r"\b(you|your|you're|youre|yourself)\b", re.I)
 STAKE = re.compile(r"\b(lose|lost|wasting|waste|quit|fail|broke|cost|risk|before|stop|never|die|dying|dead)\b", re.I)
 CURIOSITY = re.compile(r"\b(why|how|what|which|until|before|but|nobody|almost|except|reason|actually)\b", re.I)
 
-def words(t): return re.findall(r"[a-z0-9'%$.]+", t.lower())
+def words(t):
+    # Dots at the edge are punctuation, not part of the word: "video." has to match "video" in the
+    # word lists, and a lone "..." is not a word. Inner dots stay, so "3.5" is still one token.
+    return [w for w in (x.strip(".") for x in re.findall(r"[a-z0-9'%$.]+", t.lower())) if w]
 
 def specificity(t):
     w = words(t)
@@ -40,6 +43,9 @@ def specificity(t):
     filler = sum(1 for x in w if x in FILLER)
     s = 34 + nums * 22 - vague * 16 - filler * 5
     # proper nouns that are not sentence-initial read as named things
+    # Known quirk, kept on purpose in English: only the hook's very first word is skipped, so the
+    # first word of a second sentence counts as a name too. Fixing it made strong and weak hooks
+    # harder to tell apart (strong hooks are often two short sentences). See CHANGELOG.md.
     s += min(18, 6 * sum(1 for x in t.split()[1:] if x[:1].isupper()))
     return max(0, min(100, s))
 

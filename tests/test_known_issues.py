@@ -256,21 +256,21 @@ class N_Thumbnail(unittest.TestCase):
 
 
 class N_HookscoreEnglishBugs(unittest.TestCase):
-    """Decision B: fixed in English too, in a separate commit after stage 1."""
+    """Decision B, option A: trailing period and ellipsis fixed in English; sentence start kept."""
 
-    @unittest.expectedFailure
     def test_n10_trailing_period_does_not_hide_filler(self):
         a = hook("Hey guys, welcome to my channel.")["properties"]["SPECIFICITY"]
         b = hook("Hey guys, welcome to my channel")["properties"]["SPECIFICITY"]
         self.assertEqual(a, b)
 
-    @unittest.expectedFailure
-    def test_n10_sentence_start_is_not_a_proper_noun(self):
+    def test_n10_sentence_start_quirk_is_kept_in_english(self):
+        """Decision A: in English the first word of a second sentence still counts as a name.
+        Fixing it made strong and weak hooks harder to tell apart. If this test fails, the quirk
+        changed - re-run tools/hookeval.py and update CHANGELOG.md before accepting it."""
         a = hook("Now you can do it. Then you can rest.")["properties"]["SPECIFICITY"]
         b = hook("now you can do it. then you can rest.")["properties"]["SPECIFICITY"]
-        self.assertEqual(a, b)
+        self.assertEqual(a - b, 6)
 
-    @unittest.expectedFailure
     def test_n10_ellipsis_is_not_a_word(self):
         a = hook("Wait ... this changes how you edit")["properties"]["BREVITY"]
         b = hook("Wait this changes how you edit")["properties"]["BREVITY"]

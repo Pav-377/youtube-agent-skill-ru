@@ -1,0 +1,235 @@
+exit=0
+
+  Let me tell you a little bit about myself first.
+  ------------------------------------------------
+    SPECIFICITY   34  ######
+    ADDRESS       76  ###############
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       40  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Before we get started, make sure to like and subscribe.
+  -------------------------------------------------------
+    SPECIFICITY   24  ####
+    ADDRESS       26  #####
+    STAKES        48  #########
+    CURIOSITY     41  ########
+    BREVITY      100  ####################
+    VERDICT       38  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  Today I want to share a few ideas with you.
+  -------------------------------------------
+    SPECIFICITY   35  #######
+    ADDRESS       46  #########
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       36  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Hi everyone, my name is Sam and I make videos about tech.
+  ---------------------------------------------------------
+    SPECIFICITY   46  #########
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       35  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  In this video I will be discussing some tips about YouTube.
+  -----------------------------------------------------------
+    SPECIFICITY   41  ########
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       34  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Let's talk about some things that are pretty interesting.
+  ---------------------------------------------------------
+    SPECIFICITY   34  ######
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       34  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Here are some thoughts on content creation in general.
+  ------------------------------------------------------
+    SPECIFICITY   34  ######
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       34  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  I think this might be useful for some people maybe.
+  ---------------------------------------------------
+    SPECIFICITY   34  ######
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       34  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Content creation is a journey and everyone has their own path.
+  --------------------------------------------------------------
+    SPECIFICITY   34  ######
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       34  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  I have been wanting to make this video for a long time.
+  -------------------------------------------------------
+    SPECIFICITY   29  #####
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       33  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  This video is sponsored by our partner, more on that later.
+  -----------------------------------------------------------
+    SPECIFICITY   29  #####
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       33  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Okay so yeah, let's just get into it.
+  -------------------------------------
+    SPECIFICITY   24  ####
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       89  #################
+    VERDICT       31  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Welcome to another episode of the show.
+  ---------------------------------------
+    SPECIFICITY   29  #####
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       78  ###############
+    VERDICT       30  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Today's video is all about editing.
+  -----------------------------------
+    SPECIFICITY   29  #####
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       67  #############
+    VERDICT       29  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  Quick video today, nothing special, just some updates.
+  ------------------------------------------------------
+    SPECIFICITY   19  ###
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       89  #################
+    VERDICT       29  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  This ultimate guide covers everything you need to know about the algorithm and many more topics that we will go through slowly one by one today in a lot of detail.
+  ------------------------------------------------------------------------
+    SPECIFICITY   13  ##
+    ADDRESS       76  ###############
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       51  ##########
+    VERDICT       28  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  Hey guys, welcome back to the channel, today we are going to talk about thumbnails.
+  ------------------------------------------------------------------------
+    SPECIFICITY    9  #
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       25  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  So basically this is a really amazing tool that I think you will like.
+  ----------------------------------------------------------------------
+    SPECIFICITY    4  
+    ADDRESS       46  #########
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       25  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  This is going to be an incredible video, so stay tuned.
+  -------------------------------------------------------
+    SPECIFICITY    8  #
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       25  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  Thumbnails.
+  --------------------
+    SPECIFICITY   34  ######
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       30  ######
+    VERDICT       25  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
+
+  It is a really powerful and revolutionary method that is just insane.
+  ---------------------------------------------------------------------
+    SPECIFICITY    0  
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       21  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      SPECIFICITY - swap one adjective for a number, a name or a date
+
+  winner: Let me tell you a little bit about myself first.  (40, WEAK)
+
