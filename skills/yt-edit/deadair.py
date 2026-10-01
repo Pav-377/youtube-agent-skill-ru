@@ -14,6 +14,8 @@ runtime you would land on, and you apply it in whatever editor you use. Nothing 
 """
 import json, os, re, sys
 
+import lang
+
 FILLER_ONLY = re.compile(r"^[\s,.-]*((um+|uh+|er+|ah+|so|okay|ok|right|yeah|like|anyway|basically|"
                          r"actually|you know|i mean|let me see|hold on)[\s,.-]*)+$", re.I)
 
@@ -22,6 +24,7 @@ from transcript import load, parse_ts  # noqa: E402,F401  (one parser for every 
 def norm(t): return re.sub(r"[^a-z ]", "", t.lower()).split()
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     floor = float(a[a.index("--floor") + 1]) if "--floor" in a else 0.45
@@ -56,7 +59,7 @@ def main():
     removed = sum(c["end"] - c["start"] for c in cuts)
     if as_json:
         print(json.dumps({"source": a[0], "duration": dur, "cuts": cuts,
-                          "removed": round(removed, 3), "out": round(dur - removed, 3)}, indent=1)); return
+                          "removed": round(removed, 3), "out": round(dur - removed, 3)}, indent=1, ensure_ascii=False)); return
     print(f"\n  {a[0]}   {dur:.2f}s in, {len(cues)} cues, dead-air floor {floor}s\n")
     for c in cuts:
         print(f"    {c['kind']:<7} {c['start']:8.2f} -> {c['end']:8.2f}   {c['end']-c['start']:5.2f}s   {c['why']}")

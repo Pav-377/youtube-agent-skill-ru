@@ -18,8 +18,10 @@ all. Treat a low score as a reason to look again, never a high score as a promis
 """
 import json, os, re, sys
 
+import lang
+
 HERE = os.path.dirname(os.path.abspath(__file__))
-FORMULAS = json.load(open(os.path.join(HERE, "hooks.json")))["hooks"]
+FORMULAS = lang.read_json(os.path.join(HERE, "hooks.json"))["hooks"]
 
 FILLER = {"basically","actually","literally","just","really","very","so","kind","sort","like",
           "guys","hey","welcome","today","video","subscribe","channel"}
@@ -111,13 +113,14 @@ FIX = {
 }
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a
     a = [x for x in a if x != "--json"]
     if "--hook" in a:
         lines = [a[a.index("--hook") + 1]]
     elif a and os.path.exists(a[0]):
-        lines = [l for l in open(a[0]).read().splitlines() if l.strip()]
+        lines = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
         print(__doc__); sys.exit(1 if not a else 0)
     out = []
@@ -127,7 +130,7 @@ def main():
                     "band": band(verdict), "formula": name, "matched": hits})
     out.sort(key=lambda r: -r["verdict"])
     if as_json:
-        print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1)); return
+        print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1, ensure_ascii=False)); return
     for r in out:
         report(r["hook"], r["properties"], r["verdict"], r["formula"], r["matched"])
     if len(out) > 1:

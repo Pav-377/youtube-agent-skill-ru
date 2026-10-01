@@ -36,7 +36,7 @@ class P1_HookscoreRussian(unittest.TestCase):
     def test_p1_phrase_scored_as_russian(self):
         ru, en = hook(P1_RU), hook(P1_EN)
         self.assertGreater(ru["properties"]["ADDRESS"], 26, "твой / тебя not seen as address")
-        self.assertGreaterEqual(ru["properties"]["BREVITY"], 80, "19 words read as 3")
+        self.assertGreaterEqual(ru["properties"]["BREVITY"], 80, "20 words read as 3")
         self.assertLessEqual(abs(ru["verdict"] - en["verdict"]), 10)
 
 
@@ -140,7 +140,8 @@ class P7_SelfContainedSkills(unittest.TestCase):
 
 
 class N_Encoding(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 2: shared/lang.py."""
+
     def test_n1_every_open_names_its_encoding(self):
         """On a Russian Windows open() defaults to cp1251 and UTF-8 input turns into mojibake."""
         bad = []
@@ -158,13 +159,11 @@ class N_Encoding(unittest.TestCase):
                             bad.append(f"{os.path.relpath(path, ROOT)}:{node.lineno}")
         self.assertEqual(bad, [])
 
-    @unittest.expectedFailure
     def test_n2_cp1251_console_does_not_crash(self):
         p = run_script("yt-script/hookscore.py", "--hook", "Тест 🔥 эмодзи и тире —",
                        env={"PYTHONIOENCODING": "cp1251"})
         self.assertEqual(p.returncode, 0, p.stderr[-300:])
 
-    @unittest.expectedFailure
     def test_n8_json_keeps_cyrillic_readable(self):
         p = run_script("yt-package/title.py", "--title", "Монтаж за 10 минут", "--json")
         self.assertIn("Монтаж", p.stdout)

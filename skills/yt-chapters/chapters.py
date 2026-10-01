@@ -14,6 +14,8 @@ the pause was and how much the vocabulary changes across it. It is a first draft
 summariser.
 """
 import json, os, re, sys
+
+import lang
 from transcript import load  # same parser as yt-edit, copied into this folder by tools/build.py
 
 STOP = set("the a an of for to in on and or is are was were be been with this that it as at by from "
@@ -29,6 +31,7 @@ def mmss(t):
     return f"{h}:{m:02d}:{s:02d}" if h else f"{m}:{s:02d}"
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     target = int(a[a.index("--target") + 1]) if "--target" in a else 7
@@ -65,7 +68,7 @@ def main():
                          "seconds": round(end - t, 2)})
     ok = len(chapters) >= 3 and chapters[0]["start"] == 0 and all(c["seconds"] >= MIN for c in chapters)
     if as_json:
-        print(json.dumps({"valid": ok, "chapters": chapters}, indent=1)); return
+        print(json.dumps({"valid": ok, "chapters": chapters}, indent=1, ensure_ascii=False)); return
     print()
     for c in chapters: print(f"  {c['label']} {c['draft_title']}")
     print(f"\n  {len(chapters)} chapters"
