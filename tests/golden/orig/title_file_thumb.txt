@@ -1,0 +1,72 @@
+exit=0
+
+  "97% of Channels Quit Before Video 30"
+  36 chars   score 100/100
+    ok              36 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (97%, 30)
+    ok              thumbnail and title carry different words
+
+  "Why Your Videos Die at 0:30 (and the 3-Line Fix)"
+  48 chars   score 98/100
+    x  mobile       a mobile feed shows about "Why Your Videos Die at 0:30 (and the..." - check the subject survives
+    ok              48 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (0, 30, 3)
+    ok              thumbnail and title carry different words
+
+  "I Let AI Run My Channel for 30 Days"
+  35 chars   score 94/100
+    x  duplicate    thumbnail repeats the title on ai - the thumbnail should say what the title does not
+    ok              35 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (30)
+
+  "How to edit faster"
+  18 chars   score 94/100
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              18 characters, inside the 60-character desktop cut
+    ok              thumbnail and title carry different words
+
+  "What I learned"
+  14 chars   score 94/100
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              14 characters, inside the 60-character desktop cut
+    ok              thumbnail and title carry different words
+
+  "Claude vs ChatGPT: Which Writes Better Scripts?"
+  47 chars   score 84/100
+    x  mobile       a mobile feed shows about "Claude vs ChatGPT: Which Writes Better..." - check the subject survives
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              47 characters, inside the 60-character desktop cut
+    ok              open question in the title
+    ok              thumbnail and title carry different words
+
+  "This Secret Setting Doubled My Views"
+  36 chars   score 80/100
+    x  vague        secret - swap for a number, a name or a date
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              36 characters, inside the 60-character desktop cut
+    ok              thumbnail and title carry different words
+
+  "How to Grow a YouTube Channel From Zero to 10,000 Subscribers Without Showing Your Face or Spending Any Money At All"
+  116 chars   score 80/100
+    x  length       116 characters - YouTube's hard limit is 100
+    x  mobile       a mobile feed shows about "How to Grow a YouTube Channel From Zero..." - check the subject survives
+    ok              carries a concrete figure (10,000)
+    ok              thumbnail and title carry different words
+
+  "THE BEST CAMERA FOR YOUTUBE IN 2026 HONEST REVIEW"
+  49 chars   score 70/100
+    x  mobile       a mobile feed shows about "THE BEST CAMERA FOR YOUTUBE IN 2026..." - check the subject survives
+    x  shouting     7 all-caps words - two is the ceiling before it reads as spam
+    x  vague        best - swap for a number, a name or a date
+    ok              49 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (2026)
+    ok              thumbnail and title carry different words
+
+  "The Ultimate Guide to YouTube Thumbnails That Will Change Everything Forever"
+  76 chars   score 48/100
+    x  length       76 characters - desktop search cuts near 60
+    x  mobile       a mobile feed shows about "The Ultimate Guide to YouTube..." - check the subject survives
+    x  vague        everything, ultimate - swap for a number, a name or a date
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              thumbnail and title carry different words
+

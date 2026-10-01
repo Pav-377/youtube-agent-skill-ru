@@ -1,0 +1,135 @@
+[
+ {
+  "channel": "Tiny Tutorials",
+  "title": "How I film my videos",
+  "views": 4000,
+  "url": "https://www.youtube.com/watch?v=testT000",
+  "duration": 600
+ },
+ {
+  "channel": "Tiny Tutorials",
+  "title": "Camera review",
+  "views": 5200,
+  "url": "https://www.youtube.com/watch?v=testT001",
+  "duration": 600
+ },
+ {
+  "channel": "Tiny Tutorials",
+  "title": "Desk tour",
+  "views": 4800,
+  "url": "https://www.youtube.com/watch?v=testT002",
+  "duration": 600
+ },
+ {
+  "channel": "Tiny Tutorials",
+  "title": "Q and A",
+  "views": 5100,
+  "url": "https://www.youtube.com/watch?v=testT003",
+  "duration": 600
+ },
+ {
+  "channel": "Tiny Tutorials",
+  "title": "97% of creators quit before video 30",
+  "views": 51000,
+  "url": "https://www.youtube.com/watch?v=testT004",
+  "duration": 600
+ },
+ {
+  "channel": "Tiny Tutorials",
+  "title": "Vlog day",
+  "views": 6100,
+  "url": "https://www.youtube.com/watch?v=testT005",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "My editing setup",
+  "views": 30000,
+  "url": "https://www.youtube.com/watch?v=testM000",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "Lighting on a budget",
+  "views": 28000,
+  "url": "https://www.youtube.com/watch?v=testM001",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "I let an AI run my channel for 30 days",
+  "views": 120000,
+  "url": "https://www.youtube.com/watch?v=testM002",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "Studio update",
+  "views": 31000,
+  "url": "https://www.youtube.com/watch?v=testM003",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "Answering comments",
+  "views": 29000,
+  "url": "https://www.youtube.com/watch?v=testM004",
+  "duration": 600
+ },
+ {
+  "channel": "Mid Channel",
+  "title": "Everyone says post daily. They are wrong",
+  "views": 95000,
+  "url": "https://www.youtube.com/watch?v=testM005",
+  "duration": 600
+ },
+ {
+  "channel": "Big Channel",
+  "title": "Weekly news",
+  "views": 400000,
+  "url": "https://www.youtube.com/watch?v=testB000",
+  "duration": 600
+ },
+ {
+  "channel": "Big Channel",
+  "title": "Review roundup",
+  "views": 410000,
+  "url": "https://www.youtube.com/watch?v=testB001",
+  "duration": 600
+ },
+ {
+  "channel": "Big Channel",
+  "title": "Live recap",
+  "views": 390000,
+  "url": "https://www.youtube.com/watch?v=testB002",
+  "duration": 600
+ },
+ {
+  "channel": "Big Channel",
+  "title": "Podcast clip",
+  "views": 420000,
+  "url": "https://www.youtube.com/watch?v=testB003",
+  "duration": 600
+ },
+ {
+  "channel": "Big Channel",
+  "title": "Claude vs ChatGPT: which one wins?",
+  "views": 900000,
+  "url": "https://www.youtube.com/watch?v=testB004",
+  "duration": 600
+ },
+ {
+  "channel": "Thin",
+  "title": "Only video",
+  "views": 1000,
+  "url": "https://www.youtube.com/watch?v=testT000",
+  "duration": 600
+ },
+ {
+  "channel": "Thin",
+  "title": "Second video",
+  "views": 90000,
+  "url": "https://www.youtube.com/watch?v=testT001",
+  "duration": 600
+ }
+]

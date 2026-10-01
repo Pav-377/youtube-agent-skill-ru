@@ -1,0 +1,75 @@
+exit=0
+{
+ "source": "edit_en.srt",
+ "duration": 35.0,
+ "cuts": [
+  {
+   "kind": "FILLER",
+   "start": 2.5,
+   "end": 3.1,
+   "why": "Um."
+  },
+  {
+   "kind": "DEAD",
+   "start": 3.325,
+   "end": 3.675,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "REPEAT",
+   "start": 3.9,
+   "end": 6.2,
+   "why": "restart of \"so the first thing you\""
+  },
+  {
+   "kind": "FILLER",
+   "start": 6.3,
+   "end": 6.9,
+   "why": "uh, so yeah"
+  },
+  {
+   "kind": "FILLER",
+   "start": 10.5,
+   "end": 13.0,
+   "why": "Basically."
+  },
+  {
+   "kind": "DEAD",
+   "start": 16.225,
+   "end": 16.975,
+   "why": "1.20s gap"
+  },
+  {
+   "kind": "FILLER",
+   "start": 19.9,
+   "end": 20.3,
+   "why": "Okay."
+  },
+  {
+   "kind": "REPEAT",
+   "start": 20.4,
+   "end": 23.5,
+   "why": "restart of \"most people never look at\""
+  },
+  {
+   "kind": "FILLER",
+   "start": 23.6,
+   "end": 24.0,
+   "why": "you know"
+  },
+  {
+   "kind": "DEAD",
+   "start": 24.225,
+   "end": 24.575,
+   "why": "0.80s gap"
+  },
+  {
+   "kind": "DEAD",
+   "start": 31.225,
+   "end": 32.275,
+   "why": "1.50s gap"
+  }
+ ],
+ "removed": 12.4,
+ "out": 22.6
+}

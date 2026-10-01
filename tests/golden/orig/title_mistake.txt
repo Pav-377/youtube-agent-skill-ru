@@ -1,0 +1,8 @@
+exit=0
+
+  "The thumbnail mistake everyone makes"
+  36 chars   score 94/100
+    x  no-number    no number, date or name - the most reliable single fix
+    ok              36 characters, inside the 60-character desktop cut
+    ok              thumbnail and title carry different words
+

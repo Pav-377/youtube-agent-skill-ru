@@ -1,0 +1,89 @@
+{
+ "text": "So today we are fixing the first thirty seconds. Um. So the first thing you need to do is uh, so yeah So the first thing you need to do is open your analytics. Basically. Look at the retention graph for your last video. See that drop at eight seconds? That is the hook. Okay. Most people never look at this page. you know Most people never look at this page, and that is the problem. Write five hooks, score them, keep the best two. That is the whole method. See you next week.",
+ "segments": [
+  {
+   "id": 0,
+   "start": 0.0,
+   "end": 2.4,
+   "text": " So today we are fixing the first thirty seconds."
+  },
+  {
+   "id": 1,
+   "start": 2.5,
+   "end": 3.1,
+   "text": " Um."
+  },
+  {
+   "id": 2,
+   "start": 3.9,
+   "end": 6.2,
+   "text": " So the first thing you need to do is"
+  },
+  {
+   "id": 3,
+   "start": 6.3,
+   "end": 6.9,
+   "text": " uh, so yeah"
+  },
+  {
+   "id": 4,
+   "start": 7.0,
+   "end": 10.4,
+   "text": " So the first thing you need to do is open your analytics."
+  },
+  {
+   "id": 5,
+   "start": 10.5,
+   "end": 13.0,
+   "text": " Basically."
+  },
+  {
+   "id": 6,
+   "start": 13.1,
+   "end": 16.0,
+   "text": " Look at the retention graph for your last video."
+  },
+  {
+   "id": 7,
+   "start": 17.2,
+   "end": 19.8,
+   "text": " See that drop at eight seconds? That is the hook."
+  },
+  {
+   "id": 8,
+   "start": 19.9,
+   "end": 20.3,
+   "text": " Okay."
+  },
+  {
+   "id": 9,
+   "start": 20.4,
+   "end": 23.5,
+   "text": " Most people never look at this page."
+  },
+  {
+   "id": 10,
+   "start": 23.6,
+   "end": 24.0,
+   "text": " you know"
+  },
+  {
+   "id": 11,
+   "start": 24.8,
+   "end": 27.9,
+   "text": " Most people never look at this page, and that is the problem."
+  },
+  {
+   "id": 12,
+   "start": 28.0,
+   "end": 31.0,
+   "text": " Write five hooks, score them, keep the best two."
+  },
+  {
+   "id": 13,
+   "start": 32.5,
+   "end": 35.0,
+   "text": " That is the whole method. See you next week."
+  }
+ ]
+}

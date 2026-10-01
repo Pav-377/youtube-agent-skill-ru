@@ -1,0 +1,55 @@
+1
+00:00:00,000 --> 00:00:02,400
+So today we are fixing the first thirty seconds.
+
+2
+00:00:02,500 --> 00:00:03,100
+Um.
+
+3
+00:00:03,900 --> 00:00:06,200
+So the first thing you need to do is
+
+4
+00:00:06,300 --> 00:00:06,900
+uh, so yeah
+
+5
+00:00:07,000 --> 00:00:10,400
+So the first thing you need to do is open your analytics.
+
+6
+00:00:10,500 --> 00:00:13,000
+Basically.
+
+7
+00:00:13,100 --> 00:00:16,000
+Look at the retention graph for your last video.
+
+8
+00:00:17,200 --> 00:00:19,800
+See that drop at eight seconds? That is the hook.
+
+9
+00:00:19,900 --> 00:00:20,300
+Okay.
+
+10
+00:00:20,400 --> 00:00:23,500
+Most people never look at this page.
+
+11
+00:00:23,600 --> 00:00:24,000
+you know
+
+12
+00:00:24,800 --> 00:00:27,900
+Most people never look at this page, and that is the problem.
+
+13
+00:00:28,000 --> 00:00:31,000
+Write five hooks, score them, keep the best two.
+
+14
+00:00:32,500 --> 00:00:35,000
+That is the whole method. See you next week.

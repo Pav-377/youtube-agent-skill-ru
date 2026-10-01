@@ -1,0 +1,17 @@
+exit=0
+[
+ {
+  "title": "What I learned",
+  "chars": 14,
+  "score": 90,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "14 characters, inside the 60-character desktop cut"
+  ]
+ }
+]

@@ -1,0 +1,18 @@
+exit=0
+
+  edit_en.srt   35.00s in, 14 cues, dead-air floor 0.35s
+
+    FILLER      2.50 ->     3.10    0.60s   Um.
+    DEAD        3.27 ->     3.73    0.45s   0.80s gap
+    REPEAT      3.90 ->     6.20    2.30s   restart of "so the first thing you"
+    FILLER      6.30 ->     6.90    0.60s   uh, so yeah
+    FILLER     10.50 ->    13.00    2.50s   Basically.
+    DEAD       16.18 ->    17.02    0.85s   1.20s gap
+    FILLER     19.90 ->    20.30    0.40s   Okay.
+    REPEAT     20.40 ->    23.50    3.10s   restart of "most people never look at"
+    FILLER     23.60 ->    24.00    0.40s   you know
+    DEAD       24.18 ->    24.62    0.45s   0.80s gap
+    DEAD       31.18 ->    32.33    1.15s   1.50s gap
+
+  11 cuts, 12.80s removed, 22.20s out (36.6% shorter)
+

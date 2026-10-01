@@ -1,0 +1,84 @@
+[
+ {
+  "channel": "Канал",
+  "title": "Все говорят снимать каждый день. Это ошибка",
+  "views": 50000,
+  "expected_formula": "Contrarian Flip"
+ },
+ {
+  "channel": "Канал",
+  "title": "Я снимал видео 30 дней подряд",
+  "views": 50000,
+  "expected_formula": "I Tried It"
+ },
+ {
+  "channel": "Канал",
+  "title": "Почему ваши ролики никто не смотрит?",
+  "views": 50000,
+  "expected_formula": "The Question"
+ },
+ {
+  "channel": "Канал",
+  "title": "Не загружай видео, пока не проверишь это",
+  "views": 50000,
+  "expected_formula": "The Warning"
+ },
+ {
+  "channel": "Канал",
+  "title": "Монтаж против нейросети: кто быстрее",
+  "views": 50000,
+  "expected_formula": "The Comparison"
+ },
+ {
+  "channel": "Канал",
+  "title": "5 ошибок начинающих блогеров",
+  "views": 50000,
+  "expected_formula": "The List"
+ },
+ {
+  "channel": "Канал",
+  "title": "Этот канал вырос с 400 до 200 000 за полгода",
+  "views": 50000,
+  "expected_formula": "Someone Else's Result"
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 0",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 1",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 2",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 3",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 4",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 5",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 6",
+  "views": 5000
+ },
+ {
+  "channel": "Канал",
+  "title": "Обычный ролик 7",
+  "views": 5000
+ }
+]
