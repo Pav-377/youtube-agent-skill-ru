@@ -1,0 +1,495 @@
+{
+ "about": "Russian hook test set for hookscore.py (brief 5.2). Written for this project as format samples; no text is taken from or attributed to a real channel. The English side of the pairs: 21 examples from hooks.json of the original by Jake Schincariol (MIT) and 5 weak hooks from tests/fixtures/en/hooks_en_weak.txt.",
+ "status": "draft - labels proposed by Claude, waiting for the owner's review (tools/review.py)",
+ "hooks": [
+  {
+   "id": "h01",
+   "text": "Перестань начинать ролики с «привет, друзья». Вот чем это заменить.",
+   "label": "strong",
+   "why": "прямое обращение и обещание замены, но без цифры",
+   "disputed": true
+  },
+  {
+   "id": "h02",
+   "text": "Ты пишешь описание не для зрителей, а для поиска. И почти все делают это неправильно.",
+   "label": "strong",
+   "why": "ставка и любопытство, но конструкция «не X, а Y» звучит шаблонно",
+   "disputed": true
+  },
+  {
+   "id": "h03",
+   "text": "Сколько стоит ролик, который никто не досмотрел? Я посчитал: 14 часов моей работы.",
+   "label": "strong",
+   "why": "вопрос и цифра, но ставка про автора, а не про зрителя",
+   "disputed": true
+  },
+  {
+   "id": "h04",
+   "text": "Как набрать первую тысячу подписчиков, если ты снимаешь на телефон?",
+   "label": "strong",
+   "why": "конкретный зритель и вопрос, но звучит как название, а не как начало ролика",
+   "disputed": true
+  },
+  {
+   "id": "h05",
+   "text": "Сегодня покажу три способа ускорить монтаж.",
+   "label": "weak",
+   "why": "есть цифра, но это пересказ без вопроса и без ставки",
+   "disputed": true
+  },
+  {
+   "id": "h06",
+   "text": "Я неделю монтировал только на телефоне.",
+   "label": "weak",
+   "why": "эксперимент без цены и без вопроса",
+   "disputed": true
+  },
+  {
+   "id": "h07",
+   "text": "Ну что, погнали!",
+   "label": "weak",
+   "why": "слишком коротко, ничего не обещает",
+   "disputed": true
+  },
+  {
+   "id": "h08",
+   "text": "Ты теряешь половину зрителей на восьмой секунде. И дело не в теме ролика.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h09",
+   "text": "Я выложил 30 роликов за 30 дней. Вот что случилось с каналом на 31-й.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h10",
+   "text": "Если у тебя меньше тысячи подписчиков, этот ролик сэкономит тебе полгода.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h11",
+   "text": "Почему твои видео никто не досматривает, даже когда тема интересная?",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h12",
+   "text": "Не загружай следующий ролик, пока не проверишь одну настройку в Студии.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h13",
+   "text": "9 из 10 начинающих блогеров бросают канал до 50-го видео. Вот что делают остальные.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h14",
+   "text": "Я переснял одно и то же видео тремя способами. Удержание отличалось в два раза.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h15",
+   "text": "Все советуют выкладывать каждый день. Я выкладывал раз в неделю и вырос втрое.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h16",
+   "text": "За следующие пять минут у тебя будет название, обложка и сценарий для нового ролика.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h17",
+   "text": "Вот страница аналитики моего канала. Одно видео принесло 40% всего времени просмотра.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h18",
+   "text": "Ты можешь написать сценарий, название и описание на неделю вперёд, не открывая монтажку.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h19",
+   "text": "Студия показывает, на какой секунде уходят зрители. Почти никто не открывает этот отчёт.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h20",
+   "text": "Это обложка, с которой ролик набрал 2 тысячи просмотров. А это новая: 40 тысяч.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h21",
+   "text": "Я разобрал 50 самых просматриваемых роликов месяца в нашей нише. У них общая первая фраза.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h22",
+   "text": "Первые 15 секунд решают, досмотрят тебя или нет. Покажу, что в них говорить.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h23",
+   "text": "Каждый ролик на этом канале начинается с одного файла на 12 строк. Сейчас покажу его.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h24",
+   "text": "Семь ошибок, которые я сделал на первом канале и которые ты, скорее всего, делаешь сейчас.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h25",
+   "text": "Нейросеть написала мне сценарий за 40 секунд. Я проверил, сколько людей его досмотрели.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h26",
+   "text": "Если твой ролик теряет зрителей на тридцатой секунде, проблема не в монтаже.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h27",
+   "text": "С этой настройкой мои ролики стали попадать в рекомендации. Покажу её на экране.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h28",
+   "text": "Ты тратишь на монтаж три часа, а зрители уходят на пятой секунде.",
+   "label": "strong",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h29",
+   "text": "Привет, друзья! С вами снова я, и сегодня мы поговорим об обложках.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h30",
+   "text": "В этом видео я расскажу вам немного про YouTube.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h31",
+   "text": "Сегодня у нас очень интересная и полезная тема, так что оставайтесь до конца.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h32",
+   "text": "Перед тем как начать, подпишитесь на канал и поставьте лайк.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h33",
+   "text": "Всем привет, меня зовут Саша, и я снимаю видео про технологии.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h34",
+   "text": "Это будет невероятно крутое видео, вы точно не пожалеете.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h35",
+   "text": "Давайте поговорим о некоторых интересных вещах.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h36",
+   "text": "Я давно хотел снять этот ролик, и вот наконец-то время пришло.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h37",
+   "text": "Добро пожаловать в очередной выпуск нашего шоу.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h38",
+   "text": "Короче, сегодня будет про монтаж.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h39",
+   "text": "В этом ролике я постараюсь максимально подробно рассказать обо всех аспектах продвижения на YouTube, начиная с самых основ и заканчивая сложными вещами, которые мы будем разбирать постепенно.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h40",
+   "text": "Это реально очень мощный и просто невероятный инструмент.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h41",
+   "text": "Сегодня хочу поделиться с вами парой мыслей.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h42",
+   "text": "Обложки.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h43",
+   "text": "Думаю, кому-то это видео может быть полезно.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h44",
+   "text": "Для начала расскажу немного о себе.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h45",
+   "text": "Ведение канала — это путь, и у каждого он свой.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h46",
+   "text": "Короткое видео сегодня, ничего особенного, просто новости канала.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h47",
+   "text": "Этот ролик спонсирует наш партнёр, подробнее об этом позже.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h48",
+   "text": "Всем привет, всем хорошего настроения, сегодня разбираем интересный вопрос.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h49",
+   "text": "В общем, тема сегодняшнего видео — продвижение.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h50",
+   "text": "Как вы знаете, YouTube постоянно меняется.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  },
+  {
+   "id": "h51",
+   "text": "Итак, начнём.",
+   "label": "weak",
+   "why": "",
+   "disputed": false
+  }
+ ],
+ "pairs": [
+  {
+   "id": "p01",
+   "ru": "97% тех, кто заводит канал, бросают его до 30-го видео. Вот что по-другому делают остальные 3%.",
+   "en": "97% of the people who start a channel quit before video 30. Here is what the other 3% do differently."
+  },
+  {
+   "id": "p02",
+   "ru": "Этот канал вырос с 400 до 200 000 подписчиков за семь месяцев на одном формате. Я его разобрал.",
+   "en": "This channel went from 400 subscribers to 200,000 in seven months on one format. I mapped it."
+  },
+  {
+   "id": "p03",
+   "ru": "Из-за первых 30 секунд никто не досматривает твои видео. Дело не в теме.",
+   "en": "Your first 30 seconds are why nobody finishes your videos. It is not the topic."
+  },
+  {
+   "id": "p04",
+   "ru": "Все говорят: выкладывай каждый день. Я год выкладывал раз в неделю и вырастил канал втрое.",
+   "en": "Everyone says post daily. I posted once a week for a year and tripled the channel."
+  },
+  {
+   "id": "p05",
+   "ru": "Я покажу на экране тот самый промпт, который написал это видео.",
+   "en": "I am going to show you the exact prompt, on screen, that wrote this video."
+  },
+  {
+   "id": "p06",
+   "ru": "Это самый быстрый способ превратить одно длинное видео в тридцать шортсов.",
+   "en": "This is the fastest way to turn one long video into thirty Shorts."
+  },
+  {
+   "id": "p07",
+   "ru": "За следующие шесть минут у тебя будут название, обложка и сценарий для следующего видео.",
+   "en": "In the next six minutes you will have a working title, thumbnail and script for your next video."
+  },
+  {
+   "id": "p08",
+   "ru": "Я отдал нейросети свой канал на 30 дней. Я не трогал загрузки.",
+   "en": "I let an AI run my channel for 30 days. I did not touch the uploads."
+  },
+  {
+   "id": "p09",
+   "ru": "Почему твои видео умирают на 30-й секунде, если с темой всё в порядке?",
+   "en": "Why do your videos die at 30 seconds when the topic is fine?"
+  },
+  {
+   "id": "p10",
+   "ru": "Это была моя обложка. А это моя обложка сейчас. То же видео, кликабельность в четыре раза выше.",
+   "en": "This was my thumbnail. This is my thumbnail now. Same video, four times the click-through."
+  },
+  {
+   "id": "p11",
+   "ru": "Я взял девять самых просматриваемых видео про ИИ за месяц и разобрал, что общего в их названиях.",
+   "en": "I pulled the nine most-viewed AI videos of the month and broke down what the titles share."
+  },
+  {
+   "id": "p12",
+   "ru": "Claude плюс выгрузка из YouTube Studio дают тебе график загрузок на следующую неделю за один промпт.",
+   "en": "Claude plus your YouTube Studio export gives you next week's upload schedule in one prompt."
+  },
+  {
+   "id": "p13",
+   "ru": "Не загружай следующее видео, пока не проверишь эту настройку.",
+   "en": "Do not upload another video until you check this one setting."
+  },
+  {
+   "id": "p14",
+   "ru": "Семь вещей, которые я бы сделал по-другому, если бы начинал канал в 2026 году.",
+   "en": "Seven things I would do differently if I started a channel in 2026."
+  },
+  {
+   "id": "p15",
+   "ru": "Это страница аналитики. Это видео дало 40% времени просмотра канала. Вот почему.",
+   "en": "This is the analytics page. This video did 40% of the channel's watch time. Here is why."
+  },
+  {
+   "id": "p16",
+   "ru": "YouTube сообщает, какие видео недорабатывают. Почти никто не открывает этот отчёт.",
+   "en": "YouTube tells you which videos are underperforming. Almost nobody opens the report."
+  },
+  {
+   "id": "p17",
+   "ru": "Ты можешь написать, назвать, оформить и запланировать неделю видео, не открыв ни одного редактора.",
+   "en": "You can write, title, thumbnail and schedule a week of videos without opening a single editor."
+  },
+  {
+   "id": "p18",
+   "ru": "Я написал одно и то же видео тремя способами. Одно удержало 62%, а два других нет.",
+   "en": "I wrote the same video three ways. One of them held 62% and the other two did not."
+  },
+  {
+   "id": "p19",
+   "ru": "Каждое видео на этом канале начинается в одном и том же файле на 12 строк. Вот он.",
+   "en": "Every video on this channel starts in the same 12-line file. Here it is."
+  },
+  {
+   "id": "p20",
+   "ru": "Старый формат описания перестаёт работать в этом месяце. Вот что приходит ему на смену.",
+   "en": "The old description format stops mattering this month. Here is what replaces it."
+  },
+  {
+   "id": "p21",
+   "ru": "Если у тебя меньше тысячи подписчиков, это единственное видео, которое тебе нужно на этой неделе.",
+   "en": "If you have under a thousand subscribers, this is the only video you need this week."
+  },
+  {
+   "id": "p22",
+   "ru": "Привет, друзья, с возвращением на канал, сегодня поговорим об обложках.",
+   "en": "Hey guys, welcome back to the channel, today we are going to talk about thumbnails."
+  },
+  {
+   "id": "p23",
+   "ru": "Перед тем как начать, не забудьте поставить лайк и подписаться.",
+   "en": "Before we get started, make sure to like and subscribe."
+  },
+  {
+   "id": "p24",
+   "ru": "Это будет невероятное видео, так что оставайтесь с нами.",
+   "en": "This is going to be an incredible video, so stay tuned."
+  },
+  {
+   "id": "p25",
+   "ru": "Сегодня хочу поделиться с вами парой идей.",
+   "en": "Today I want to share a few ideas with you."
+  },
+  {
+   "id": "p26",
+   "ru": "Сначала расскажу немного о себе.",
+   "en": "Let me tell you a little bit about myself first."
+  }
+ ]
+}
