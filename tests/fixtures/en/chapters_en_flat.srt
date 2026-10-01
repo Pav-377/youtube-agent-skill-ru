@@ -1,0 +1,127 @@
+1
+00:00:00,000 --> 00:00:03,000
+First the camera and the light.
+
+2
+00:00:03,200 --> 00:00:06,200
+The microphone matters more than the camera.
+
+3
+00:00:06,400 --> 00:00:09,400
+Sound decides everything.
+
+4
+00:00:09,600 --> 00:00:12,600
+You do not need a studio.
+
+5
+00:00:12,800 --> 00:00:15,800
+First the camera and the light.
+
+6
+00:00:16,000 --> 00:00:19,000
+The microphone matters more than the camera.
+
+7
+00:00:19,200 --> 00:00:22,200
+Sound decides everything.
+
+8
+00:00:22,400 --> 00:00:25,400
+You do not need a studio.
+
+9
+00:00:25,600 --> 00:00:28,600
+Now editing.
+
+10
+00:00:28,800 --> 00:00:31,800
+I cut straight on the timeline.
+
+11
+00:00:32,000 --> 00:00:35,000
+I barely use transitions.
+
+12
+00:00:35,200 --> 00:00:38,200
+Editing takes an hour.
+
+13
+00:00:38,400 --> 00:00:41,400
+Now editing.
+
+14
+00:00:41,600 --> 00:00:44,600
+I cut straight on the timeline.
+
+15
+00:00:44,800 --> 00:00:47,800
+I barely use transitions.
+
+16
+00:00:48,000 --> 00:00:51,000
+Editing takes an hour.
+
+17
+00:00:51,200 --> 00:00:54,200
+Next the thumbnail and the title.
+
+18
+00:00:54,400 --> 00:00:57,400
+The preview must read on a phone.
+
+19
+00:00:57,600 --> 00:01:00,600
+Clicks come from the title and thumbnail.
+
+20
+00:01:00,800 --> 00:01:03,800
+I make the thumbnail last.
+
+21
+00:01:04,000 --> 00:01:07,000
+Next the thumbnail and the title.
+
+22
+00:01:07,200 --> 00:01:10,200
+The preview must read on a phone.
+
+23
+00:01:10,400 --> 00:01:13,400
+Clicks come from the title and thumbnail.
+
+24
+00:01:13,600 --> 00:01:16,600
+I make the thumbnail last.
+
+25
+00:01:16,800 --> 00:01:19,800
+Finally promotion.
+
+26
+00:01:20,000 --> 00:01:23,000
+The algorithm watches retention.
+
+27
+00:01:23,200 --> 00:01:26,200
+Recommendations bring subscribers.
+
+28
+00:01:26,400 --> 00:01:29,400
+Subscribers come from recommendations.
+
+29
+00:01:29,600 --> 00:01:32,600
+Finally promotion.
+
+30
+00:01:32,800 --> 00:01:35,800
+The algorithm watches retention.
+
+31
+00:01:36,000 --> 00:01:39,000
+Recommendations bring subscribers.
+
+32
+00:01:39,200 --> 00:01:42,200
+Subscribers come from recommendations.

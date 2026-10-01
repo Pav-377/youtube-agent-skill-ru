@@ -1,0 +1,42 @@
+{
+ "note": "English regression cases. Each runs a script from skills/ with cwd = tests/fixtures/en. Expected output lives in tests/golden/orig/<id>.txt (generated from the original commit, never edited by hand) unless tests/golden/current/<id>.txt exists - that is a deliberate change and must be listed in CHANGELOG.md.",
+ "cases": [
+  {"id": "hookscore_strong",       "script": "yt-script/hookscore.py",    "args": ["hooks_en_strong.txt"]},
+  {"id": "hookscore_strong_json",  "script": "yt-script/hookscore.py",    "args": ["--json", "hooks_en_strong.txt"]},
+  {"id": "hookscore_weak",         "script": "yt-script/hookscore.py",    "args": ["hooks_en_weak.txt"]},
+  {"id": "hookscore_weak_json",    "script": "yt-script/hookscore.py",    "args": ["--json", "hooks_en_weak.txt"]},
+  {"id": "hookscore_single",       "script": "yt-script/hookscore.py",    "args": ["--hook", "Claude just destroyed YouTube. Now you can connect it to your channel and it will run all your content for you."]},
+
+  {"id": "title_file",             "script": "yt-package/title.py",       "args": ["titles_en.txt"]},
+  {"id": "title_file_json",        "script": "yt-package/title.py",       "args": ["titles_en.txt", "--json"]},
+  {"id": "title_file_thumb",       "script": "yt-package/title.py",       "args": ["titles_en.txt", "--thumb", "AI RAN IT"]},
+  {"id": "title_ai",               "script": "yt-package/title.py",       "args": ["--title", "I Let AI Run My Channel for 30 Days", "--thumb", "AI RAN IT"]},
+  {"id": "title_editing",          "script": "yt-package/title.py",       "args": ["--title", "Editing a video in 10 minutes without software", "--thumb", "NO EDITING"]},
+  {"id": "title_long_thumb",       "script": "yt-package/title.py",       "args": ["--title", "Why Your Videos Die at 0:30", "--thumb", "THE 30 SECOND CLIFF IS REAL AND FIXABLE"]},
+  {"id": "title_mistake",          "script": "yt-package/title.py",       "args": ["--title", "The thumbnail mistake everyone makes", "--thumb", "STOP"]},
+  {"id": "title_single_json",      "script": "yt-package/title.py",       "args": ["--title", "What I learned", "--json"]},
+
+  {"id": "deadair_srt",            "script": "yt-edit/deadair.py",        "args": ["edit_en.srt"]},
+  {"id": "deadair_vtt",            "script": "yt-edit/deadair.py",        "args": ["edit_en.vtt"]},
+  {"id": "deadair_whisper",        "script": "yt-edit/deadair.py",        "args": ["edit_en_whisper.json"]},
+  {"id": "deadair_floor",          "script": "yt-edit/deadair.py",        "args": ["edit_en.srt", "--floor", "0.35"]},
+  {"id": "deadair_json",           "script": "yt-edit/deadair.py",        "args": ["edit_en.srt", "--json"]},
+
+  {"id": "chapters_default",       "script": "yt-chapters/chapters.py",   "args": ["chapters_en.srt"], "hash_dependent": true},
+  {"id": "chapters_target4",       "script": "yt-chapters/chapters.py",   "args": ["chapters_en.srt", "--target", "4"], "hash_dependent": true},
+  {"id": "chapters_flat_target4",  "script": "yt-chapters/chapters.py",   "args": ["chapters_en_flat.srt", "--target", "4"], "hash_dependent": true},
+  {"id": "chapters_json",          "script": "yt-chapters/chapters.py",   "args": ["chapters_en.srt", "--target", "4", "--json"], "hash_dependent": true},
+
+  {"id": "retention_pct",          "script": "yt-retention/retention.py", "args": ["retention_en_pct.csv"]},
+  {"id": "retention_pct_duration", "script": "yt-retention/retention.py", "args": ["retention_en_pct.csv", "--duration", "600"]},
+  {"id": "retention_pct_said",     "script": "yt-retention/retention.py", "args": ["retention_en_pct.csv", "--duration", "600", "--transcript", "long_en.srt"]},
+  {"id": "retention_pct_json",     "script": "yt-retention/retention.py", "args": ["retention_en_pct.csv", "--json"]},
+  {"id": "retention_seconds",      "script": "yt-retention/retention.py", "args": ["retention_en_seconds.csv"]},
+  {"id": "retention_seconds_said", "script": "yt-retention/retention.py", "args": ["retention_en_seconds.csv", "--transcript", "long_en.srt"]},
+  {"id": "retention_seconds_json", "script": "yt-retention/retention.py", "args": ["retention_en_seconds.csv", "--transcript", "long_en.srt", "--json"]},
+
+  {"id": "swipe_default",          "script": "yt-viral/swipe.py",         "args": ["swipe_en.json"]},
+  {"id": "swipe_min2",             "script": "yt-viral/swipe.py",         "args": ["swipe_en.json", "--min", "2.0"]},
+  {"id": "swipe_json",             "script": "yt-viral/swipe.py",         "args": ["swipe_en.json", "--min", "2.0", "--json"]}
+ ]
+}

@@ -14,8 +14,7 @@ the pause was and how much the vocabulary changes across it. It is a first draft
 summariser.
 """
 import json, os, re, sys
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "yt-edit"))
-from deadair import load, parse_ts  # noqa: E402  (same parser, one implementation)
+from transcript import load  # same parser as yt-edit, copied into this folder by tools/build.py
 
 STOP = set("the a an of for to in on and or is are was were be been with this that it as at by from "
            "you your i my we our they them he she but so if then than there here what which who how "
@@ -57,8 +56,10 @@ def main():
     for n, t in enumerate(picked):
         end = picked[n + 1] if n + 1 < len(picked) else dur
         text = " ".join(c[2] for c in cues if c[0] >= t and c[1] <= end)
-        kw = [w for w in keywords(text)]
-        kw.sort(key=lambda w: -text.lower().count(w))
+        low = text.lower()
+        # Most frequent first; ties go to the word said first. Without the tie-break the order came
+        # from set iteration and changed from one run to the next.
+        kw = sorted(keywords(text), key=lambda w: (-low.count(w), low.find(w)))
         title = " ".join(w.capitalize() for w in kw[:3]) or "Section"
         chapters.append({"start": round(t, 2), "label": mmss(t), "draft_title": title,
                          "seconds": round(end - t, 2)})

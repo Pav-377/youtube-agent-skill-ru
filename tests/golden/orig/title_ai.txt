@@ -1,0 +1,8 @@
+exit=0
+
+  "I Let AI Run My Channel for 30 Days"
+  35 chars   score 94/100
+    x  duplicate    thumbnail repeats the title on ai - the thumbnail should say what the title does not
+    ok              35 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (30)
+

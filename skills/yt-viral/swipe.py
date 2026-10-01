@@ -13,13 +13,13 @@ Tuesday; a 400k video on a channel whose median is 30k is the thing worth studyi
 is scored as a MULTIPLE OF ITS OWN CHANNEL'S MEDIAN, which needs at least four videos per channel
 to mean anything - the tool says so rather than quietly ranking on noise.
 
-The formula comes from skills/yt-script/hooks.json, matched against the TITLE. It is a judgement
+The formula comes from hooks.json (a copy of shared/hooks.json in this folder), matched against the TITLE. It is a judgement
 about the words on screen, not a claim about why the video worked.
 """
 import json, os, re, statistics, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FORMULAS = json.load(open(os.path.join(HERE, "..", "yt-script", "hooks.json")))["hooks"]
+FORMULAS = json.load(open(os.path.join(HERE, "hooks.json")))["hooks"]
 
 def classify(title):
     scored = []

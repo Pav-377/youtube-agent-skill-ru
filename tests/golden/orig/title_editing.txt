@@ -1,0 +1,9 @@
+exit=0
+
+  "Editing a video in 10 minutes without software"
+  46 chars   score 80/100
+    x  mobile       a mobile feed shows about "Editing a video in 10 minutes without..." - check the subject survives
+    x  duplicate    thumbnail repeats the title on editing - the thumbnail should say what the title does not
+    ok              46 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (10)
+

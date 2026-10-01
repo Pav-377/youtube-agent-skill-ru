@@ -1,3 +1,9 @@
 __pycache__/
 *.pyc
 .DS_Store
+
+# Private inputs from the channel owner (transcripts, Studio exports, the brief). Never committed.
+_private/
+
+# Build output: zips go to the GitHub Release, not into git.
+dist/

@@ -1,0 +1,22 @@
+exit=0
+
+  19 videos across 4 channels, outliers at 2.0x or better
+
+     9.90x     51,000  vs     5,150 median   Tiny Tutorials         97% of creators quit before video 30
+            The Statistic
+     3.93x    120,000  vs    30,500 median   Mid Channel            I let an AI run my channel for 30 days
+            I Tried It
+     3.11x     95,000  vs    30,500 median   Mid Channel            Everyone says post daily. They are wrong
+            Contrarian Flip
+     2.20x    900,000  vs   410,000 median   Big Channel            Claude vs ChatGPT: which one wins?
+            The Comparison
+
+  skipped 1 channel(s) with under 4 videos collected - a median off one or
+  two videos is not a median: Thin (2)
+
+  formulas among the outliers
+     1x  The Statistic
+     1x  I Tried It
+     1x  Contrarian Flip
+     1x  The Comparison
+

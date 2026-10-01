@@ -1,0 +1,9 @@
+{
+ "note": "Which shared file goes into which skill folder. tools/build.py copies them byte for byte; tools/check.py fails if a copy drifts. Edit files in shared/, never the copies in skills/.",
+ "files": {
+  "hooks.json":    ["yt-script", "yt-viral", "yt-shorts", "yt-audit"],
+  "hookscore.py":  ["yt-script", "yt-shorts", "yt-audit"],
+  "title.py":      ["yt-package", "yt-audit"],
+  "transcript.py": ["yt-edit", "yt-retention", "yt-chapters"]
+ }
+}

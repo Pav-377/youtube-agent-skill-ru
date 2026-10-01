@@ -1,0 +1,47 @@
+exit=0
+{
+ "outliers": [
+  {
+   "channel": "Tiny Tutorials",
+   "title": "97% of creators quit before video 30",
+   "views": 51000,
+   "median": 5150,
+   "multiple": 9.9,
+   "formula": "The Statistic",
+   "url": "https://www.youtube.com/watch?v=testT004"
+  },
+  {
+   "channel": "Mid Channel",
+   "title": "I let an AI run my channel for 30 days",
+   "views": 120000,
+   "median": 30500,
+   "multiple": 3.93,
+   "formula": "I Tried It",
+   "url": "https://www.youtube.com/watch?v=testM002"
+  },
+  {
+   "channel": "Mid Channel",
+   "title": "Everyone says post daily. They are wrong",
+   "views": 95000,
+   "median": 30500,
+   "multiple": 3.11,
+   "formula": "Contrarian Flip",
+   "url": "https://www.youtube.com/watch?v=testM005"
+  },
+  {
+   "channel": "Big Channel",
+   "title": "Claude vs ChatGPT: which one wins?",
+   "views": 900000,
+   "median": 410000,
+   "multiple": 2.2,
+   "formula": "The Comparison",
+   "url": "https://www.youtube.com/watch?v=testB004"
+  }
+ ],
+ "skipped_thin_channels": [
+  [
+   "Thin",
+   2
+  ]
+ ]
+}

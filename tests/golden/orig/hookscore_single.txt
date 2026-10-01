@@ -1,0 +1,12 @@
+exit=0
+
+  Claude just destroyed YouTube. Now you can connect it to your channel and it will run all your content for you.
+  ------------------------------------------------------------------------
+    SPECIFICITY   36  #######
+    ADDRESS      100  ####################
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY      100  ####################
+    VERDICT       43  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way
