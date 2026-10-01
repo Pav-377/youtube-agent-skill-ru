@@ -1,0 +1,45 @@
+{
+ "note": "Data for title.py. Edit here, not in the code; tools/build.py copies this file next to every title.py. Russian words are compared as forms of one word (lang.same_word), so one form per word is enough.",
+ "desktop": 60,
+ "mobile": 40,
+ "hard": 100,
+ "caps_ceiling": 2,
+ "thumb": {
+  "ok_up_to": 3,
+  "hint_up_to": 5,
+  "small_max": 6,
+  "note": "Big thumbnail text: up to ok_up_to meaningful words is fine, up to hint_up_to gets a soft hint, more gets a warning. The small caption (--thumb-small) is counted on its own: a warning above small_max meaningful words or when it repeats the title. Warnings only - nothing is blocked."
+ },
+ "vague": {
+  "en": ["amazing", "incredible", "insane", "crazy", "huge", "massive", "ultimate", "best", "powerful",
+         "secret", "revolutionary", "mindblowing", "epic", "perfect", "complete", "everything"],
+  "ru": ["невероятный", "крутой", "лучший", "мощный", "секретный", "идеальный", "полный", "эпичный",
+         "безумный", "нереальный", "потрясающий", "шикарный", "гениальный", "топовый", "огромный",
+         "абсолютно", "интересный", "классный", "грандиозный", "революционный", "уникальный"]
+ },
+ "stop": {
+  "en": ["the", "a", "an", "of", "for", "to", "in", "on", "and", "or", "is", "are", "with", "your", "you",
+         "my", "i", "this", "that", "it", "how", "what", "why"],
+  "ru": ["и", "в", "во", "на", "с", "со", "к", "ко", "по", "о", "об", "обо", "от", "до", "за", "из", "у",
+         "для", "без", "про", "под", "над", "при", "через", "а", "но", "или", "не", "ни", "же", "ли", "бы",
+         "это", "этот", "эта", "эти", "как", "что", "чем", "почему", "зачем", "когда", "где", "кто",
+         "я", "ты", "вы", "мы", "он", "она", "они", "мой", "твой", "ваш", "наш", "свой", "все", "весь",
+         "так", "вот", "уже", "еще", "только", "тоже", "даже", "если", "то", "мне", "тебе", "вам", "нам"]
+ },
+ "thumb_function_words": {
+  "en": ["a", "an", "the", "of", "in", "on", "at", "to", "for", "and", "or", "but", "is", "are", "it",
+         "by", "as", "with", "from", "so", "if"],
+  "ru": ["и", "в", "во", "на", "с", "со", "к", "ко", "по", "о", "об", "от", "до", "за", "из", "у", "для",
+         "без", "про", "под", "над", "при", "а", "но", "или", "не", "ни", "же", "ли", "бы", "как", "то",
+         "вот", "уже", "еще", "лишь", "даже"]
+ },
+ "numerals_ru": ["один", "одна", "два", "две", "три", "четыре", "пять", "шесть", "семь", "восемь",
+                 "девять", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "сто", "тысяча",
+                 "миллион", "миллиард", "полтора", "половина", "дважды", "трижды", "вдвое", "втрое"],
+ "clickbait_ru": {
+  "note": "Phrases are matched on normalised text (lower case, ё = е) as whole words; a * at the end matches any ending. Keep stems narrow: шок* would also catch шоколад.",
+  "phrases": ["шок", "шокир*", "вы не поверите", "не поверишь", "никто не ожидал", "до слез", "это конец",
+              "сенсаци*", "срочно", "жесть", "обалде*", "офиге*", "вся правда", "смотреть до конца",
+              "смотри до конца", "100% работает", "лютый", "лютая", "капец"]
+ }
+}

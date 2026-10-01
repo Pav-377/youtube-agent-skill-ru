@@ -1,0 +1,188 @@
+exit=0
+[
+ {
+  "title": "I Let AI Run My Channel for 30 Days",
+  "chars": 35,
+  "score": 100,
+  "issues": [],
+  "good": [
+   "35 characters, inside the 60-character desktop cut",
+   "carries a concrete figure (30)"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "97% of Channels Quit Before Video 30",
+  "chars": 36,
+  "score": 100,
+  "issues": [],
+  "good": [
+   "36 characters, inside the 60-character desktop cut",
+   "carries a concrete figure (97%, 30)"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "Why Your Videos Die at 0:30 (and the 3-Line Fix)",
+  "chars": 48,
+  "score": 94,
+  "issues": [
+   [
+    "mobile",
+    "a mobile feed shows about \"Why Your Videos Die at 0:30 (and the...\" - check the subject survives"
+   ]
+  ],
+  "good": [
+   "48 characters, inside the 60-character desktop cut",
+   "carries a concrete figure (0, 30, 3)"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "How to edit faster",
+  "chars": 18,
+  "score": 90,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "18 characters, inside the 60-character desktop cut"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "What I learned",
+  "chars": 14,
+  "score": 90,
+  "issues": [
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "14 characters, inside the 60-character desktop cut"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "Claude vs ChatGPT: Which Writes Better Scripts?",
+  "chars": 47,
+  "score": 80,
+  "issues": [
+   [
+    "mobile",
+    "a mobile feed shows about \"Claude vs ChatGPT: Which Writes Better...\" - check the subject survives"
+   ],
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "47 characters, inside the 60-character desktop cut",
+   "open question in the title"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "This Secret Setting Doubled My Views",
+  "chars": 36,
+  "score": 76,
+  "issues": [
+   [
+    "vague",
+    "secret - swap for a number, a name or a date"
+   ],
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [
+   "36 characters, inside the 60-character desktop cut"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "How to Grow a YouTube Channel From Zero to 10,000 Subscribers Without Showing Your Face or Spending Any Money At All",
+  "chars": 116,
+  "score": 76,
+  "issues": [
+   [
+    "length",
+    "116 characters - YouTube's hard limit is 100"
+   ],
+   [
+    "mobile",
+    "a mobile feed shows about \"How to Grow a YouTube Channel From Zero...\" - check the subject survives"
+   ]
+  ],
+  "good": [
+   "carries a concrete figure (10,000)"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "THE BEST CAMERA FOR YOUTUBE IN 2026 HONEST REVIEW",
+  "chars": 49,
+  "score": 66,
+  "issues": [
+   [
+    "mobile",
+    "a mobile feed shows about \"THE BEST CAMERA FOR YOUTUBE IN 2026...\" - check the subject survives"
+   ],
+   [
+    "shouting",
+    "7 all-caps words - two is the ceiling before it reads as spam"
+   ],
+   [
+    "vague",
+    "best - swap for a number, a name or a date"
+   ]
+  ],
+  "good": [
+   "49 characters, inside the 60-character desktop cut",
+   "carries a concrete figure (2026)"
+  ],
+  "hints": [],
+  "lang": "en"
+ },
+ {
+  "title": "The Ultimate Guide to YouTube Thumbnails That Will Change Everything Forever",
+  "chars": 76,
+  "score": 44,
+  "issues": [
+   [
+    "length",
+    "76 characters - desktop search cuts near 60"
+   ],
+   [
+    "mobile",
+    "a mobile feed shows about \"The Ultimate Guide to YouTube...\" - check the subject survives"
+   ],
+   [
+    "vague",
+    "everything, ultimate - swap for a number, a name or a date"
+   ],
+   [
+    "no-number",
+    "no number, date or name - the most reliable single fix"
+   ]
+  ],
+  "good": [],
+  "hints": [],
+  "lang": "en"
+ }
+]

@@ -80,6 +80,16 @@ def resolve(choice, text):
     return choice if choice in LANGS else detect(text)
 
 
+def plural(n, one, few, many):
+    """Russian plural: plural(1, "слово", "слова", "слов") -> "слово"; 3 -> "слова"; 5, 11, 12 -> "слов"."""
+    n = abs(int(n))
+    if n % 10 == 1 and n % 100 != 11:
+        return one
+    if 2 <= n % 10 <= 4 and not 12 <= n % 100 <= 14:
+        return few
+    return many
+
+
 # --- normalisation and tokens ----------------------------------------------------------------------
 
 _SPACES = dict.fromkeys(map(ord, "       "), " ")

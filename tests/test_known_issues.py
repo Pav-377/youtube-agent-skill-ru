@@ -63,13 +63,13 @@ class P3_DeadairRussian(unittest.TestCase):
 
 
 class P4_TitleRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p4_duplicate_by_stem(self):
         r = run_json("yt-package/title.py", "--title", "Монтаж ролика за 10 минут",
                      "--thumb", "МОНТАЖА НЕ БУДЕТ")[0]
         self.assertIn("duplicate", [k for k, _ in r["issues"]])
 
-    @unittest.expectedFailure
     def test_n_title_front_load_false_positive(self):
         """Audit: every all-Cyrillic title was told its first three words are filler."""
         r = run_json("yt-package/title.py", "--title", "Как снимать ролики на телефон")[0]
@@ -239,14 +239,14 @@ class N_Swipe(unittest.TestCase):
 
 
 class N_Thumbnail(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n9_thumb_small_repeating_the_title_is_flagged(self):
         """The small caption is checked on its own: here it repeats "videos" and "die" from the title."""
         r = run_json("yt-package/title.py", "--title", "Why Your Videos Die at 0:30", "--thumb", "THE CLIFF",
                      "--thumb-small", "your videos die here")[0]
         self.assertIn("thumb-small", json.dumps(r))
 
-    @unittest.expectedFailure
     def test_n9_four_meaningful_words_get_a_soft_hint(self):
         r = run_json("yt-package/title.py", "--title", "Posting schedule experiment",
                      "--thumb", "STOP POSTING EVERY DAY")[0]
