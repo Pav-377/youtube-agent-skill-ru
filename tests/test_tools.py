@@ -101,7 +101,7 @@ class OtherChecksCatchProblems(unittest.TestCase):
                 self.assertTrue(self.run_check(check.check_imports, {
                     "skills/yt-demo/SKILL.md": GOOD_SKILL, "skills/yt-demo/t.py": src, "shared/x.txt": ""}))
 
-    @unittest.skipIf(sys.version_info < (3, 10), "stdlib list needs Python 3.10+")
+    @unittest.skipIf(sys.version_info < (3, 10), "sys.stdlib_module_names (the list of standard modules) only exists from Python 3.10; the third-party import check runs there")
     def test_imports_third_party(self):
         self.assertTrue(self.run_check(check.check_imports, {
             "skills/yt-demo/SKILL.md": GOOD_SKILL, "skills/yt-demo/t.py": "import numpy\n", "shared/x.txt": ""}))
