@@ -276,19 +276,23 @@ def _note(path, text):
     print(msg, file=sys.stderr)
 
 
-def read_text(path):
-    """Read a text file whatever Windows saved it as: UTF-8 with or without BOM, UTF-16 with BOM
-    (Excel's "Unicode text"), and cp1251 as a last resort - with a note on stderr saying so."""
-    with open(path, "rb") as fh:
-        data = fh.read()
+def decode(data, name="file"):
+    """Bytes to text: UTF-8 with or without BOM, UTF-16 with BOM (Excel's "Unicode text"), and
+    cp1251 as a last resort - with a note on stderr saying so. `name` is only for that note."""
     if data.startswith((codecs.BOM_UTF16_LE, codecs.BOM_UTF16_BE)):
         return data.decode("utf-16")
     try:
         return data.decode("utf-8-sig")
     except UnicodeDecodeError:
         text = data.decode("cp1251", errors="replace")
-        _note(path, text)
+        _note(name, text)
         return text
+
+
+def read_text(path):
+    """Read a text file whatever Windows saved it as. See decode()."""
+    with open(path, "rb") as fh:
+        return decode(fh.read(), path)
 
 
 def read_json(path):

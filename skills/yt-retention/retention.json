@@ -1,0 +1,19 @@
+{
+ "note": "Data for retention.py: thresholds and the words that identify columns in a YouTube Studio export, in Russian and English. Matching is on lower-cased header text, by substring.",
+ "min_points": 8,
+ "cliff_min_drop": 0.8,
+ "cliffs_shown": 5,
+ "hook_seconds": 30,
+ "hook_percent_without_duration": 10,
+ "hook_healthy_below": 25,
+ "hook_severe_from": 40,
+ "said_window_pad_seconds": 2,
+ "said_max_chars": 140,
+ "headers": {
+  "position": ["position", "elapsed", "time", "timestamp", "позиция", "момент", "время", "отметка", "хронометраж"],
+  "retention": ["retention", "watching", "watch ratio", "audience", "удержан", "смотр", "аудитор", "зрител"],
+  "relative": ["relative", "относит", "typical", "типичн", "compared", "сравнен"],
+  "seconds": ["sec", "(s)", "time", "timestamp", "сек", "(с)", "время", "хронометраж"],
+  "percent": ["%", "percent", "ratio", "процент", "доля"]
+ }
+}

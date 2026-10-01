@@ -41,13 +41,13 @@ class P1_HookscoreRussian(unittest.TestCase):
 
 
 class P2_RetentionDecimalComma(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p2_decimal_comma(self):
         r = run_json("yt-retention/retention.py", fixture("ru", "retention_ru_comma.csv"))
         self.assertEqual(r["start"], 100.0)
         self.assertAlmostEqual(r["hook_leak"], 19.5)
 
-    @unittest.expectedFailure
     def test_p2_semicolon_separator(self):
         r = run_json("yt-retention/retention.py", fixture("ru", "retention_ru_semicolon.csv"))
         self.assertAlmostEqual(r["hook_leak"], 19.5)
@@ -179,14 +179,14 @@ class N_YouTubeAutoCaptions(unittest.TestCase):
 
 
 class N_Retention(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n4_transcript_on_percent_axis_without_duration(self):
         """--transcript used to print nothing at all when the axis is a percentage."""
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_pct.csv"),
                      "--transcript", fixture("en", "long_en.srt"))
         self.assertTrue(r["said"], "no transcript lines reported")
 
-    @unittest.expectedFailure
     def test_n5_short_video_on_seconds_axis(self):
         """A 60 s Short exported in seconds was read as a percentage axis (max x <= 100.5)."""
         with tempfile.TemporaryDirectory() as tmp:
@@ -195,20 +195,18 @@ class N_Retention(unittest.TestCase):
                 fh.write("Video position (seconds),Audience retention (%)\n")
                 y = 100.0
                 for x in range(0, 61, 2):
-                    y -= 6.0 if x == 30 else 0.5
+                    y -= 6.0 if x == 44 else 0.5  # a cliff after the 30 s hook
                     fh.write(f"{x},{y:.1f}\n")
             r = run_json("yt-retention/retention.py", path)
         self.assertTrue(r["cliffs"])
         self.assertIsNotNone(r["cliffs"][0]["at_seconds"])
 
-    @unittest.expectedFailure
     def test_n6_cliff_reports_what_was_said_at_the_drop(self):
         """The drop between 190 s and 200 s is the sponsor read at 195-200 s."""
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_seconds.csv"),
                      "--transcript", fixture("en", "long_en.srt"))
         self.assertTrue(any("sponsor" in s for s in r["said"].values()), r["said"])
 
-    @unittest.expectedFailure
     def test_n6_hook_drop_is_not_listed_as_cliffs(self):
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_seconds.csv"))
         self.assertFalse([c for c in r["cliffs"] if c["at_seconds"] is not None and c["at_seconds"] < 30],

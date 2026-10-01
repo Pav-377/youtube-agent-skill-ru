@@ -1,0 +1,17 @@
+exit=0
+
+  retention_en_pct.csv   101 points   100.0% -> 38.0%
+
+  HOOK LEAK   14.0% lost in the opening   [healthy]
+              under 25 is healthy for this length. Fix the first line before anything else.
+
+  CLIFFS      the moments people actually left
+    -  4.3%  at  204-210s   "This part of the video is brought to you by our sponsor. We keep going with point 42. We keep going with point 43."
+    -  3.3%  at  366-372s   "We keep going with point 73. We keep going with point 74. We keep going with point 75."
+    -  2.8%  at    42-48s   "We keep going with point 9. We keep going with point 10. We keep going with point 11."
+    -  2.8%  at    54-60s   "We keep going with point 11. We keep going with point 12. We keep going with point 13."
+    -  2.8%  at    48-54s   "We keep going with point 10. We keep going with point 11. We keep going with point 12."
+
+  SLIDE       0.481% per unit across the middle
+              a flat slide is pacing, not content. Cut the middle, do not rewrite it.
+

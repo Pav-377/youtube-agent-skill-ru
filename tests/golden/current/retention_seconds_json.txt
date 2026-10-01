@@ -1,0 +1,32 @@
+exit=0
+{
+ "points": 61,
+ "start": 100.0,
+ "hook_leak": 30.0,
+ "end": 41.1,
+ "cliffs": [
+  {
+   "from": 190.0,
+   "to": 200.0,
+   "lost": 5.3,
+   "at_seconds": 190.0,
+   "to_seconds": 200.0
+  },
+  {
+   "from": 400.0,
+   "to": 410.0,
+   "lost": 4.4,
+   "at_seconds": 400.0,
+   "to_seconds": 410.0
+  }
+ ],
+ "slide_per_unit": 0.051,
+ "said": {
+  "190.0": "We keep going with point 38. We keep going with point 39. Quick word from our sponsor before we continue. This part of the video is brought ",
+  "400.0": "We keep going with point 80. We keep going with point 81. Let me give you some background on my setup first. It started back in college when"
+ },
+ "source": "retention_en_seconds.csv",
+ "axis": "seconds",
+ "duration": null,
+ "lang": "en"
+}
