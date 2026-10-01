@@ -11,6 +11,8 @@
 
 ### Все скиллы
 
+- **Новое имя плагина:** `youtube-agent-ru`, маркетплейс `youtube-agent-skill-ru`. Ссылки ведут на
+  этот репозиторий, автор оригинала указан в `plugin.json`.
 - **Каждый скилл работает отдельно.** Раньше пять скиллов брали файлы из соседних папок:
   `yt-viral`, `yt-shorts` и `yt-audit` — `hooks.json`, `hookscore.py` и `title.py`;
   `yt-retention` и `yt-chapters` — разбор транскрипта из `yt-edit/deadair.py`. Загруженные в
