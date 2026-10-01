@@ -278,7 +278,8 @@ class N_HookscoreEnglishBugs(unittest.TestCase):
 
 
 class N_Chapters(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 1."""
+
     def test_n13_titles_do_not_depend_on_hash_seed(self):
         """Tied keywords were ordered by set iteration, so titles changed between runs."""
         outs = {run_script("yt-chapters/chapters.py", fixture("en", "chapters_en.srt"),

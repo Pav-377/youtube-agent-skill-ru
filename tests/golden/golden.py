@@ -1,6 +1,7 @@
 """golden.py - run the English regression cases and regenerate the original's expected output.
 
     python tests/golden/golden.py --regenerate     # rewrite tests/golden/orig/ from commit a2feb21
+    python tests/golden/golden.py --accept ID ...  # store today's output as the new expectation
 
 The expected output in tests/golden/orig/ is never edited by hand. It is what the original scripts
 at ORIGINAL_REF print for each case in cases.json. When our version changes English behaviour on
@@ -63,8 +64,23 @@ def regenerate():
         print(f"  {case_id}")
 
 
+def accept(ids):
+    """Record a deliberate change. Every accepted id must also be named in CHANGELOG.md."""
+    known = {c["id"]: c for c in cases()}
+    out = os.path.join(HERE, "current")
+    os.makedirs(out, exist_ok=True)
+    for case_id in ids:
+        if case_id not in known:
+            raise SystemExit(f"unknown case {case_id}")
+        with open(os.path.join(out, case_id + ".txt"), "w", encoding="utf-8", newline="\n") as fh:
+            fh.write(run(os.path.join(ROOT, "skills"), known[case_id]))
+        print(f"  accepted {case_id} - name it in CHANGELOG.md")
+
+
 if __name__ == "__main__":
     if "--regenerate" in sys.argv:
         regenerate()
+    elif "--accept" in sys.argv:
+        accept(sys.argv[sys.argv.index("--accept") + 1:])
     else:
         print(__doc__)

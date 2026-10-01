@@ -56,8 +56,10 @@ def main():
     for n, t in enumerate(picked):
         end = picked[n + 1] if n + 1 < len(picked) else dur
         text = " ".join(c[2] for c in cues if c[0] >= t and c[1] <= end)
-        kw = [w for w in keywords(text)]
-        kw.sort(key=lambda w: -text.lower().count(w))
+        low = text.lower()
+        # Most frequent first; ties go to the word said first. Without the tie-break the order came
+        # from set iteration and changed from one run to the next.
+        kw = sorted(keywords(text), key=lambda w: (-low.count(w), low.find(w)))
         title = " ".join(w.capitalize() for w in kw[:3]) or "Section"
         chapters.append({"start": round(t, 2), "label": mmss(t), "draft_title": title,
                          "seconds": round(end - t, 2)})
