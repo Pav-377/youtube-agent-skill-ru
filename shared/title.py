@@ -16,6 +16,8 @@ tail, a mobile one can lose the subject.
 """
 import json, re, sys, os
 
+import lang
+
 DESKTOP, MOBILE, HARD = 60, 40, 100
 VAGUE = {"amazing","incredible","insane","crazy","huge","massive","ultimate","best","powerful",
          "secret","revolutionary","mindblowing","epic","perfect","complete","everything"}
@@ -65,17 +67,18 @@ def show(r):
     for m in r["good"]:      print(f"    ok              {m}")
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     thumb = a[a.index("--thumb") + 1] if "--thumb" in a else None
     if "--title" in a:
         rows = [check(a[a.index("--title") + 1], thumb)]
     elif a and os.path.exists(a[0]):
-        rows = [check(l, thumb) for l in open(a[0]).read().splitlines() if l.strip()]
+        rows = [check(l, thumb) for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
         print(__doc__); sys.exit(1)
     rows.sort(key=lambda r: -r["score"])
-    if as_json: print(json.dumps(rows, indent=1)); return
+    if as_json: print(json.dumps(rows, indent=1, ensure_ascii=False)); return
     for r in rows: show(r)
     print()
 

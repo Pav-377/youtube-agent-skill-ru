@@ -1,0 +1,6 @@
+{
+ "note": "Data for lang.py. Edit here, not in the code; tools/build.py copies this file next to every lang.py.",
+ "word_share_for_russian": 0.4,
+ "letter_share_for_russian": 0.2,
+ "detection_note": "detect() looks at plain words - lower case, no digits - because capitalised words are brands, models and sentence starts in both languages and say nothing about the language. Russian when at least word_share_for_russian of the plain words are Cyrillic. Only when a text has no plain words at all (ШОК! ЭТО КОНЕЦ, Обзор iPhone 17) it falls back to the share of Cyrillic letters. On the cases in tests/test_lang.py the most Cyrillic English text has 0.25 and the least Cyrillic Russian text 0.5; 0.4 sits between them. A pure letter share cannot work: Claude Code + MCP: гайд (Russian) has 0.24, My trip to Moscow (Москва) (English) has 0.27."
+}

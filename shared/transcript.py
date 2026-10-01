@@ -11,6 +11,8 @@ meant the other two skills only worked when yt-edit sat next to them on disk.
 """
 import json, re
 
+import lang
+
 
 def parse_ts(s):
     s = s.strip().replace(",", ".")
@@ -19,7 +21,7 @@ def parse_ts(s):
 
 
 def load(path):
-    raw = open(path, encoding="utf-8", errors="replace").read()
+    raw = lang.read_text(path)
     if path.endswith(".json"):
         d = json.loads(raw)
         segs = d.get("segments", d if isinstance(d, list) else [])

@@ -18,8 +18,10 @@ all. Treat a low score as a reason to look again, never a high score as a promis
 """
 import json, os, re, sys
 
+import lang
+
 HERE = os.path.dirname(os.path.abspath(__file__))
-FORMULAS = json.load(open(os.path.join(HERE, "hooks.json")))["hooks"]
+FORMULAS = lang.read_json(os.path.join(HERE, "hooks.json"))["hooks"]
 
 FILLER = {"basically","actually","literally","just","really","very","so","kind","sort","like",
           "guys","hey","welcome","today","video","subscribe","channel"}
@@ -30,7 +32,10 @@ YOU = re.compile(r"\b(you|your|you're|youre|yourself)\b", re.I)
 STAKE = re.compile(r"\b(lose|lost|wasting|waste|quit|fail|broke|cost|risk|before|stop|never|die|dying|dead)\b", re.I)
 CURIOSITY = re.compile(r"\b(why|how|what|which|until|before|but|nobody|almost|except|reason|actually)\b", re.I)
 
-def words(t): return re.findall(r"[a-z0-9'%$.]+", t.lower())
+def words(t):
+    # Dots at the edge are punctuation, not part of the word: "video." has to match "video" in the
+    # word lists, and a lone "..." is not a word. Inner dots stay, so "3.5" is still one token.
+    return [w for w in (x.strip(".") for x in re.findall(r"[a-z0-9'%$.]+", t.lower())) if w]
 
 def specificity(t):
     w = words(t)
@@ -40,6 +45,9 @@ def specificity(t):
     filler = sum(1 for x in w if x in FILLER)
     s = 34 + nums * 22 - vague * 16 - filler * 5
     # proper nouns that are not sentence-initial read as named things
+    # Known quirk, kept on purpose in English: only the hook's very first word is skipped, so the
+    # first word of a second sentence counts as a name too. Fixing it made strong and weak hooks
+    # harder to tell apart (strong hooks are often two short sentences). See CHANGELOG.md.
     s += min(18, 6 * sum(1 for x in t.split()[1:] if x[:1].isupper()))
     return max(0, min(100, s))
 
@@ -105,13 +113,14 @@ FIX = {
 }
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a
     a = [x for x in a if x != "--json"]
     if "--hook" in a:
         lines = [a[a.index("--hook") + 1]]
     elif a and os.path.exists(a[0]):
-        lines = [l for l in open(a[0]).read().splitlines() if l.strip()]
+        lines = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
         print(__doc__); sys.exit(1 if not a else 0)
     out = []
@@ -121,7 +130,7 @@ def main():
                     "band": band(verdict), "formula": name, "matched": hits})
     out.sort(key=lambda r: -r["verdict"])
     if as_json:
-        print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1)); return
+        print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1, ensure_ascii=False)); return
     for r in out:
         report(r["hook"], r["properties"], r["verdict"], r["formula"], r["matched"])
     if len(out) > 1:

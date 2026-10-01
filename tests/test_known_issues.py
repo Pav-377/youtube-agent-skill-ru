@@ -36,7 +36,7 @@ class P1_HookscoreRussian(unittest.TestCase):
     def test_p1_phrase_scored_as_russian(self):
         ru, en = hook(P1_RU), hook(P1_EN)
         self.assertGreater(ru["properties"]["ADDRESS"], 26, "твой / тебя not seen as address")
-        self.assertGreaterEqual(ru["properties"]["BREVITY"], 80, "19 words read as 3")
+        self.assertGreaterEqual(ru["properties"]["BREVITY"], 80, "20 words read as 3")
         self.assertLessEqual(abs(ru["verdict"] - en["verdict"]), 10)
 
 
@@ -140,7 +140,8 @@ class P7_SelfContainedSkills(unittest.TestCase):
 
 
 class N_Encoding(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 2: shared/lang.py."""
+
     def test_n1_every_open_names_its_encoding(self):
         """On a Russian Windows open() defaults to cp1251 and UTF-8 input turns into mojibake."""
         bad = []
@@ -158,13 +159,11 @@ class N_Encoding(unittest.TestCase):
                             bad.append(f"{os.path.relpath(path, ROOT)}:{node.lineno}")
         self.assertEqual(bad, [])
 
-    @unittest.expectedFailure
     def test_n2_cp1251_console_does_not_crash(self):
         p = run_script("yt-script/hookscore.py", "--hook", "Тест 🔥 эмодзи и тире —",
                        env={"PYTHONIOENCODING": "cp1251"})
         self.assertEqual(p.returncode, 0, p.stderr[-300:])
 
-    @unittest.expectedFailure
     def test_n8_json_keeps_cyrillic_readable(self):
         p = run_script("yt-package/title.py", "--title", "Монтаж за 10 минут", "--json")
         self.assertIn("Монтаж", p.stdout)
@@ -256,21 +255,21 @@ class N_Thumbnail(unittest.TestCase):
 
 
 class N_HookscoreEnglishBugs(unittest.TestCase):
-    """Decision B: fixed in English too, in a separate commit after stage 1."""
+    """Decision B, option A: trailing period and ellipsis fixed in English; sentence start kept."""
 
-    @unittest.expectedFailure
     def test_n10_trailing_period_does_not_hide_filler(self):
         a = hook("Hey guys, welcome to my channel.")["properties"]["SPECIFICITY"]
         b = hook("Hey guys, welcome to my channel")["properties"]["SPECIFICITY"]
         self.assertEqual(a, b)
 
-    @unittest.expectedFailure
-    def test_n10_sentence_start_is_not_a_proper_noun(self):
+    def test_n10_sentence_start_quirk_is_kept_in_english(self):
+        """Decision A: in English the first word of a second sentence still counts as a name.
+        Fixing it made strong and weak hooks harder to tell apart. If this test fails, the quirk
+        changed - re-run tools/hookeval.py and update CHANGELOG.md before accepting it."""
         a = hook("Now you can do it. Then you can rest.")["properties"]["SPECIFICITY"]
         b = hook("now you can do it. then you can rest.")["properties"]["SPECIFICITY"]
-        self.assertEqual(a, b)
+        self.assertEqual(a - b, 6)
 
-    @unittest.expectedFailure
     def test_n10_ellipsis_is_not_a_word(self):
         a = hook("Wait ... this changes how you edit")["properties"]["BREVITY"]
         b = hook("Wait this changes how you edit")["properties"]["BREVITY"]

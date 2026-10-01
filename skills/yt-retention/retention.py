@@ -17,11 +17,13 @@ It reports three things, because they are three different problems with three di
 With --transcript it prints what you were saying at each cliff, which is the only version of this
 report you can act on without scrubbing the video yourself.
 """
-import csv, json, os, re, sys
+import csv, io, json, os, re, sys
+
+import lang
 
 def load_csv(path):
     rows = []
-    with open(path, newline="", encoding="utf-8-sig", errors="replace") as fh:
+    with io.StringIO(lang.read_text(path), newline="") as fh:
         for r in csv.reader(fh):
             nums = []
             for c in r:
@@ -33,6 +35,7 @@ def load_csv(path):
     return rows
 
 def main():
+    lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     tr = a[a.index("--transcript") + 1] if "--transcript" in a else None
@@ -72,7 +75,7 @@ def main():
             said[str(c["from"])] = " ".join(near)[:140]
     out = {"points": len(rows), "start": start, "hook_leak": round(hook_leak, 2),
            "end": ys[-1], "cliffs": cliffs, "slide_per_unit": round(slide, 3), "said": said}
-    if as_json: print(json.dumps(out, indent=1)); return
+    if as_json: print(json.dumps(out, indent=1, ensure_ascii=False)); return
     print(f"\n  {files[0]}   {len(rows)} points   {ys[0]:.1f}% -> {ys[-1]:.1f}%\n")
     verdict = "healthy" if hook_leak < 25 else "leaking" if hook_leak < 40 else "severe"
     print(f"  HOOK LEAK   {hook_leak:.1f}% lost in the opening   [{verdict}]")
