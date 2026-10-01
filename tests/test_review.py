@@ -1,5 +1,5 @@
 """tools/review.py: the owner's table goes out and comes back without losing anything."""
-import csv, io, json, os, shutil, sys, tempfile, unittest
+import contextlib, csv, io, json, os, shutil, sys, tempfile, unittest
 
 from helpers import ROOT
 
@@ -15,7 +15,8 @@ class RoundTrip(unittest.TestCase):
         self.saved = dict(review.SETS)
         review.SETS["hooks"] = self.set_path
         self.csv = os.path.join(self.tmp, "review.csv")
-        review.export("hooks", self.csv)
+        with contextlib.redirect_stdout(io.StringIO()):
+            review.export("hooks", self.csv)
 
     def tearDown(self):
         review.SETS.clear()
@@ -48,7 +49,8 @@ class RoundTrip(unittest.TestCase):
         csv.writer(out, delimiter=";", lineterminator="\r\n").writerows(t)
         with open(self.csv, "w", encoding="cp1251", newline="") as fh:  # as Excel may save it
             fh.write(out.getvalue())
-        review.import_("hooks", self.csv)
+        with contextlib.redirect_stdout(io.StringIO()):
+            review.import_("hooks", self.csv)
         with open(self.set_path, encoding="utf-8") as fh:
             doc = json.load(fh)
         hook = next(h for h in doc["hooks"] if h["id"] == target[0])
