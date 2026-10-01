@@ -22,6 +22,32 @@ import lang
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 FORMULAS = lang.read_json(os.path.join(HERE, "hooks.json"))["hooks"]
+CFG = lang.read_json(os.path.join(HERE, "swipe.json"))
+SUFFIX = re.compile(r"^(\d+(?:[.,]\d+)?)\s*([^\d\s.,]+)\.?$")
+
+
+def views_of(value):
+    """A view count as an int, from a number or from text as a page shows it: 412000, "412,000",
+    "200 000" (any space), "1,2K", "1.2M", "1,2 тыс.", "3 млн просмотров". None if it is not one."""
+    if value is None or value == "":
+        return 0  # missing counts as zero, as it always has
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return int(value)
+    s = lang.normalize(str(value)).strip()
+    for w in CFG["ignore_words"]:
+        s = re.sub(r"\b%s\b\.?" % w, "", s)
+    s = re.sub(r"(?<=\d)[\s]+(?=\d)", "", s.strip())  # 200 000 -> 200000
+    m = SUFFIX.match(s)
+    if m:
+        mult = CFG["multipliers"].get(m.group(2).rstrip("."))
+        return None if mult is None else int(round(float(m.group(1).replace(",", ".")) * mult))
+    if re.fullmatch(r"\d{1,3}(?:[,.]\d{3})+", s):
+        return int(re.sub(r"[,.]", "", s))  # 412,000 / 412.000: views are whole numbers
+    if re.fullmatch(r"\d+", s):
+        return int(s)
+    return None  # "1,5" with no K/тыс./млн is probably a count with its suffix lost: ask, do not guess
 
 def classify(title):
     scored = []
@@ -40,18 +66,29 @@ def main():
     if not files or not os.path.exists(files[0]): print(__doc__); sys.exit(1)
     rows = lang.read_json(files[0])
     if isinstance(rows, dict): rows = rows.get("videos", [])
-    by = {}
-    for r in rows: by.setdefault(r.get("channel", "?"), []).append(r)
+    code = lang.detect(" ".join(str(r.get("title", "")) for r in rows))
+    by, bad = {}, []
+    for n, r in enumerate(rows, 1):
+        views = views_of(r.get("views", 0))
+        if views is None:
+            bad.append((n, r.get("title", ""), r.get("views")))
+            continue  # one unreadable count must not shift its channel's median
+        by.setdefault(r.get("channel", "?"), []).append(dict(r, views=views))
+    for n, title, value in bad:
+        print(f"  video {n} ({str(title)[:40]}): cannot read views {value!r} - write a number, e.g. 12000 or 12K"
+              if code == "en" else
+              f"  Видео {n} ({str(title)[:40]}): не понял число просмотров {value!r}. "
+              "Напишите число, например 12000, 12 тыс. или 1,2 млн. Это видео пропущено.", file=sys.stderr)
     out, thin = [], []
     for ch, vids in by.items():
-        views = [float(v.get("views", 0) or 0) for v in vids]
+        views = [float(v["views"]) for v in vids]
         med = statistics.median(views) if views else 0
-        if len(vids) < 4:
+        if len(vids) < CFG["min_videos_per_channel"]:
             thin.append((ch, len(vids)))
             continue
         for v in vids:
-            m = (float(v.get("views", 0) or 0) / med) if med else 0
-            out.append({"channel": ch, "title": v.get("title", ""), "views": int(v.get("views", 0) or 0),
+            m = (float(v["views"]) / med) if med else 0
+            out.append({"channel": ch, "title": v.get("title", ""), "views": v["views"],
                         "median": int(med), "multiple": round(m, 2),
                         "formula": classify(v.get("title", "")), "url": v.get("url", "")})
     out = [r for r in out if r["multiple"] >= lo]

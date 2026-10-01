@@ -215,7 +215,8 @@ class N_Retention(unittest.TestCase):
 
 
 class N_Swipe(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n7_view_counts_as_text(self):
         views = ["1,2K", "1.2M", "1,2 тыс.", "3 млн", "200 000", "200 000"]
         want = [1200, 1200000, 1200, 3000000, 200000, 200000]
@@ -227,7 +228,6 @@ class N_Swipe(unittest.TestCase):
             r = run_json("yt-viral/swipe.py", path, "--min", "0")
         self.assertEqual(sorted(x["views"] for x in r["outliers"]), sorted(want))
 
-    @unittest.expectedFailure
     def test_n7_bad_view_count_is_a_message_not_a_traceback(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "v.json")
