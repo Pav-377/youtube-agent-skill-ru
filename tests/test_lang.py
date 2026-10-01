@@ -116,6 +116,16 @@ class Stem(unittest.TestCase):
             with self.subTest(word):
                 self.assertEqual(lang.stem(word), want)
 
+    def test_official_snowball_sample(self):
+        """400 pairs from the official Snowball test vocabulary (tests/fixtures/snowball_ru, BSD-3).
+        The full 49785-word vocabulary matched 100% on 2026-10-01: tools/snowball_check.py."""
+        path = os.path.join(ROOT, "tests", "fixtures", "snowball_ru", "sample.tsv")
+        with open(path, encoding="utf-8") as fh:
+            pairs = [line.rstrip("
+").split("	") for line in fh if not line.startswith("#")]
+        self.assertEqual(len(pairs), 400)
+        self.assertEqual([(w, s, lang.stem(w)) for w, s in pairs if lang.stem(w) != s], [])
+
     def test_snowball_quirks_are_known(self):
         """Plain Snowball behaviour, kept: same_word() is what callers use to compare."""
         self.assertEqual(lang.stem("канал"), "кана")
