@@ -208,6 +208,11 @@ def fmt(x, nd, code):
     return s.replace(".", ",") if code == "ru" else s
 
 
+def hook_seconds(length):
+    """10% of the video, between hook_min_seconds and hook_seconds (see retention.json)."""
+    return min(CFG["hook_seconds"], max(CFG["hook_min_seconds"], CFG["hook_share"] * length))
+
+
 def analyse(d, dur, cues):
     xs, ys, pct = d["xs"], d["ys"], d["axis"] == "percent"
     rows = list(zip(xs, ys))
@@ -215,9 +220,12 @@ def analyse(d, dur, cues):
     def at(x):
         return (x / 100.0 * dur) if (pct and dur) else (x if not pct else None)
     start = ys[0] or 100.0
-    # HOOK: the first 30 seconds, or the first 10% when the axis is a percentage and we have no duration
-    cutoff = CFG["hook_seconds"] if not pct else (
-        CFG["hook_seconds"] / dur * 100 if dur else CFG["hook_percent_without_duration"])
+    # HOOK: 10% of the video, at least 3 and at most 30 seconds. From 5 minutes up that is the
+    # original's 30 seconds; a 60-second Short gets 6 - half of it is not a hook. On a percentage
+    # axis with no known length it stays the first 10%.
+    length = dur if dur else (None if pct else (xs[-1] if xs else None))
+    hook_s = hook_seconds(length) if length else None
+    cutoff = (hook_s if not pct else hook_s / length * 100) if hook_s else CFG["hook_percent_without_duration"]
     hook_end = min((y for x, y in rows if x <= cutoff), default=start)
     hook_leak = start - hook_end
     drops = []
@@ -247,8 +255,12 @@ def analyse(d, dur, cues):
             # people left somewhere between the two points: say everything spoken across the drop
             near = [q[2] for q in cues if q[0] <= c["to_seconds"] + pad and q[1] >= c["at_seconds"] - pad]
             said[str(c["from"])] = " ".join(near)[:CFG["said_max_chars"]]
-    return {"points": len(rows), "start": start, "hook_leak": round(hook_leak, 2), "end": ys[-1],
-            "cliffs": cliffs, "slide_per_unit": round(slide, 3), "said": said}
+    out = {"points": len(rows), "start": start, "hook_leak": round(hook_leak, 2), "end": ys[-1],
+           "cliffs": cliffs, "slide_per_unit": round(slide, 3), "said": said}
+    if hook_s and hook_s < CFG["hook_seconds"]:
+        out["hook_seconds"] = round(hook_s, 1)  # only for short videos: long ones keep 30 s
+        out["length_seconds"] = round(length, 1)
+    return out
 
 
 def where(c, code, axis):
@@ -265,6 +277,8 @@ def report_en(src, d, out, notes):
         print(f"  {n}")
     if notes:
         print()
+    if "hook_seconds" in out:
+        print(f"  a {out['length_seconds']:.0f}s video: the hook is its first {out['hook_seconds']:.0f}s (10% of it, 3-30s)\n")
     leak = out["hook_leak"]
     verdict = "healthy" if leak < CFG["hook_healthy_below"] else "leaking" if leak < CFG["hook_severe_from"] else "severe"
     print(f"  HOOK LEAK   {leak:.1f}% lost in the opening   [{verdict}]")
@@ -286,6 +300,9 @@ def report_ru(src, d, out, notes):
         print(f"  {n}")
     if notes:
         print()
+    if "hook_seconds" in out:
+        print(f"  Ролик длиной {out['length_seconds']:.0f} с: хук — первые {fmt(out['hook_seconds'], 0, 'ru')} с "
+              "(10% длины, но не меньше 3 и не больше 30 с)\n")
     leak = out["hook_leak"]
     verdict = ("норма" if leak < CFG["hook_healthy_below"] else
                "утечка" if leak < CFG["hook_severe_from"] else "сильная утечка")

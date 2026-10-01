@@ -241,5 +241,38 @@ class Messages(unittest.TestCase):
         self.assertEqual(r["duration"], 600.0)
 
 
+
+class ShortVideoHook(unittest.TestCase):
+    """The hook is 10% of the video, 3 to 30 seconds: a Short is not half hook."""
+
+    def test_window(self):
+        for length, want in [(20, 3), (60, 6), (180, 18), (300, 30), (600, 30), (3600, 30)]:
+            with self.subTest(length=length):
+                self.assertAlmostEqual(retention.hook_seconds(length), want)
+
+    def short(self, tmp):
+        path = os.path.join(tmp, "short.csv")
+        with open(path, "w", encoding="utf-8") as fh:
+            fh.write("Позиция в видео (сек.);Удержание аудитории (%)\n")
+            y = 100.0
+            for x in range(0, 61, 2):
+                y -= 8.0 if x in (2, 4, 6) else (5.0 if x == 30 else 0.5)
+                fh.write(f"{x};{y:.1f}\n".replace(".", ","))
+        return path
+
+    def test_sixty_second_short(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r = run_json(SCRIPT, self.short(tmp))
+            p = run_script(SCRIPT, self.short(tmp))
+        self.assertEqual(r["hook_seconds"], 6)
+        self.assertAlmostEqual(r["hook_leak"], 99.5 - 75.5)  # what was lost by 6 s, not by 30 s
+        self.assertEqual([(c["at_seconds"], c["to_seconds"]) for c in r["cliffs"]][:1], [(28, 30)])
+        self.assertIn("хук — первые 6 с", p.stdout)
+
+    def test_long_videos_keep_thirty_seconds_and_their_output(self):
+        r = run_json(SCRIPT, fixture("en", "retention_en_seconds.csv"))
+        self.assertNotIn("hook_seconds", r)
+
+
 if __name__ == "__main__":
     unittest.main()
