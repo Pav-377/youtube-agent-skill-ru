@@ -109,6 +109,7 @@ SMOKE = {
     "chapters.py": [fixture("en", "chapters_en.srt")],
     "retention.py": [fixture("en", "retention_en_seconds.csv"), "--transcript", fixture("en", "long_en.srt")],
     "swipe.py": [fixture("en", "swipe_en.json")],
+    "aitells.py": ["--text", "Это не просто монтаж, а искусство."],
 }
 
 

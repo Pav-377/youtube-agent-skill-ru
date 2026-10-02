@@ -48,6 +48,20 @@ Generate ten titles, run them all through `title.py`, show the user the top thre
 and the specific issue on each. For the winner, write the thumbnail brief: the expression, the
 framing, the three words, and what the background has to do to hold contrast at feed size.
 
+## Before you show it: the AI-tell check
+
+Run `aitells.py` (in this folder) on the titles, the thumbnail text and the thumbnail brief before the user sees anything:
+
+```bash
+python3 aitells.py --text "..."      # or a file, paragraphs separated by an empty line
+```
+
+Rewrite every **stamp** it reports - the "not X, but Y" contrast, the canned linking phrase, the
+lead-in question, the slogan-like parallel, the triads one after another - in plain words, and act
+on the **speech** notes (split a sentence that cannot be said in one breath). Run it again until no
+stamp is left. It only finds; the rewriting is yours, and it must sound like the user's voice
+profile, not like a cleaned-up version of you.
+
 ## The gate
 
 Nothing here publishes. This skill writes and you publish. Every output ends in a block the user
