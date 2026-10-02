@@ -88,10 +88,12 @@ class P5_ChaptersRussian(unittest.TestCase):
 
 
 class P6_SwipeRussian(unittest.TestCase):
-    @unittest.expectedFailure
     def test_p6_formulas_on_russian_titles(self):
+        """Fixed in stage 3: Russian patterns in hooks.json; Russian titles get Russian formula names."""
+        with open(os.path.join(SKILLS, "yt-viral", "hooks.json"), encoding="utf-8") as fh:
+            ru_name = {h["name"]: h["name_ru"] for h in json.load(fh)["hooks"]}
         with open(fixture("ru", "swipe_ru.json"), encoding="utf-8") as fh:
-            want = {v["title"]: v["expected_formula"] for v in json.load(fh) if "expected_formula" in v}
+            want = {v["title"]: ru_name[v["expected_formula"]] for v in json.load(fh) if "expected_formula" in v}
         got = {r["title"]: r["formula"]
                for r in run_json("yt-viral/swipe.py", fixture("ru", "swipe_ru.json"), "--min", "0")["outliers"]}
         hits = sum(1 for t, f in want.items() if got.get(t) == f)

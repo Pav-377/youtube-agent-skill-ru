@@ -49,13 +49,15 @@ def views_of(value):
         return int(s)
     return None  # "1,5" with no K/тыс./млн is probably a count with its suffix lost: ask, do not guess
 
-def classify(title):
+def classify(title, code="en"):
+    """The formula a title follows, by the patterns in hooks.json - English or Russian ones."""
+    key, name = ("match_ru", "name_ru") if code == "ru" else ("match", "name")
     scored = []
     for f in FORMULAS:
-        n = sum(1 for p in f["match"] if re.search(p, title, re.I))
-        if n: scored.append((n, f["name"]))
+        n = sum(1 for p in f.get(key, []) if re.search(p, title, re.I))
+        if n: scored.append((n, f.get(name, f["name"])))
     scored.sort(reverse=True)
-    return scored[0][1] if scored else "Unclassified"
+    return scored[0][1] if scored else ("Без формулы" if code == "ru" else "Unclassified")
 
 def main():
     lang.setup_output()
@@ -90,10 +92,13 @@ def main():
             m = (float(v["views"]) / med) if med else 0
             out.append({"channel": ch, "title": v.get("title", ""), "views": v["views"],
                         "median": int(med), "multiple": round(m, 2),
-                        "formula": classify(v.get("title", "")), "url": v.get("url", "")})
+                        "formula": classify(v.get("title", ""), lang.detect(str(v.get("title", "")))),
+                        "url": v.get("url", "")})
     out = [r for r in out if r["multiple"] >= lo]
     out.sort(key=lambda r: -r["multiple"])
     if as_json: print(json.dumps({"outliers": out, "skipped_thin_channels": thin}, indent=1, ensure_ascii=False)); return
+    if code == "ru":
+        return report_ru(rows, by, lo, out, thin)
     print(f"\n  {len(rows)} videos across {len(by)} channels, outliers at {lo}x or better\n")
     for r in out[:25]:
         print(f"    {r['multiple']:5.2f}x  {r['views']:>9,}  vs {r['median']:>9,} median   {r['channel'][:22]:<22} {r['title'][:52]}")
@@ -109,6 +114,27 @@ def main():
         for f, n in sorted(counts.items(), key=lambda x: -x[1]):
             print(f"    {n:2d}x  {f}")
     print()
+
+def report_ru(rows, by, lo, out, thin):
+    def n(x): return f"{x:,}".replace(",", " ")
+    def k(x): return f"{x:.2f}".replace(".", ",")
+    print(f"\n  видео: {len(rows)}, каналов: {len(by)}, выбросы от {k(lo)}× медианы канала\n")
+    for r in out[:25]:
+        print(f"    {k(r['multiple']):>5}×  {n(r['views']):>11}  при медиане {n(r['median']):>11}   "
+              f"{r['channel'][:22]:<22} {r['title'][:52]}")
+        print(f"            {r['formula']}")
+    if not out: print("    ни одно видео не прошло порог: соберите больше видео с каждого канала или снизьте --min")
+    if thin:
+        print(f"\n  пропущено каналов, где меньше {CFG['min_videos_per_channel']} видео: {len(thin)}. "
+              "Медиана по одному-двум видео ничего не значит: " + ", ".join(f"{c} ({m})" for c, m in thin[:6]))
+    counts = {}
+    for r in out: counts[r["formula"]] = counts.get(r["formula"], 0) + 1
+    if counts:
+        print("\n  формулы у выбросов")
+        for f, m in sorted(counts.items(), key=lambda x: -x[1]):
+            print(f"    {m:2d}×  {f}")
+    print("\n  Формула — это суждение о словах заголовка, а не объяснение, почему видео выстрелило.\n")
+
 
 if __name__ == "__main__":
     main()
