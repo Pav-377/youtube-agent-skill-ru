@@ -9,6 +9,8 @@
   "title.py":      ["yt-package", "yt-audit"],
   "title.json":    ["yt-package", "yt-audit"],
   "transcript.py": ["yt-edit", "yt-retention", "yt-chapters"],
+  "voice_template.md":    ["yt-script", "yt-package", "yt-comment", "yt-plan", "yt-seo", "yt-audit"],
+  "voice_template.ru.md": ["yt-script", "yt-package", "yt-comment", "yt-plan", "yt-seo", "yt-audit"],
   "lang.py":       ["yt-script", "yt-shorts", "yt-audit", "yt-package", "yt-edit", "yt-retention", "yt-chapters", "yt-viral"],
   "lang.json":     ["yt-script", "yt-shorts", "yt-audit", "yt-package", "yt-edit", "yt-retention", "yt-chapters", "yt-viral"]
  }

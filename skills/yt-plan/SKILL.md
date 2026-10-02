@@ -4,7 +4,8 @@ description: >-
   Plan a week or a month of YouTube uploads - what to post, when, and in
   what order, sized to the creator's actual capacity. Use for "plan my
   week", "content calendar", "what should I post", "I have no idea what to
-  make next".
+  make next". Also for Russian requests: "контент-план на неделю", "план
+  публикаций", "что снять дальше", "расписание роликов".
 ---
 
 # yt-plan
@@ -14,11 +15,16 @@ A plan that does not fit the week is a list of regrets. Ask two questions before
 
 ## Before you write
 
-1. Read `~/.claude/youtube/voice.md` if it exists. That is the user's voice profile: how they talk
-   on camera, the words they never use, who they are talking to, what they will not claim. If it
-   does not exist, ask for **three of their own videos**, read or transcribe them, infer the voice,
-   and write the file. A script in the wrong voice is worse than no script, because they have to
-   read it out loud.
+1. Read the user's voice profile first: `~/.claude/youtube/voice.md` in Claude Code, or the profile
+   the user put into this project's instructions or pasted into the chat (claude.ai and Claude
+   Desktop have no `~/.claude`). It says how they talk on camera, whether they say «ты» or «вы» to
+   the viewer, their pace in words per minute, the words that are theirs, the words they never use,
+   who they are talking to, what they will not claim. If there is no profile, ask for **three of
+   their own videos** (links or transcripts), infer the voice, and hand the profile back as ready
+   text following `voice_template.ru.md` (Russian) or `voice_template.md` (English) in this
+   folder, saying where to keep it: `~/.claude/youtube/voice.md` in Claude Code, the project
+   instructions on claude.ai. A script in the wrong voice is worse than no script, because they have
+   to read it out loud.
 2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have
    one, ask for it or write the line without it.
 
@@ -39,6 +45,19 @@ recognises, and the empty days are what make the filled ones survive a bad week.
 A table: day, format, working title, the one sentence it promises, and what already exists for it.
 Then the honest line at the bottom - how many hours this costs, and what to drop first if the week
 goes wrong.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- The table in Russian: День, Формат, Рабочее название, Обещание, Что уже есть.
+- Do not assume holidays or audience habits; ask for the channel's own best days.
 
 ## The gate
 

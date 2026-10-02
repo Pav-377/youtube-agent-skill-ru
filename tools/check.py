@@ -10,6 +10,7 @@
   contained    nothing in a skill folder reaches outside it (no ../)
   text         text files are UTF-8 without a BOM
   imports      skill scripts use the standard library only, and nothing that talks to a network
+  skills       a Russian-language mode and examples_ru.md in every skill; tools run from the skill folder
 
 Limits are from the official docs (checked 2026-10-01):
   platform.claude.com/docs/en/agents-and-tools/agent-skills/overview  - SKILL.md frontmatter
@@ -214,9 +215,35 @@ def check_imports():
     return out
 
 
+def check_skills():
+    """Every skill has a Russian-language mode and its examples, and runs its tools from its own folder."""
+    out = []
+    for d in skill_dirs():
+        name = os.path.basename(d)
+        with open(os.path.join(d, "SKILL.md"), encoding="utf-8") as fh:
+            text = fh.read()
+        if "## Russian-language mode" not in text:
+            out.append(f"skills/{name}/SKILL.md: no '## Russian-language mode' section")
+        if not os.path.isfile(os.path.join(d, "examples_ru.md")):
+            out.append(f"skills/{name}: no examples_ru.md")
+        elif "(examples_ru.md)" not in text:
+            out.append(f"skills/{name}/SKILL.md: does not link examples_ru.md")
+        for m in re.finditer(r"python3?\s+([\w./${}\"]+\.py)", text):
+            if "CLAUDE_SKILL_DIR" not in m.group(1):
+                out.append(f"skills/{name}/SKILL.md: '{m.group(0)}' - run tools as python3 \"${{CLAUDE_SKILL_DIR}}/x.py\"")
+    for src, copy in (("templates/voice.md", "shared/voice_template.md"),
+                      ("templates/voice.ru.md", "shared/voice_template.ru.md")):
+        a, b = os.path.join(ROOT, src), os.path.join(ROOT, copy)
+        if os.path.exists(a) and os.path.exists(b):
+            with open(a, "rb") as fa, open(b, "rb") as fb:
+                if fa.read() != fb.read():
+                    out.append(f"{copy} differs from {src} - copy the template over")
+    return out
+
+
 CHECKS = [("sync", check_sync), ("frontmatter", check_frontmatter), ("plugin", check_plugin),
           ("links", check_links), ("contained", check_contained), ("text", check_text),
-          ("imports", check_imports)]
+          ("imports", check_imports), ("skills", check_skills)]
 
 
 def main():

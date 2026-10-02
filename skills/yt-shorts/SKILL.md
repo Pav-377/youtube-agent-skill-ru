@@ -2,8 +2,10 @@
 name: yt-shorts
 description: >-
   Find the Shorts hiding inside a long video and write them, using the
-  transcript to pick self-contained moments. Use for "cut this into shorts",
-  "clip this", "repurpose this video", "what should I clip".
+  transcript to pick self-contained moments. Use for "cut this into
+  shorts", "clip this", "repurpose this video", "what should I clip". Also
+  for Russian requests: "нарежь шортсы", "сделай Shorts из видео", "что
+  вырезать в короткие ролики".
 ---
 
 # yt-shorts
@@ -35,7 +37,7 @@ reject one without reading the whole transcript.
 Run `aitells.py` (in this folder) on the new first line and the on-screen text of each Short before the user sees anything:
 
 ```bash
-python3 aitells.py --text "..."      # or a file, paragraphs separated by an empty line
+python3 "${CLAUDE_SKILL_DIR}/aitells.py" --text "..."      # or a file, paragraphs separated by an empty line
 ```
 
 Rewrite every **stamp** it reports - the "not X, but Y" contrast, the canned linking phrase, the
@@ -43,6 +45,30 @@ lead-in question, the slogan-like parallel, the triads one after another - in pl
 on the **speech** notes (split a sentence that cannot be said in one breath). Run it again until no
 stamp is left. It only finds; the rewriting is yours, and it must sound like the user's voice
 profile, not like a cleaned-up version of you.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- The tools detect Russian on their own (`--lang ru` forces it) and report in Russian.
+- Pick the spans in the Russian transcript. Write the new first line in spoken Russian and score it
+  with `hookscore.py`; the score filters out weak openings, it does not promise views.
+- On-screen text in Russian, about five words at most, different from the spoken line.
+- Run `aitells.py` on the first lines and the on-screen text before showing them.
+
+## Running the tools
+
+The scripts sit next to this SKILL.md. `${CLAUDE_SKILL_DIR}` in the commands is this skill's folder:
+Claude Code shows it as the skill's base directory; on claude.ai it is the folder this SKILL.md was
+read from, so put that path in if the shell does not know the variable. If `python3` is not found
+(Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
+else, read and write only the files you give them, and never touch the network.
 
 ## The gate
 

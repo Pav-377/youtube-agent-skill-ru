@@ -4,6 +4,8 @@ description: >-
   Audit a YouTube channel end to end - packaging, consistency, the first
   fifteen seconds, and what to fix first. Use for "audit my channel", "why
   isn't my channel growing", "review my videos", or a pasted channel URL.
+  Also for Russian requests: "разбери мой канал", "аудит канала", "почему
+  канал не растёт".
 ---
 
 # yt-audit
@@ -12,11 +14,16 @@ An audit that lists twenty problems is a way of avoiding the one that matters. T
 
 ## Before you write
 
-1. Read `~/.claude/youtube/voice.md` if it exists. That is the user's voice profile: how they talk
-   on camera, the words they never use, who they are talking to, what they will not claim. If it
-   does not exist, ask for **three of their own videos**, read or transcribe them, infer the voice,
-   and write the file. A script in the wrong voice is worse than no script, because they have to
-   read it out loud.
+1. Read the user's voice profile first: `~/.claude/youtube/voice.md` in Claude Code, or the profile
+   the user put into this project's instructions or pasted into the chat (claude.ai and Claude
+   Desktop have no `~/.claude`). It says how they talk on camera, whether they say «ты» or «вы» to
+   the viewer, their pace in words per minute, the words that are theirs, the words they never use,
+   who they are talking to, what they will not claim. If there is no profile, ask for **three of
+   their own videos** (links or transcripts), infer the voice, and hand the profile back as ready
+   text following `voice_template.ru.md` (Russian) or `voice_template.md` (English) in this
+   folder, saying where to keep it: `~/.claude/youtube/voice.md` in Claude Code, the project
+   instructions on claude.ai. A script in the wrong voice is worse than no script, because they have
+   to read it out loud.
 2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have
    one, ask for it or write the line without it.
 
@@ -41,6 +48,29 @@ An audit that lists twenty problems is a way of avoiding the one that matters. T
 - What NOT to do yet, and why.
 
 Never open an audit with praise you do not mean, and never end one with a list of twenty things.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- The tools detect Russian on their own (`--lang ru` forces it) and report in Russian.
+- `title.py` and `hookscore.py` run in Russian mode on Russian titles and openings.
+- The hook score is a filter for weak openings, not a forecast. Never tell the user a video will do
+  well because its hook scored high: on 226 real Russian openings, hits and misses scored the same.
+
+## Running the tools
+
+The scripts sit next to this SKILL.md. `${CLAUDE_SKILL_DIR}` in the commands is this skill's folder:
+Claude Code shows it as the skill's base directory; on claude.ai it is the folder this SKILL.md was
+read from, so put that path in if the shell does not know the variable. If `python3` is not found
+(Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
+else, read and write only the files you give them, and never touch the network.
 
 ## The gate
 

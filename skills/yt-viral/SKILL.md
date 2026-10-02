@@ -2,9 +2,11 @@
 name: yt-viral
 description: >-
   Find what is actually working in the user's niche on YouTube and rank it
-  by how far each video beat its own channel, then name the formula. Use for
-  "what's working right now", "find viral videos in my niche", "why did this
-  blow up", competitor research, or a swipe file.
+  by how far each video beat its own channel, then name the formula. Use
+  for "what's working right now", "find viral videos in my niche", "why
+  did this blow up", competitor research, or a swipe file. Also for
+  Russian requests: "найди идеи у конкурентов", "что сейчас залетает в
+  моей нише", "почему это видео взлетело", "выбросы по просмотрам".
 ---
 
 # yt-viral
@@ -13,7 +15,7 @@ Raw view counts rank channel size, not ideas. This ranks by **multiple over each
 median**, which is the only version of the question that is about the video.
 
 ```bash
-python3 swipe.py collected.json --min 2.0
+python3 "${CLAUDE_SKILL_DIR}/swipe.py" collected.json --min 2.0
 ```
 
 ## Collecting the input
@@ -38,6 +40,32 @@ should say so when you present it.
 What to hand back: the top five with their multiples, the formula each used, and the ONE structural
 thing they share. Then the harder line - which of those the user could actually make this week, in
 their voice, with what they have.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- The tools detect Russian on their own (`--lang ru` forces it) and report in Russian.
+- `swipe.py` reads Russian view counts (1,2 тыс., 3 млн, 200 000) and names the formula of a Russian
+  title by its Russian name from `hooks.json`.
+- Collecting with yt-dlp: take view counts with `--extractor-args youtube:lang=en` (with Russian
+  pages a channel list can shorten "181 тыс." to 181) and titles with `youtube:lang=ru` (without it
+  YouTube may hand back machine translations).
+- The formula is a judgement about the title's words, not the reason the video took off. Say so.
+
+## Running the tools
+
+The scripts sit next to this SKILL.md. `${CLAUDE_SKILL_DIR}` in the commands is this skill's folder:
+Claude Code shows it as the skill's base directory; on claude.ai it is the folder this SKILL.md was
+read from, so put that path in if the shell does not know the variable. If `python3` is not found
+(Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
+else, read and write only the files you give them, and never touch the network.
 
 ## The gate
 
