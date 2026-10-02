@@ -187,10 +187,10 @@ def main():
     a = sys.argv[1:]
     choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
-    thumb = a[a.index("--thumb") + 1] if "--thumb" in a else None
-    small = a[a.index("--thumb-small") + 1] if "--thumb-small" in a else None
+    thumb = lang.flag_value(a, "--thumb")
+    small = lang.flag_value(a, "--thumb-small")
     if "--title" in a:
-        titles = [a[a.index("--title") + 1]]
+        titles = [lang.flag_value(a, "--title")]
     elif a and os.path.exists(a[0]):
         titles = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:

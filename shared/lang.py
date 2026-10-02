@@ -76,6 +76,21 @@ def take_lang_flag(args):
     return value, list(args[:i]) + list(args[i + 2:])
 
 
+def flag_value(args, flag, default=None, cast=str):
+    """The value after `flag` in an argument list, or `default` when the flag is absent. A flag
+    with no value, or a value of the wrong kind, ends the script with a short message instead of an
+    IndexError or ValueError traceback."""
+    if flag not in args:
+        return default
+    i = args.index(flag)
+    if i + 1 >= len(args) or (args[i + 1].startswith("--") and len(args[i + 1]) > 2):
+        raise SystemExit(f"{flag}: нужно значение после флага / {flag} needs a value")
+    try:
+        return cast(args[i + 1].replace(",", ".") if cast in (int, float) else args[i + 1])
+    except ValueError:
+        raise SystemExit(f"{flag}: не понял значение {args[i + 1]!r} / cannot read {args[i + 1]!r}")
+
+
 def resolve(choice, text):
     return choice if choice in LANGS else detect(text)
 
