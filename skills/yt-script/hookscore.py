@@ -3,6 +3,8 @@
 # Edit this file, never a copy.
 """hookscore.py - score a YouTube hook before you waste a take on it.
 
+What it is for: it filters out weak openings and says what to fix. It does not predict views.
+
 Five properties, 0-100 each, and a verdict that is 60% the mean and 40% the weakest one. The
 weakest-link weighting is deliberate: a hook with four strong properties and one dead one is a hook
 that leaks at the dead one, and averaging hides that.
@@ -15,6 +17,11 @@ WHAT THIS CAN AND CANNOT TELL YOU. Measured against 74 real short-form hooks (fi
 auto-captions, top-8 and bottom-8 by views across five channels): it separates deliberately bad
 hooks from real ones well, and it separates a creator's own hits from their own misses barely at
 all. Treat a low score as a reason to look again, never a high score as a promise.
+
+The Russian mode was measured the same way (tools/research/eval_hooks.py): on hooks written to be
+weak or ordinary it ranks the ordinary one higher in 98% of pairs, with a 15-point gap; on the first
+15 seconds of 226 real Russian videos, strong (2x the channel median views) and weak (under 0.5x)
+score the same on average. A filter for weak openings, not a forecast.
 """
 import json, os, re, sys
 
@@ -251,7 +258,8 @@ def main():
     if len(out) > 1:
         w = out[0]
         if w["lang"] == "ru":
-            print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']}, {BAND_RU[w['band']]})\n")
+            print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']}, {BAND_RU[w['band']]})")
+            print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.\n")
         else:
             print(f"\n  winner: {w['hook'].strip()}  ({w['verdict']}, {w['band']})\n")
 

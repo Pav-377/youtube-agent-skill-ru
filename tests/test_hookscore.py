@@ -82,5 +82,30 @@ class Modes(unittest.TestCase):
             self.assertIn(word, p.stdout)
 
 
+
+class Acceptance(unittest.TestCase):
+    """Brief 5.2 as revised by the owner on 2026-10-02: the score is a filter for weak openings.
+    On hooks written to be weak or ordinary, at least 90% of (ordinary, weak) pairs must be ranked
+    the right way round and the mean gap must be at least 10 points. On real views-labelled hooks
+    the scorer does not separate hits from misses; that is reported, not tested (docs/REPORT.md)."""
+
+    def test_weak_versus_ordinary(self):
+        import json
+        from helpers import fixture
+        with open(fixture("hooks_ru.json"), encoding="utf-8") as fh:
+            doc = json.load(fh)
+        s = [hs.score(h["text"], "ru")[1] for h in doc["hooks"] if h["label"] == "strong"]
+        w = [hs.score(h["text"], "ru")[1] for h in doc["hooks"] if h["label"] == "weak"]
+        pairs = sum((a > b) + 0.5 * (a == b) for a in s for b in w) / (len(s) * len(w))
+        self.assertGreaterEqual(pairs, 0.90)
+        self.assertGreaterEqual(sum(s) / len(s) - sum(w) / len(w), 10)
+
+    def test_russian_report_says_what_the_score_is_for(self):
+        from helpers import fixture
+        p = run_script("yt-script/hookscore.py", fixture("ru", "titles_ru.txt"))
+        self.assertIn("отсеивает слабые начала", p.stdout)
+        self.assertIn("не предсказывает", p.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()
