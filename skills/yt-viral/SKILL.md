@@ -67,6 +67,13 @@ read from, so put that path in if the shell does not know the variable. If `pyth
 (Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
 else, read and write only the files you give them, and never touch the network.
 
+If neither command works - "not found", "Python was not found" from the Windows Store stub, exit
+code 9009, or a version older than 3.9 - stop and tell the user in their language, in plain words,
+that the tool did not run because Python is missing, and point them to the "Если нет Python"
+section of docs/INSTALL.md (Russian) or https://www.python.org/downloads/ . Do not score, count or
+lint by eye and present it as the tool's result; if they want to go on without Python, say clearly
+that what follows is your own judgement, not the tool's.
+
 ## The gate
 
 Nothing here publishes. This skill writes and you publish. Every output ends in a block the user

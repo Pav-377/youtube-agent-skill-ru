@@ -30,8 +30,11 @@ python3 "${CLAUDE_SKILL_DIR}/title.py" titles.txt            # one per line, ran
    who they are talking to, what they will not claim. If there is no profile, ask for **three of
    their own videos** (links or transcripts), infer the voice, and hand the profile back as ready
    text following `voice_template.ru.md` (Russian) or `voice_template.md` (English) in this
-   folder, saying where to keep it: `~/.claude/youtube/voice.md` in Claude Code, the project
-   instructions on claude.ai. A script in the wrong voice is worse than no script, because they have
+   folder. In Claude Code, save it yourself to `~/.claude/youtube/voice.md` (create the folder; if
+   the file already exists, show the changes and ask before replacing it). Never write the profile
+   into the plugin or skill folder, and never tell the user to fill in the template there: an
+   update replaces that folder and the profile is lost. On claude.ai and Claude Desktop, hand it
+   back as text for the project instructions. A script in the wrong voice is worse than no script, because they have
    to read it out loud.
 2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have
    one, ask for it or write the line without it.
@@ -95,6 +98,13 @@ Claude Code shows it as the skill's base directory; on claude.ai it is the folde
 read from, so put that path in if the shell does not know the variable. If `python3` is not found
 (Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
 else, read and write only the files you give them, and never touch the network.
+
+If neither command works - "not found", "Python was not found" from the Windows Store stub, exit
+code 9009, or a version older than 3.9 - stop and tell the user in their language, in plain words,
+that the tool did not run because Python is missing, and point them to the "Если нет Python"
+section of docs/INSTALL.md (Russian) or https://www.python.org/downloads/ . Do not score, count or
+lint by eye and present it as the tool's result; if they want to go on without Python, say clearly
+that what follows is your own judgement, not the tool's.
 
 ## The gate
 
