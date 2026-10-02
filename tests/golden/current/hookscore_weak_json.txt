@@ -11,7 +11,8 @@ exit=0
   },
   "verdict": 40,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Before we get started, make sure to like and subscribe.",
@@ -24,7 +25,8 @@ exit=0
   },
   "verdict": 38,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Today I want to share a few ideas with you.",
@@ -37,7 +39,8 @@ exit=0
   },
   "verdict": 36,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Hi everyone, my name is Sam and I make videos about tech.",
@@ -50,7 +53,8 @@ exit=0
   },
   "verdict": 35,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "In this video I will be discussing some tips about YouTube.",
@@ -63,7 +67,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Let's talk about some things that are pretty interesting.",
@@ -76,7 +81,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Here are some thoughts on content creation in general.",
@@ -89,7 +95,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "I think this might be useful for some people maybe.",
@@ -102,7 +109,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Content creation is a journey and everyone has their own path.",
@@ -115,7 +123,8 @@ exit=0
   },
   "verdict": 34,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "I have been wanting to make this video for a long time.",
@@ -128,7 +137,8 @@ exit=0
   },
   "verdict": 33,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "This video is sponsored by our partner, more on that later.",
@@ -141,7 +151,8 @@ exit=0
   },
   "verdict": 33,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Okay so yeah, let's just get into it.",
@@ -154,7 +165,8 @@ exit=0
   },
   "verdict": 31,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Welcome to another episode of the show.",
@@ -167,7 +179,8 @@ exit=0
   },
   "verdict": 30,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Today's video is all about editing.",
@@ -180,7 +193,8 @@ exit=0
   },
   "verdict": 29,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Quick video today, nothing special, just some updates.",
@@ -193,7 +207,8 @@ exit=0
   },
   "verdict": 29,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "This ultimate guide covers everything you need to know about the algorithm and many more topics that we will go through slowly one by one today in a lot of detail.",
@@ -206,7 +221,8 @@ exit=0
   },
   "verdict": 28,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Hey guys, welcome back to the channel, today we are going to talk about thumbnails.",
@@ -219,7 +235,8 @@ exit=0
   },
   "verdict": 25,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "So basically this is a really amazing tool that I think you will like.",
@@ -232,7 +249,8 @@ exit=0
   },
   "verdict": 25,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "This is going to be an incredible video, so stay tuned.",
@@ -245,7 +263,8 @@ exit=0
   },
   "verdict": 25,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "Thumbnails.",
@@ -258,7 +277,8 @@ exit=0
   },
   "verdict": 25,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  },
  {
   "hook": "It is a really powerful and revolutionary method that is just insane.",
@@ -271,6 +291,7 @@ exit=0
   },
   "verdict": 21,
   "band": "WEAK",
-  "formula": "Unclassified"
+  "formula": "Unclassified",
+  "lang": "en"
  }
 ]

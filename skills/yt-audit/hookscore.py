@@ -3,6 +3,8 @@
 # Edit this file, never a copy.
 """hookscore.py - score a YouTube hook before you waste a take on it.
 
+What it is for: it filters out weak openings and says what to fix. It does not predict views.
+
 Five properties, 0-100 each, and a verdict that is 60% the mean and 40% the weakest one. The
 weakest-link weighting is deliberate: a hook with four strong properties and one dead one is a hook
 that leaks at the dead one, and averaging hides that.
@@ -15,6 +17,11 @@ WHAT THIS CAN AND CANNOT TELL YOU. Measured against 74 real short-form hooks (fi
 auto-captions, top-8 and bottom-8 by views across five channels): it separates deliberately bad
 hooks from real ones well, and it separates a creator's own hits from their own misses barely at
 all. Treat a low score as a reason to look again, never a high score as a promise.
+
+The Russian mode was measured the same way (tools/research/eval_hooks.py): on hooks written to be
+weak or ordinary it ranks the ordinary one higher in 98% of pairs, with a 15-point gap; on the first
+15 seconds of 226 real Russian videos, strong (2x the channel median views) and weak (under 0.5x)
+score the same on average. A filter for weak openings, not a forecast.
 """
 import json, os, re, sys
 
@@ -78,23 +85,124 @@ def brevity(t):
 PROPS = [("SPECIFICITY", specificity), ("ADDRESS", address), ("STAKES", stakes),
          ("CURIOSITY", curiosity), ("BREVITY", brevity)]
 
-def classify(t):
+# --- Russian ---------------------------------------------------------------------------------------
+# The same five properties and the same arithmetic as above, with Russian word lists from
+# hookscore.json. Words are lang.tokens(), so Cyrillic, hyphens and numbers count, and punctuation
+# never does. Unlike the English mode, the first word of every sentence is never taken for a name.
+RU = lang.read_json(os.path.join(HERE, "hookscore.json"))
+ADDR = RU["address_ru"]
+PRONOUNS = {lang.normalize(w) for w in ADDR["pronouns"]}
+IMPERATIVES = [lang.normalize(w) for w in ADDR["imperatives"]]
+SENTENCE_END = (".", "!", "?", "…")
+
+def ru_tokens(t): return [lang.normalize(w) for w in lang.tokens(t)]
+
+def ru_hits(t, entries):
+    """How many times the entries occur: stem* by prefix, phrases as whole words, others by form."""
+    toks = ru_tokens(t)
+    text = " " + " ".join(toks) + " "
+    n = 0
+    for e in entries:
+        e = lang.normalize(e)
+        if " " in e:
+            n += len(re.findall(r"(?<!\w)" + re.escape(e) + r"(?!\w)", text))
+        elif e.endswith("*"):
+            n += sum(1 for w in toks if w.startswith(e[:-1]))
+        elif len(e) < 5:
+            n += sum(1 for w in toks if w == e)  # short words by form would merge как and какой
+        else:
+            n += sum(1 for w in toks if len(w) >= 5 and lang.same_word(w, e))
+    return n
+
+def ru_numbers(t):
+    """Runs of digits and number words: "пять тысяч" is one figure, "30 дней" another."""
+    groups, inside = 0, False
+    for w in ru_tokens(t):
+        is_num = w[0].isdigit() or any(lang.same_word(w, x) for x in RU["numerals_ru"])
+        groups += is_num and not inside
+        inside = is_num
+    return groups
+
+def ru_names(t):
+    toks = t.split()
+    n = 0
+    for i, tok in enumerate(toks):
+        w = re.sub(r"^\W+|\W+$", "", tok)
+        if i == 0 or toks[i - 1].endswith(SENTENCE_END):
+            continue  # a sentence start is not a name
+        if w[:1].isupper() and not (len(w) > 1 and w.isupper()):
+            n += 1
+    return n
+
+def ru_address_positions(t):
+    toks = ru_tokens(t)
+    text = " " + " ".join(toks) + " "
+    pos = [i for i, w in enumerate(toks) if w in PRONOUNS or w in IMPERATIVES
+           or (len(w) >= ADDR["second_person_min_length"] and w.endswith(tuple(ADDR["second_person_endings"])))]
+    for e in IMPERATIVES:
+        if " " in e:
+            for m in re.finditer(r"(?<!\w)" + re.escape(e) + r"(?!\w)", text):
+                pos.append(text[:m.start()].count(" ") - 1)  # the text starts with a space
+    return pos
+
+def specificity_ru(t):
+    if not ru_tokens(t): return 0
+    s = 34 + ru_numbers(t) * 22 - ru_hits(t, RU["vague_ru"]) * 16 - ru_hits(t, RU["filler_ru"]) * 5
+    s += min(18, 6 * ru_names(t))
+    return max(0, min(100, s))
+
+def address_ru(t):
+    pos = ru_address_positions(t)
+    first = 30 if any(p < 6 for p in pos) else 0
+    return max(0, min(100, 26 + len(pos) * 20 + first))
+
+def stakes_ru(t):
+    n = ru_hits(t, RU["stakes_ru"])
+    return max(0, min(100, 22 + n * 26 + (14 if ru_numbers(t) else 0)))
+
+def curiosity_ru(t):
+    n = ru_hits(t, RU["curiosity_ru"])
+    q = 18 if t.strip().endswith("?") else 0
+    closed = -18 if ru_hits(t, RU["closed_ru"]) else 0
+    return max(0, min(100, 24 + n * 17 + q + closed))
+
+def brevity_ru(t):
+    n = len(ru_tokens(t))
+    lo, hi = RU["brevity_ru"]["low"], RU["brevity_ru"]["high"]
+    if n == 0: return 0
+    if lo <= n <= hi: return 100
+    if n < lo: return max(30, 100 - (lo - n) * 11)
+    return max(10, 100 - (n - hi) * 7)
+
+PROPS_RU = [("SPECIFICITY", specificity_ru), ("ADDRESS", address_ru), ("STAKES", stakes_ru),
+            ("CURIOSITY", curiosity_ru), ("BREVITY", brevity_ru)]
+
+def classify(t, code="en"):
+    key, name_key = ("match_ru", "name_ru") if code == "ru" else ("match", "name")
     best, hits = None, 0
     for f in FORMULAS:
-        n = sum(1 for p in f["match"] if re.search(p, t, re.I))
+        n = sum(1 for p in f.get(key, []) if re.search(p, t, re.I))
         if n > hits: best, hits = f, n
-    return (best["name"] if best else "Unclassified"), hits
+    if not best:
+        return ("Без формулы" if code == "ru" else "Unclassified"), 0
+    return best.get(name_key, best["name"]), hits
 
-def score(t):
-    parts = {n: fn(t) for n, fn in PROPS}
+def score(t, code="en"):
+    parts = {n: fn(t) for n, fn in (PROPS_RU if code == "ru" else PROPS)}
     vals = list(parts.values())
     verdict = round(0.6 * (sum(vals) / len(vals)) + 0.4 * min(vals))
-    name, hits = classify(t)
+    name, hits = classify(t, code)
     return parts, verdict, name, hits
 
 def band(v): return "STRONG" if v >= 72 else "WORKABLE" if v >= 55 else "WEAK"
 
-def report(t, parts, verdict, name, hits):
+BAND_RU = {"STRONG": "СИЛЬНЫЙ", "WORKABLE": "РАБОЧИЙ", "WEAK": "СЛАБЫЙ"}
+PROP_RU = {"SPECIFICITY": "КОНКРЕТИКА", "ADDRESS": "ОБРАЩЕНИЕ", "STAKES": "СТАВКИ",
+           "CURIOSITY": "ЛЮБОПЫТСТВО", "BREVITY": "КРАТКОСТЬ"}
+
+def report(t, parts, verdict, name, hits, code="en"):
+    if code == "ru":
+        return report_ru(t, parts, verdict, name, hits)
     print(f"\n  {t.strip()}")
     print(f"  {'-' * min(72, max(20, len(t.strip())))}")
     for k, v in parts.items():
@@ -103,6 +211,18 @@ def report(t, parts, verdict, name, hits):
     print(f"    formula      {name}" + (f"  ({hits} pattern{'s' if hits != 1 else ''} matched)" if hits else "  (no formula matched - that is usually a summary, not a hook)"))
     low = min(parts, key=parts.get)
     print(f"    weakest      {low} - {FIX[low]}")
+
+def report_ru(t, parts, verdict, name, hits):
+    print(f"\n  {t.strip()}")
+    print(f"  {'-' * min(72, max(20, len(t.strip())))}")
+    for k, v in parts.items():
+        print(f"    {PROP_RU[k]:<13} {v:3d}  {'#' * (v // 5)}")
+    print(f"    {'ИТОГ':<13} {verdict:3d}  {BAND_RU[band(verdict)]}")
+    print(f"    формула       {name}" + (f"  (совпало шаблонов: {hits})" if hits else
+                                         "  (ни одна формула не подошла: обычно это пересказ, а не хук)"))
+    low = min(parts, key=parts.get)
+    fix = RU["fix_ru"][low].format(**RU["brevity_ru"])
+    print(f"    слабое место  {PROP_RU[low].lower()}: {fix}")
 
 FIX = {
  "SPECIFICITY": "swap one adjective for a number, a name or a date",
@@ -115,6 +235,7 @@ FIX = {
 def main():
     lang.setup_output()
     a = sys.argv[1:]
+    choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a
     a = [x for x in a if x != "--json"]
     if "--hook" in a:
@@ -125,16 +246,22 @@ def main():
         print(__doc__); sys.exit(1 if not a else 0)
     out = []
     for t in lines:
-        parts, verdict, name, hits = score(t)
+        code = lang.resolve(choice, t)
+        parts, verdict, name, hits = score(t, code)
         out.append({"hook": t.strip(), "properties": parts, "verdict": verdict,
-                    "band": band(verdict), "formula": name, "matched": hits})
+                    "band": band(verdict), "formula": name, "matched": hits, "lang": code})
     out.sort(key=lambda r: -r["verdict"])
     if as_json:
         print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1, ensure_ascii=False)); return
     for r in out:
-        report(r["hook"], r["properties"], r["verdict"], r["formula"], r["matched"])
+        report(r["hook"], r["properties"], r["verdict"], r["formula"], r["matched"], r["lang"])
     if len(out) > 1:
-        print(f"\n  winner: {out[0]['hook'].strip()}  ({out[0]['verdict']}, {out[0]['band']})\n")
+        w = out[0]
+        if w["lang"] == "ru":
+            print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']}, {BAND_RU[w['band']]})")
+            print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.\n")
+        else:
+            print(f"\n  winner: {w['hook'].strip()}  ({w['verdict']}, {w['band']})\n")
 
 if __name__ == "__main__":
     main()

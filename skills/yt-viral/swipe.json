@@ -1,0 +1,10 @@
+{
+ "note": "Data for swipe.py. View counts copied from a page often come as text: 1,2K, 1.2M, 1,2 тыс., 3 млн. Each suffix, lower-cased and without its dot, multiplies the number before it.",
+ "multipliers": {
+  "k": 1000, "к": 1000, "тыс": 1000, "тысяч": 1000, "тысячи": 1000, "тысяча": 1000,
+  "m": 1000000, "м": 1000000, "млн": 1000000, "миллион": 1000000, "миллиона": 1000000, "миллионов": 1000000,
+  "b": 1000000000, "млрд": 1000000000, "миллиард": 1000000000, "миллиарда": 1000000000, "миллиардов": 1000000000
+ },
+ "ignore_words": ["views", "view", "просмотров", "просмотра", "просмотр", "просм"],
+ "min_videos_per_channel": 4
+}

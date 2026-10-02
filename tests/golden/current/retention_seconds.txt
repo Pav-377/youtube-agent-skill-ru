@@ -1,0 +1,14 @@
+exit=0
+
+  retention_en_seconds.csv   61 points   100.0% -> 41.1%
+
+  HOOK LEAK   30.0% lost in the opening   [leaking]
+              under 25 is healthy for this length. Fix the first line before anything else.
+
+  CLIFFS      the moments people actually left
+    -  5.3%  at  190-200s
+    -  4.4%  at  400-410s
+
+  SLIDE       0.051% per unit across the middle
+              a flat slide is pacing, not content. Cut the middle, do not rewrite it.
+

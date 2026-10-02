@@ -1,0 +1,9 @@
+exit=0
+
+  "Why Your Videos Die at 0:30"
+  27 chars   score 94/100
+    x  duplicate    thumbnail repeats the title on 30 - the thumbnail should say what the title does not
+    ~  thumb-length 5 meaningful words on the thumbnail - see if it can be shorter
+    ok              27 characters, inside the 60-character desktop cut
+    ok              carries a concrete figure (0, 30)
+

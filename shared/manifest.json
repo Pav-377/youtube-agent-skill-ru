@@ -3,7 +3,9 @@
  "files": {
   "hooks.json":    ["yt-script", "yt-viral", "yt-shorts", "yt-audit"],
   "hookscore.py":  ["yt-script", "yt-shorts", "yt-audit"],
+  "hookscore.json": ["yt-script", "yt-shorts", "yt-audit"],
   "title.py":      ["yt-package", "yt-audit"],
+  "title.json":    ["yt-package", "yt-audit"],
   "transcript.py": ["yt-edit", "yt-retention", "yt-chapters"],
   "lang.py":       ["yt-script", "yt-shorts", "yt-audit", "yt-package", "yt-edit", "yt-retention", "yt-chapters", "yt-viral"],
   "lang.json":     ["yt-script", "yt-shorts", "yt-audit", "yt-package", "yt-edit", "yt-retention", "yt-chapters", "yt-viral"]

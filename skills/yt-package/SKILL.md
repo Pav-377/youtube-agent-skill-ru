@@ -14,6 +14,7 @@ thumbnail repeats the title, and half the click surface says the same thing twic
 
 ```bash
 python3 title.py --title "..." --thumb "AI RAN IT"
+python3 title.py --title "..." --thumb "AI RAN IT" --thumb-small "for 30 days"   # big text + small caption
 python3 title.py titles.txt            # one per line, ranked
 ```
 
@@ -33,7 +34,11 @@ python3 title.py titles.txt            # one per line, ranked
   reported because they fail differently: a desktop cut loses the tail, a mobile cut can lose the
   subject.
 - **The thumbnail must not repeat the title.** Different words, same promise.
-- **Three words maximum on the thumbnail.** At feed size a fourth word is a grey smear.
+- **Three meaningful words on the big thumbnail text.** At feed size a fourth word starts to smear:
+  four or five gets a hint to shorten, six or more a warning. Small words ("in", "the", "и", "на")
+  do not count. A small caption under the big text (`--thumb-small`) is checked on its own: up to six
+  meaningful words, and it must not repeat the title either. Everything here is a warning, never a
+  block.
 - **A number, a name or a date** beats every adjective available to you.
 - **Two all-caps words is the ceiling** before a title reads as spam.
 

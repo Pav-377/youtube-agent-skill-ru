@@ -32,7 +32,8 @@ def load_cues(path):
 
 
 class P1_HookscoreRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3 (mechanics); calibration on the reviewed set follows."""
+
     def test_p1_phrase_scored_as_russian(self):
         ru, en = hook(P1_RU), hook(P1_EN)
         self.assertGreater(ru["properties"]["ADDRESS"], 26, "твой / тебя not seen as address")
@@ -41,35 +42,35 @@ class P1_HookscoreRussian(unittest.TestCase):
 
 
 class P2_RetentionDecimalComma(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p2_decimal_comma(self):
         r = run_json("yt-retention/retention.py", fixture("ru", "retention_ru_comma.csv"))
         self.assertEqual(r["start"], 100.0)
         self.assertAlmostEqual(r["hook_leak"], 19.5)
 
-    @unittest.expectedFailure
     def test_p2_semicolon_separator(self):
         r = run_json("yt-retention/retention.py", fixture("ru", "retention_ru_semicolon.csv"))
         self.assertAlmostEqual(r["hook_leak"], 19.5)
 
 
 class P3_DeadairRussian(unittest.TestCase):
-    @unittest.expectedFailure
     def test_p3_hesitation_and_restart(self):
+        """Fixed in stage 3. A hesitation is its own class now: HESITATION, not FILLER."""
         cuts = run_json("yt-edit/deadair.py", fixture("ru", "edit_ru.srt"))["cuts"]
         kinds = {(c["kind"], c["start"]) for c in cuts}
-        self.assertIn(("FILLER", 2.1), kinds, "«Эээ...» not cut")
+        self.assertIn(("HESITATION", 2.1), kinds, "«Эээ...» not cut")
         self.assertIn(("REPEAT", 3.9), kinds, "restart «Я покажу как я монтирую» not found")
 
 
 class P4_TitleRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p4_duplicate_by_stem(self):
         r = run_json("yt-package/title.py", "--title", "Монтаж ролика за 10 минут",
                      "--thumb", "МОНТАЖА НЕ БУДЕТ")[0]
         self.assertIn("duplicate", [k for k, _ in r["issues"]])
 
-    @unittest.expectedFailure
     def test_n_title_front_load_false_positive(self):
         """Audit: every all-Cyrillic title was told its first three words are filler."""
         r = run_json("yt-package/title.py", "--title", "Как снимать ролики на телефон")[0]
@@ -77,7 +78,8 @@ class P4_TitleRussian(unittest.TestCase):
 
 
 class P5_ChaptersRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p5_boundaries_from_vocabulary(self):
         r = run_json("yt-chapters/chapters.py", fixture("ru", "chapters_ru_flat.srt"), "--target", "4")
         starts = [c["start"] for c in r["chapters"]]
@@ -87,10 +89,12 @@ class P5_ChaptersRussian(unittest.TestCase):
 
 
 class P6_SwipeRussian(unittest.TestCase):
-    @unittest.expectedFailure
     def test_p6_formulas_on_russian_titles(self):
+        """Fixed in stage 3: Russian patterns in hooks.json; Russian titles get Russian formula names."""
+        with open(os.path.join(SKILLS, "yt-viral", "hooks.json"), encoding="utf-8") as fh:
+            ru_name = {h["name"]: h["name_ru"] for h in json.load(fh)["hooks"]}
         with open(fixture("ru", "swipe_ru.json"), encoding="utf-8") as fh:
-            want = {v["title"]: v["expected_formula"] for v in json.load(fh) if "expected_formula" in v}
+            want = {v["title"]: ru_name[v["expected_formula"]] for v in json.load(fh) if "expected_formula" in v}
         got = {r["title"]: r["formula"]
                for r in run_json("yt-viral/swipe.py", fixture("ru", "swipe_ru.json"), "--min", "0")["outliers"]}
         hits = sum(1 for t, f in want.items() if got.get(t) == f)
@@ -170,7 +174,8 @@ class N_Encoding(unittest.TestCase):
 
 
 class N_YouTubeAutoCaptions(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3: shared/transcript.py."""
+
     def test_n3_tags_stripped_and_rolling_lines_merged(self):
         cues = load_cues(fixture("ru", "auto_ru.vtt"))
         text = " ".join(t for _, _, t in cues)
@@ -179,14 +184,14 @@ class N_YouTubeAutoCaptions(unittest.TestCase):
 
 
 class N_Retention(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n4_transcript_on_percent_axis_without_duration(self):
         """--transcript used to print nothing at all when the axis is a percentage."""
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_pct.csv"),
                      "--transcript", fixture("en", "long_en.srt"))
         self.assertTrue(r["said"], "no transcript lines reported")
 
-    @unittest.expectedFailure
     def test_n5_short_video_on_seconds_axis(self):
         """A 60 s Short exported in seconds was read as a percentage axis (max x <= 100.5)."""
         with tempfile.TemporaryDirectory() as tmp:
@@ -195,20 +200,18 @@ class N_Retention(unittest.TestCase):
                 fh.write("Video position (seconds),Audience retention (%)\n")
                 y = 100.0
                 for x in range(0, 61, 2):
-                    y -= 6.0 if x == 30 else 0.5
+                    y -= 6.0 if x == 44 else 0.5  # a cliff after the 30 s hook
                     fh.write(f"{x},{y:.1f}\n")
             r = run_json("yt-retention/retention.py", path)
         self.assertTrue(r["cliffs"])
         self.assertIsNotNone(r["cliffs"][0]["at_seconds"])
 
-    @unittest.expectedFailure
     def test_n6_cliff_reports_what_was_said_at_the_drop(self):
         """The drop between 190 s and 200 s is the sponsor read at 195-200 s."""
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_seconds.csv"),
                      "--transcript", fixture("en", "long_en.srt"))
         self.assertTrue(any("sponsor" in s for s in r["said"].values()), r["said"])
 
-    @unittest.expectedFailure
     def test_n6_hook_drop_is_not_listed_as_cliffs(self):
         r = run_json("yt-retention/retention.py", fixture("en", "retention_en_seconds.csv"))
         self.assertFalse([c for c in r["cliffs"] if c["at_seconds"] is not None and c["at_seconds"] < 30],
@@ -216,7 +219,8 @@ class N_Retention(unittest.TestCase):
 
 
 class N_Swipe(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n7_view_counts_as_text(self):
         views = ["1,2K", "1.2M", "1,2 тыс.", "3 млн", "200 000", "200 000"]
         want = [1200, 1200000, 1200, 3000000, 200000, 200000]
@@ -228,7 +232,6 @@ class N_Swipe(unittest.TestCase):
             r = run_json("yt-viral/swipe.py", path, "--min", "0")
         self.assertEqual(sorted(x["views"] for x in r["outliers"]), sorted(want))
 
-    @unittest.expectedFailure
     def test_n7_bad_view_count_is_a_message_not_a_traceback(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = os.path.join(tmp, "v.json")
@@ -240,14 +243,14 @@ class N_Swipe(unittest.TestCase):
 
 
 class N_Thumbnail(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_n9_thumb_small_repeating_the_title_is_flagged(self):
         """The small caption is checked on its own: here it repeats "videos" and "die" from the title."""
         r = run_json("yt-package/title.py", "--title", "Why Your Videos Die at 0:30", "--thumb", "THE CLIFF",
                      "--thumb-small", "your videos die here")[0]
         self.assertIn("thumb-small", json.dumps(r))
 
-    @unittest.expectedFailure
     def test_n9_four_meaningful_words_get_a_soft_hint(self):
         r = run_json("yt-package/title.py", "--title", "Posting schedule experiment",
                      "--thumb", "STOP POSTING EVERY DAY")[0]

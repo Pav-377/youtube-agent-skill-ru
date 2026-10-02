@@ -34,8 +34,12 @@ python3 hookscore.py --hook "one line"      # score a single one
 **The first 15 seconds is the whole job.** It does three things or the video leaks: confirm the
 click the title promised, open a question the viewer cannot close, and prove the payoff exists.
 
-1. **Hook.** Write FIVE against [the 21 formulas](hooks.json), run them through `hookscore.py`,
-   keep the top two, and show the user both with their scores. Never hand over one hook.
+1. **Hook.** Write FIVE against [the 21 formulas](hooks.json) and run them through `hookscore.py`.
+   The score is a filter: drop the variants it marks WEAK and use its "weakest" line to fix the
+   rest. Then choose the best two of what remains yourself, and for each say in one short line
+   which formula it uses and why it is strong for this idea. Show the user both hooks with their
+   score and that line. Never hand over one hook. Never present the score as a forecast of views:
+   it filters out weak openings and says what to fix, nothing more.
 2. **The turn** (0:15-0:45). Say what the video is going to do, in one sentence, and start doing it.
    No channel intro, no "before we get started", no subscribe pitch. Those are the single most
    common cause of the 0:30 cliff.
@@ -47,7 +51,7 @@ click the title promised, open a question the viewer cannot close, and prove the
 
 ## What to hand back
 
-- the two best hooks with their scored panels
+- the two best hooks with their scored panels and one line each on why you chose them
 - the script, beat by beat, with `[ON SCREEN: ...]` on every beat
 - the runtime estimate at 150 words per minute
 - one line naming which formula the winning hook used and why it fits this idea

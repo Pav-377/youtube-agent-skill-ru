@@ -1,0 +1,75 @@
+{
+ "note": "Data for retention.py: thresholds and the words that identify columns in a YouTube Studio export, in Russian and English. Matching is on lower-cased header text, by substring.",
+ "min_points": 8,
+ "cliff_min_drop": 0.8,
+ "cliffs_shown": 5,
+ "hook_seconds": 30,
+ "hook_min_seconds": 3,
+ "hook_share": 0.1,
+ "hook_note": "The hook is hook_share of the video, at least hook_min_seconds and at most hook_seconds: from 5 minutes up that is 30 s as in the original, a 60 s Short gets 6 s. PRELIMINARY - to be checked on the owner's Studio exports.",
+ "hook_percent_without_duration": 10,
+ "hook_healthy_below": 25,
+ "hook_severe_from": 40,
+ "said_window_pad_seconds": 2,
+ "said_max_chars": 140,
+ "headers": {
+  "position": [
+   "position",
+   "elapsed",
+   "time",
+   "timestamp",
+   "позиция",
+   "момент",
+   "время",
+   "отметка",
+   "хронометраж"
+  ],
+  "retention": [
+   "retention",
+   "watching",
+   "watch ratio",
+   "audience",
+   "удержан",
+   "смотр",
+   "аудитор",
+   "зрител"
+  ],
+  "relative": [
+   "relative",
+   "относит",
+   "typical",
+   "типичн",
+   "compared",
+   "сравнен"
+  ],
+  "seconds": [
+   "sec",
+   "(s)",
+   "time",
+   "timestamp",
+   "сек",
+   "(с)",
+   "время",
+   "хронометраж"
+  ],
+  "percent": [
+   "%",
+   "percent",
+   "ratio",
+   "процент",
+   "доля"
+  ],
+  "not_retention": [
+   "started",
+   "stopped",
+   "number of times",
+   "начали",
+   "начало",
+   "перестали",
+   "прекратили",
+   "сколько раз",
+   "количество раз"
+  ]
+ },
+ "headers_status": "NOT CONFIRMED on a real export. English names seen in third-party code: 'Video position (%)', 'Absolute audience retention (%)', and a separate segment table with 'Started watching', 'Stopped watching', 'Number of times each moment was seen'. Russian names are guesses until a real Russian-UI export is checked."
+}
