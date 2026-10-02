@@ -101,8 +101,10 @@ def ru_hits(t, entries):
             n += len(re.findall(r"(?<!\w)" + re.escape(e) + r"(?!\w)", text))
         elif e.endswith("*"):
             n += sum(1 for w in toks if w.startswith(e[:-1]))
+        elif len(e) < 5:
+            n += sum(1 for w in toks if w == e)  # short words by form would merge как and какой
         else:
-            n += sum(1 for w in toks if lang.same_word(w, e))
+            n += sum(1 for w in toks if len(w) >= 5 and lang.same_word(w, e))
     return n
 
 def ru_numbers(t):
