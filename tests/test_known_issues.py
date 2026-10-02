@@ -55,11 +55,11 @@ class P2_RetentionDecimalComma(unittest.TestCase):
 
 
 class P3_DeadairRussian(unittest.TestCase):
-    @unittest.expectedFailure
     def test_p3_hesitation_and_restart(self):
+        """Fixed in stage 3. A hesitation is its own class now: HESITATION, not FILLER."""
         cuts = run_json("yt-edit/deadair.py", fixture("ru", "edit_ru.srt"))["cuts"]
         kinds = {(c["kind"], c["start"]) for c in cuts}
-        self.assertIn(("FILLER", 2.1), kinds, "«Эээ...» not cut")
+        self.assertIn(("HESITATION", 2.1), kinds, "«Эээ...» not cut")
         self.assertIn(("REPEAT", 3.9), kinds, "restart «Я покажу как я монтирую» not found")
 
 

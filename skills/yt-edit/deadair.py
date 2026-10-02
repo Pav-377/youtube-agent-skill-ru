@@ -9,6 +9,11 @@ Finds three things and prints the cuts as a list you can act on, newest problem 
   FILLER  cues that are only filler ("um", "so yeah", "basically")
   REPEAT  a sentence restarted - the second take of the same opening
 
+A Russian transcript (detected, or --lang ru) gets the Russian edit list from deadair_ru.py: word by
+word, hesitations always cut, filler words cut or kept by context with a reason for each, and the
+times exact when the transcript has them per word (YouTube's automatic captions, whisper with word
+timestamps) and marked with ≈ when they are estimated (.srt).
+
 WHAT IT DOES NOT DO. It does not cut the file. It prints an EDL, the total it would remove, and the
 runtime you would land on, and you apply it in whatever editor you use. Nothing here touches media.
 """
@@ -26,12 +31,16 @@ def norm(t): return re.sub(r"[^a-z ]", "", t.lower()).split()
 def main():
     lang.setup_output()
     a = sys.argv[1:]
+    choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     floor = float(a[a.index("--floor") + 1]) if "--floor" in a else 0.45
     a = [x for x in a if not x.startswith("--") and not re.match(r"^[\d.]+$", x)]
     if not a or not os.path.exists(a[0]): print(__doc__); sys.exit(1)
     cues = load(a[0])
     if not cues: print("no cues found - is this an srt, vtt or whisper json?"); sys.exit(1)
+    if lang.resolve(choice, " ".join(c[2] for c in cues[:200])) == "ru":
+        from deadair_ru import run
+        return run(a[0], cues, floor, as_json)
     dur = cues[-1][1]
     cuts = []
     for i, (s, e, t) in enumerate(cues):

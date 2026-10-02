@@ -1,0 +1,346 @@
+{
+ "note": "Data for fillers_ru.py (brief 5.3). Words are compared in lower case with ё = е and punctuation stripped. Add words and guards here, not in the code.",
+ "hesitation_regex": "^(э+|э+м+|м+|а-а+|м-м+|э-э+)$",
+ "hesitation_note": "Always cut. YouTube's automatic captions drop most hesitation sounds before we ever see them; Whisper keeps more of them.",
+ "pause_seconds": 0.3,
+ "pause_note": "A gap of at least this long before a word starts a new phrase; a filler with such a gap on both sides stands alone in a pause.",
+ "density": {
+  "window_seconds": 30,
+  "max_fillers": 6,
+  "note": "More than max_fillers filler words (hesitations not counted) inside window_seconds and a filler kept as a connector is cut too: the brief's density rule. Set conservatively - see docs/REPORT.md for how it was chosen."
+ },
+ "fillers": {
+  "ну": {
+   "keep_at_start": true,
+   "inside": "cut"
+  },
+  "короче": {
+   "keep_at_start": true,
+   "inside": "cut"
+  },
+  "в общем": {
+   "keep_at_start": true,
+   "inside": "stack_only"
+  },
+  "собственно": {
+   "keep_at_start": true,
+   "inside": "cut"
+  },
+  "вот": {
+   "keep_at_start": false,
+   "inside": "cut"
+  },
+  "как бы": {
+   "keep_at_start": false,
+   "inside": "cut"
+  },
+  "в принципе": {
+   "keep_at_start": false,
+   "inside": "cut"
+  },
+  "типа": {
+   "keep_at_start": false,
+   "inside": "cut_before_verb"
+  },
+  "значит": {
+   "keep_at_start": false,
+   "inside": "cut_narrative"
+  },
+  "получается": {
+   "keep_at_start": false,
+   "inside": "cut_after_и"
+  },
+  "это самое": {
+   "keep_at_start": false,
+   "inside": "never"
+  },
+  "так сказать": {
+   "keep_at_start": false,
+   "inside": "never"
+  },
+  "на самом деле": {
+   "keep_at_start": false,
+   "inside": "never"
+  },
+  "реально": {
+   "keep_at_start": false,
+   "inside": "never"
+  },
+  "прям": {
+   "keep_at_start": false,
+   "inside": "never"
+  }
+ },
+ "fillers_note": "keep_at_start: a connector at the start of a phrase is shown as KEEP (live speech). inside: what happens inside a phrase - cut; stack_only (only when it follows another filler); cut_before_verb (only before a verb, pronoun or preposition, so типа снежок stays); cut_narrative (значит only between commas or after и/я/он/она/мы/они); cut_after_и (и получается он ...); never (the word carries meaning or emphasis too often to cut it automatically).",
+ "guards": {
+  "вот_next": [
+   "этот",
+   "эта",
+   "это",
+   "эти",
+   "эту",
+   "этого",
+   "этой",
+   "этих",
+   "этим",
+   "этом",
+   "так",
+   "такой",
+   "такая",
+   "такое",
+   "такие",
+   "таких",
+   "такую",
+   "здесь",
+   "тут",
+   "именно",
+   "сейчас",
+   "он",
+   "она",
+   "оно",
+   "они",
+   "как",
+   "что",
+   "почему",
+   "где",
+   "куда",
+   "откуда",
+   "мой",
+   "моя",
+   "моё",
+   "мои",
+   "вопрос",
+   "и",
+   "прямо",
+   "прям"
+  ],
+  "вот_prev": [
+   "это",
+   "такая",
+   "такой",
+   "такое",
+   "такие",
+   "так",
+   "как",
+   "вот",
+   "этот",
+   "эта",
+   "эти",
+   "эту",
+   "этого",
+   "этой",
+   "этих",
+   "этим",
+   "этом",
+   "такую",
+   "таких"
+  ],
+  "вот_note": "вот before a pointer (вот этот, вот так, вот здесь, вот именно) or after one (это вот, такая вот) points at something: never a filler. вот и ... is an idiom. A number after вот is emphasis (вот за 8 лет). Ну вот + a word with no comma in between is one unit (ну вот моя дочь); ну вот, (comma) is a stack of fillers.",
+  "ну_idioms_next": [
+   "и",
+   "что",
+   "так",
+   "да",
+   "ладно",
+   "всё",
+   "все",
+   "конечно",
+   "нет",
+   "давай",
+   "давайте",
+   "хорошо",
+   "как"
+  ],
+  "speech_verbs": [
+   "говорит",
+   "говорю",
+   "говорят",
+   "сказал",
+   "сказала",
+   "сказали",
+   "спрашивает",
+   "спросил",
+   "спросила",
+   "отвечает",
+   "пишет",
+   "пишут",
+   "думаю",
+   "думает",
+   "такой",
+   "такая"
+  ],
+  "speech_note": "A filler right after a speech verb opens a quote (он говорит: ну всё, пока) - quotes are never cut.",
+  "как_бы_next_pronouns": [
+   "ты",
+   "вы",
+   "он",
+   "она",
+   "они",
+   "я",
+   "мы",
+   "это"
+  ],
+  "в_принципе_prev": [
+   "но",
+   "хотя",
+   "а"
+  ],
+  "собственно_next": [
+   "говоря"
+  ],
+  "в_общем_next": [
+   "доступе",
+   "доступ",
+   "и",
+   "целом",
+   "виде",
+   "смысле"
+  ],
+  "короче_prev": [
+   "стал",
+   "стала",
+   "стало",
+   "стали",
+   "был",
+   "была",
+   "было",
+   "сделать",
+   "сделал",
+   "гораздо",
+   "намного",
+   "чуть"
+  ],
+  "короче_next": [
+   "чем"
+  ],
+  "значит_subjects": [
+   "и",
+   "я",
+   "он",
+   "она",
+   "мы",
+   "они",
+   "человек"
+  ],
+  "значит_not_next": [
+   "я",
+   "мне",
+   "ты",
+   "нет",
+   "что",
+   "это",
+   "так"
+  ],
+  "получается_not_next": [
+   "у",
+   "что",
+   "так",
+   "это",
+   "не"
+  ],
+  "типа_next_ok": [
+   "я",
+   "ты",
+   "он",
+   "она",
+   "мы",
+   "вы",
+   "они",
+   "ничего",
+   "не",
+   "в",
+   "на",
+   "из",
+   "за",
+   "с",
+   "у",
+   "к",
+   "по"
+  ],
+  "pronoun_like_prev_conjunctions": [
+   "и",
+   "а",
+   "но",
+   "что",
+   "потому",
+   "поэтому",
+   "чтобы"
+  ],
+  "типа_prev_meaning": [
+   "это",
+   "как",
+   "такой",
+   "такая",
+   "такое",
+   "такие"
+  ],
+  "phrase_openers": [
+   "понимаешь",
+   "понимаете",
+   "знаешь",
+   "знаете",
+   "представляешь",
+   "представляете",
+   "слушай",
+   "слушайте",
+   "смотри",
+   "смотрите",
+   "ребята",
+   "друзья",
+   "народ"
+  ],
+  "phrase_openers_note": "After a filler, one of these words opens a new phrase (ну представляешь, вот понимаешь, короче ребята): the filler belongs to its start.",
+  "interjections": [
+   "вау",
+   "ого",
+   "ох",
+   "ах",
+   "ой",
+   "эх",
+   "ух",
+   "ура",
+   "ага",
+   "ну-ну",
+   "фу",
+   "ох",
+   "блин"
+  ],
+  "interjections_note": "A filler next to an interjection is part of an exclamation (вау ну вау) - never cut.",
+  "ну_note": "ну + one of ну_idioms_next is an idiom or a rhetorical question (ну и что, ну как же, ну да) - never a filler. \"как\" was added after the held-out check (docs/REPORT.md)."
+ },
+ "repeat": {
+  "function_words": [
+   "я",
+   "ты",
+   "он",
+   "она",
+   "мы",
+   "вы",
+   "они",
+   "и",
+   "в",
+   "на",
+   "что",
+   "это",
+   "как",
+   "у",
+   "с",
+   "не",
+   "а",
+   "но",
+   "к",
+   "по",
+   "за",
+   "то",
+   "так",
+   "же",
+   "бы",
+   "ли",
+   "мне",
+   "меня",
+   "там",
+   "тут"
+  ],
+  "note": "A function word said twice in a row (я я, в в) is a stumble and is cut. A content word said twice (ужас ужас) is emphasis and stays."
+ }
+}
