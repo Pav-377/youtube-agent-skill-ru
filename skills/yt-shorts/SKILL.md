@@ -30,6 +30,20 @@ reject one without reading the whole transcript.
 - **A loop point**: what the last line sets up so the first line answers it.
 - Vertical framing note - what gets cropped out of a 16:9 frame and whether that matters.
 
+## Before you show it: the AI-tell check
+
+Run `aitells.py` (in this folder) on the new first line and the on-screen text of each Short before the user sees anything:
+
+```bash
+python3 aitells.py --text "..."      # or a file, paragraphs separated by an empty line
+```
+
+Rewrite every **stamp** it reports - the "not X, but Y" contrast, the canned linking phrase, the
+lead-in question, the slogan-like parallel, the triads one after another - in plain words, and act
+on the **speech** notes (split a sentence that cannot be said in one breath). Run it again until no
+stamp is left. It only finds; the rewriting is yours, and it must sound like the user's voice
+profile, not like a cleaned-up version of you.
+
 ## The gate
 
 Nothing here publishes. This skill writes and you publish. Every output ends in a block the user

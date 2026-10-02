@@ -56,6 +56,20 @@ click the title promised, open a question the viewer cannot close, and prove the
 - the runtime estimate at 150 words per minute
 - one line naming which formula the winning hook used and why it fits this idea
 
+## Before you show it: the AI-tell check
+
+Run `aitells.py` (in this folder) on every beat of the script and both hooks before the user sees anything:
+
+```bash
+python3 aitells.py --text "..."      # or a file, paragraphs separated by an empty line
+```
+
+Rewrite every **stamp** it reports - the "not X, but Y" contrast, the canned linking phrase, the
+lead-in question, the slogan-like parallel, the triads one after another - in plain words, and act
+on the **speech** notes (split a sentence that cannot be said in one breath). Run it again until no
+stamp is left. It only finds; the rewriting is yours, and it must sound like the user's voice
+profile, not like a cleaned-up version of you.
+
 ## The gate
 
 Nothing here publishes. This skill writes and you publish. Every output ends in a block the user

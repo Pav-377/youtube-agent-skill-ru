@@ -1,0 +1,238 @@
+{
+ "note": "Data for aitells.py (brief 5.7). Phrases are matched in lower case with ё = е as whole words; a * at the end matches any ending. Regex entries are Python regular expressions, matched case-insensitively against one sentence. Add patterns here, not in the code.",
+ "ru": {
+  "contrast": {
+   "kind": "stamp",
+   "label": "противопоставление «не X, а Y»",
+   "hint": "Скажите прямо, что есть, без того, чего нет: «не X, а Y» — любимый приём нейросетей.",
+   "regex": [
+    "\\b(?:это|речь|дело|вопрос|история|проблема|секрет|смысл)\\s+не\\s+(?:про|о|об|в|во|только|просто)?\\s*[^.!?;]{1,50}?[,—–-]\\s*(?:а|это)\\s+(?:про|о|об|в|во)?\\b",
+    "\\bне\\s+просто\\s+[^.!?;]{1,50}?,\\s*а\\b",
+    "\\bне\\s+столько\\b[^.!?;]{1,50}?\\bсколько\\b",
+    "\\bне\\s+потому\\s+что\\b[^.!?;]{1,60}?,\\s*а\\s+потому\\b",
+    "^не\\s+[^,.!?]{1,30},\\s*а\\s+[^,.!?]{1,40}[.!]?$"
+   ],
+   "next_sentence": {
+    "first": "^(?:это|он|она|оно|они)\\s+не\\s+(?:просто|только|какой-то|очередной|обычный)\\b",
+    "second": "^(?:это|он|она|оно|они)\\b",
+    "note": "Это не просто X. Это Y. - the contrast spread over two sentences."
+   }
+  },
+  "canned": {
+   "kind": "stamp",
+   "label": "канцелярская связка",
+   "hint": "Уберите связку или скажите проще, своими словами.",
+   "phrases": [
+    "давайте разберемся",
+    "давай разберемся",
+    "давайте разбираться",
+    "в современном мире",
+    "в наше время",
+    "стоит отметить",
+    "важно отметить",
+    "стоит подчеркнуть",
+    "важно понимать",
+    "важно помнить",
+    "стоит помнить",
+    "играет ключевую роль",
+    "играет важную роль",
+    "ключевую роль",
+    "погрузимся",
+    "давайте погрузимся",
+    "окунемся",
+    "в заключение",
+    "подводя итог",
+    "подводя итоги",
+    "таким образом",
+    "невероятно важно",
+    "крайне важно",
+    "открывает новые возможности",
+    "ни для кого не секрет",
+    "не секрет, что",
+    "в эпоху",
+    "в мире, где",
+    "является ключевым",
+    "давайте посмотрим правде в глаза",
+    "меняет правила игры",
+    "без лишних слов",
+    "настоящий прорыв",
+    "глубокое погружение",
+    "в этом видео мы рассмотрим",
+    "в этом ролике мы рассмотрим",
+    "давайте рассмотрим",
+    "давайте начнем",
+    "итак, давайте",
+    "прежде всего стоит",
+    "следует отметить",
+    "необходимо отметить",
+    "данный",
+    "данная",
+    "данное",
+    "данные инструменты",
+    "на сегодняшний день",
+    "в рамках"
+   ],
+   "regex": [
+    "\\bдавай(?:те)?(?:-ка)?\\s+(?:же\\s+)?разбер",
+    "\\b(?:стоит|следует|важно|необходимо|нужно)\\s+(?:также\\s+|еще\\s+|ещё\\s+|особо\\s+|отдельно\\s+)?(?:отметить|подчеркнуть|упомянуть)\\b",
+    "\\bигра(?:ет|ют|л|ла|ли)\\s+(?:\\w+\\s+)?(?:ключев|важн|немаловажн|решающ|огромн|значительн|центральн)\\w*\\s+рол",
+    "\\bдавай(?:те)?(?:-ка)?\\s+(?:же\\s+)?(?:погрузимся|окунемся|окунёмся)"
+   ]
+  },
+  "lead_in": {
+   "kind": "stamp",
+   "label": "вопрос-подводка",
+   "hint": "Сразу скажите ответ. Подводка тянет время и звучит как шаблон.",
+   "phrases": [
+    "представь себе",
+    "представьте себе",
+    "что если я скажу",
+    "а что если я скажу",
+    "а теперь самое интересное",
+    "и вот тут начинается самое интересное",
+    "вот тут начинается самое интересное",
+    "спойлер",
+    "вот в чем фишка",
+    "звучит знакомо",
+    "угадай что",
+    "угадайте что",
+    "а теперь внимание"
+   ],
+   "regex": [
+    "^(?:а\\s+|и\\s+|так\\s+|итак,?\\s+)?(?:ты\\s+|вы\\s+)?знае(?:шь|те)[\\s,]+(?:что|почему|зачем)\\b[^.!]*\\?"
+   ],
+   "regex_note": "знаешь/знаете, что/почему only as a question that opens the sentence: 'Вы все знаете, что такое ChatGPT.' is a statement."
+  },
+  "aphorism": {
+   "kind": "stamp",
+   "label": "чеканная фраза-афоризм",
+   "hint": "Так звучит реклама. Оставьте мысль простыми словами, без параллели.",
+   "regex": [
+    "^[^—–.!?]{1,30}\\s[—–]\\s[^,—–.!?]{1,30},\\s[^—–.!?]{1,30}\\s[—–]\\s[^—–.!?]{1,30}[.!]?$",
+    "^(?:меньше|больше)\\s+\\w+\\s+[—–-]\\s+(?:больше|меньше)\\s+\\w+[.!]?$"
+   ],
+   "max_words": 12,
+   "halves": {
+    "max_words": 5,
+    "note": "Two short halves around one dash that share a word (Твой контент — твои правила, Камера пишет картинку — голос пишет доверие)."
+   }
+  },
+  "triad": {
+   "kind": "stamp",
+   "label": "тройные перечисления подряд",
+   "hint": "Оставьте одно перечисление или назовите главное. Тройки подряд — частый шаблон.",
+   "regex": [
+    "\\b[\\w-]+(?:\\s+[\\w-]+)?,\\s+[\\w-]+(?:\\s+[\\w-]+)?,?\\s+и\\s+[\\w-]+"
+   ],
+   "min_in_paragraph": 2
+  },
+  "dashes": {
+   "kind": "speech",
+   "label": "много тире",
+   "hint": "Разбейте на короткие предложения: тире вслух не слышно.",
+   "max_per_paragraph": 2
+  },
+  "long": {
+   "kind": "speech",
+   "label": "длинное предложение",
+   "hint": "Вслух такое не сказать на одном дыхании. Разбейте на два.",
+   "max_words": 18
+  }
+ },
+ "en": {
+  "contrast": {
+   "kind": "stamp",
+   "label": "\"not X, but Y\"",
+   "hint": "Say what it is, without what it is not.",
+   "regex": [
+    "\\b(?:it'?s|it is|this is|that'?s|that is)\\s+not\\s+(?:about\\s+)?[^.!?;]{1,50}?[,—–-]\\s*(?:it'?s|it is|but)\\b",
+    "\\bnot\\s+just\\s+[^.!?;]{1,50}?,?\\s+but\\b",
+    "\\bisn'?t\\s+about\\s+[^.!?;]{1,50}?[,—–-]\\s*it'?s\\b"
+   ]
+  },
+  "canned": {
+   "kind": "stamp",
+   "label": "canned phrase",
+   "hint": "Cut it or say it plainly.",
+   "phrases": [
+    "let's dive in",
+    "dive into",
+    "deep dive",
+    "in today's world",
+    "in today's fast-paced",
+    "it's worth noting",
+    "it is worth noting",
+    "it's important to note",
+    "plays a crucial role",
+    "plays a key role",
+    "delve",
+    "in conclusion",
+    "unlock",
+    "game-changer",
+    "game changer",
+    "revolutionize",
+    "navigate the",
+    "in the realm of",
+    "a testament to",
+    "without further ado",
+    "buckle up",
+    "let's break it down"
+   ],
+   "regex": [
+    "\\bplays?\\s+(?:a\\s+)?(?:\\w+\\s+)?(?:crucial|key|vital|pivotal|important)\\s+role"
+   ]
+  },
+  "lead_in": {
+   "kind": "stamp",
+   "label": "lead-in question",
+   "hint": "Give the answer straight away.",
+   "phrases": [
+    "here's the thing",
+    "here's the kicker",
+    "but here's the kicker",
+    "what if i told you",
+    "guess what",
+    "the best part",
+    "spoiler alert",
+    "sound familiar",
+    "you know why",
+    "and that's where it gets interesting"
+   ]
+  },
+  "aphorism": {
+   "kind": "stamp",
+   "label": "slogan-style parallel",
+   "hint": "It reads like an ad. Keep the thought in plain words.",
+   "regex": [
+    "^[^—–.!?]{1,30}\\s[—–]\\s[^,—–.!?]{1,30},\\s[^—–.!?]{1,30}\\s[—–]\\s[^—–.!?]{1,30}[.!]?$"
+   ],
+   "max_words": 12,
+   "halves": {
+    "max_words": 5,
+    "note": "Two short halves around one dash that share a word."
+   }
+  },
+  "triad": {
+   "kind": "stamp",
+   "label": "triads in a row",
+   "hint": "Keep one list, or name the one thing that matters.",
+   "regex": [
+    "\\b[\\w'-]+(?:\\s+[\\w'-]+)?,\\s+[\\w'-]+(?:\\s+[\\w'-]+)?,?\\s+and\\s+[\\w'-]+"
+   ],
+   "min_in_paragraph": 2
+  },
+  "dashes": {
+   "kind": "speech",
+   "label": "too many dashes",
+   "hint": "Split into short sentences: nobody hears a dash.",
+   "max_per_paragraph": 2
+  },
+  "long": {
+   "kind": "speech",
+   "label": "long sentence",
+   "hint": "Too long to say in one breath. Split it.",
+   "max_words": 22
+  }
+ },
+ "phrase_note": "In phrases a space also matches a comma: 'знаете что' finds 'Знаете, что'."
+}

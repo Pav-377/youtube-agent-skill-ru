@@ -237,7 +237,7 @@ class NoResourceWarnings(unittest.TestCase):
         from helpers import fixture, run_script
         from test_known_issues import SMOKE
         where = {"hookscore.py": "yt-script", "title.py": "yt-package", "deadair.py": "yt-edit",
-                 "chapters.py": "yt-chapters", "retention.py": "yt-retention", "swipe.py": "yt-viral"}
+                 "chapters.py": "yt-chapters", "retention.py": "yt-retention", "swipe.py": "yt-viral", "aitells.py": "yt-script"}
         extra = {"hookscore.py", "title.py"}
         for script, args in SMOKE.items():
             with self.subTest(script):
