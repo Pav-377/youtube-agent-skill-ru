@@ -5,27 +5,35 @@ description: >-
   formulas, scored, then the full spoken script with the retention beats
   marked. Use whenever the user wants a video script, a hook, an opening
   line, "what should I say", "write my next video", or is about to record
-  and does not have the first fifteen seconds yet.
+  and does not have the first fifteen seconds yet. Also for Russian
+  requests: "напиши сценарий для YouTube", "придумай хук", "начало
+  ролика", "что сказать в первые секунды", "сценарий для видео".
 ---
 
 # yt-script
 
 One idea into a script somebody finishes.
 
-Two tools live in this folder and both actually run. Use them. Do not eyeball the hook.
+The tools in this folder actually run: `hookscore.py` scores hooks and `aitells.py` finds
+machine-written stamps. Use them. Do not eyeball the hook.
 
 ```bash
-python3 hookscore.py hooks.txt              # rank your hook options
-python3 hookscore.py --hook "one line"      # score a single one
+python3 "${CLAUDE_SKILL_DIR}/hookscore.py" hooks.txt              # rank your hook options
+python3 "${CLAUDE_SKILL_DIR}/hookscore.py" --hook "one line"      # score a single one
 ```
 
 ## Before you write
 
-1. Read `~/.claude/youtube/voice.md` if it exists. That is the user's voice profile: how they talk
-   on camera, the words they never use, who they are talking to, what they will not claim. If it
-   does not exist, ask for **three of their own videos**, read or transcribe them, infer the voice,
-   and write the file. A script in the wrong voice is worse than no script, because they have to
-   read it out loud.
+1. Read the user's voice profile first: `~/.claude/youtube/voice.md` in Claude Code, or the profile
+   the user put into this project's instructions or pasted into the chat (claude.ai and Claude
+   Desktop have no `~/.claude`). It says how they talk on camera, whether they say «ты» or «вы» to
+   the viewer, their pace in words per minute, the words that are theirs, the words they never use,
+   who they are talking to, what they will not claim. If there is no profile, ask for **three of
+   their own videos** (links or transcripts), infer the voice, and hand the profile back as ready
+   text following `voice_template.ru.md` (Russian) or `voice_template.md` (English) in this
+   folder, saying where to keep it: `~/.claude/youtube/voice.md` in Claude Code, the project
+   instructions on claude.ai. A script in the wrong voice is worse than no script, because they have
+   to read it out loud.
 2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have
    one, ask for it or write the line without it.
 
@@ -53,7 +61,7 @@ click the title promised, open a question the viewer cannot close, and prove the
 
 - the two best hooks with their scored panels and one line each on why you chose them
 - the script, beat by beat, with `[ON SCREEN: ...]` on every beat
-- the runtime estimate at 150 words per minute
+- the runtime estimate at the pace in the voice profile, 150 words per minute if it has none
 - one line naming which formula the winning hook used and why it fits this idea
 
 ## Before you show it: the AI-tell check
@@ -61,7 +69,7 @@ click the title promised, open a question the viewer cannot close, and prove the
 Run `aitells.py` (in this folder) on every beat of the script and both hooks before the user sees anything:
 
 ```bash
-python3 aitells.py --text "..."      # or a file, paragraphs separated by an empty line
+python3 "${CLAUDE_SKILL_DIR}/aitells.py" --text "..."      # or a file, paragraphs separated by an empty line
 ```
 
 Rewrite every **stamp** it reports - the "not X, but Y" contrast, the canned linking phrase, the
@@ -69,6 +77,35 @@ lead-in question, the slogan-like parallel, the triads one after another - in pl
 on the **speech** notes (split a sentence that cannot be said in one breath). Run it again until no
 stamp is left. It only finds; the rewriting is yours, and it must sound like the user's voice
 profile, not like a cleaned-up version of you.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- The tools detect Russian on their own (`--lang ru` forces it) and report in Russian.
+- Spoken Russian: one thought per sentence, short sentences, words a person says rather than
+  writes. Use the author's own words from the profile where they fit naturally - one or two a minute,
+  never a pile of them.
+- Score the five hooks with `hookscore.py` (Russian mode) and name formulas by their Russian names
+  (`name_ru` in `hooks.json`). The score filters out weak openings and says what to fix; the choice
+  of the best two is yours, with one line on formula and reason each. Never call it a forecast.
+- Runtime: words divided by the pace in the profile. Without one, 150 words a minute - the pace
+  measured on 226 Russian YouTube openings (37.6 words in 15 seconds).
+- Run `aitells.py` on the hooks and the script and rewrite every stamp before showing anything.
+
+## Running the tools
+
+The scripts sit next to this SKILL.md. `${CLAUDE_SKILL_DIR}` in the commands is this skill's folder:
+Claude Code shows it as the skill's base directory; on claude.ai it is the folder this SKILL.md was
+read from, so put that path in if the shell does not know the variable. If `python3` is not found
+(Windows), run the same command with `python`. The scripts need Python 3.9 or newer and nothing
+else, read and write only the files you give them, and never touch the network.
 
 ## The gate
 

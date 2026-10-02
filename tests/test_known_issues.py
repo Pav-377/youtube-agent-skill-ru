@@ -291,7 +291,6 @@ class N_Chapters(unittest.TestCase):
 
 
 class N_SkillDocs(unittest.TestCase):
-    @unittest.expectedFailure
     def test_n12_yt_script_counts_its_tools_right(self):
         with open(os.path.join(SKILLS, "yt-script", "SKILL.md"), encoding="utf-8") as fh:
             self.assertNotIn("Two tools live in this folder", fh.read())

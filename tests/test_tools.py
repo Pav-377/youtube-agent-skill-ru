@@ -164,5 +164,24 @@ class Dist(unittest.TestCase):
         self.assertFalse([n for n in names if "__pycache__" in n or "_private" in n])
 
 
+
+class SkillsCheckCatchesProblems(unittest.TestCase):
+    def run_check(self, files):
+        with tempfile.TemporaryDirectory() as tmp:
+            make_tree(tmp, files)
+            with Patched(tmp):
+                return check.check_skills()
+
+    def test_good(self):
+        self.assertEqual(self.run_check({
+            "skills/yt-demo/SKILL.md": GOOD_SKILL + "## Russian-language mode\nSee [examples_ru.md](examples_ru.md).\n"
+                                       'python3 "${CLAUDE_SKILL_DIR}/x.py"\n',
+            "skills/yt-demo/examples_ru.md": "x"}), [])
+
+    def test_missing_section_examples_and_bare_command(self):
+        problems = self.run_check({"skills/yt-demo/SKILL.md": GOOD_SKILL + "python3 x.py --json\n"})
+        self.assertEqual(len(problems), 3, problems)
+
+
 if __name__ == "__main__":
     unittest.main()

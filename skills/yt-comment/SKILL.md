@@ -1,9 +1,11 @@
 ---
 name: yt-comment
 description: >-
-  Draft replies to YouTube comments in the creator's voice, triaged by which
-  ones are worth answering. Use for "reply to my comments", "handle the
-  comment section", "someone asked X", or a pasted comment thread.
+  Draft replies to YouTube comments in the creator's voice, triaged by
+  which ones are worth answering. Use for "reply to my comments", "handle
+  the comment section", "someone asked X", or a pasted comment thread.
+  Also for Russian requests: "ответь на комментарии", "разбери
+  комментарии", "что ответить зрителю", "какой комментарий закрепить".
 ---
 
 # yt-comment
@@ -13,11 +15,16 @@ decide whether a thread becomes a conversation other people read.
 
 ## Before you write
 
-1. Read `~/.claude/youtube/voice.md` if it exists. That is the user's voice profile: how they talk
-   on camera, the words they never use, who they are talking to, what they will not claim. If it
-   does not exist, ask for **three of their own videos**, read or transcribe them, infer the voice,
-   and write the file. A script in the wrong voice is worse than no script, because they have to
-   read it out loud.
+1. Read the user's voice profile first: `~/.claude/youtube/voice.md` in Claude Code, or the profile
+   the user put into this project's instructions or pasted into the chat (claude.ai and Claude
+   Desktop have no `~/.claude`). It says how they talk on camera, whether they say «ты» or «вы» to
+   the viewer, their pace in words per minute, the words that are theirs, the words they never use,
+   who they are talking to, what they will not claim. If there is no profile, ask for **three of
+   their own videos** (links or transcripts), infer the voice, and hand the profile back as ready
+   text following `voice_template.ru.md` (Russian) or `voice_template.md` (English) in this
+   folder, saying where to keep it: `~/.claude/youtube/voice.md` in Claude Code, the project
+   instructions on claude.ai. A script in the wrong voice is worse than no script, because they have
+   to read it out loud.
 2. Never invent a number, a result or a source. If a figure would strengthen it and you do not have
    one, ask for it or write the line without it.
 
@@ -44,6 +51,22 @@ Sort what the user pastes into four piles and say how many are in each before wr
 
 Say which ONE comment to pin and why. Pin the question the most people also have, not the nicest
 one. Heart generously - it costs nothing and it is visible.
+
+## Russian-language mode
+
+When the user writes in Russian, or the material (a transcript, titles, an export) is Russian:
+
+- Answer in Russian, in plain spoken language, without bureaucratic words (данный, является,
+  осуществлять) and without machine-written stamps («не X, а Y», «давайте разберёмся», lead-in
+  questions like «Знаешь, почему?»). Keep «ты» or «вы» exactly as the
+  voice profile sets it, the same way from start to end.
+- Take tone and format from [examples_ru.md](examples_ru.md). The examples are format samples, not
+  facts: never quote their numbers or present them as real channels or real results.
+- Name the four piles in Russian: Вопросы, Поправки, Похвала, Провокации.
+- Reply in the author's voice. Address a commenter as the profile says, or as the commenter
+  addressed the author if the profile is silent.
+- Say it plainly: this skill prepares the replies; the author posts them. Nothing is published,
+  hearted or pinned by the plugin.
 
 ## The gate
 
