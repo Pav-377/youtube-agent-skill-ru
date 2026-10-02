@@ -100,6 +100,26 @@ class Acceptance(unittest.TestCase):
         self.assertGreaterEqual(pairs, 0.90)
         self.assertGreaterEqual(sum(s) / len(s) - sum(w) / len(w), 10)
 
+    def test_russian_band_cut_failed_on_held_out_hooks(self):
+        """The owner's protocol (tools/hookbands.py): fit the «weak» cut on half the set, keep it
+        only with at least 90% right labels on the other half and on 20 new hooks. It failed, so the
+        Russian report has no band word. If this starts passing, the decision is worth revisiting."""
+        import subprocess
+        from helpers import ROOT
+        p = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "hookbands.py")],
+                           capture_output=True, text=True, encoding="utf-8")
+        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
+        self.assertIn("REJECTED", p.stdout)
+
+    def test_russian_report_has_no_band_word(self):
+        from helpers import fixture
+        p = run_script("yt-script/hookscore.py", fixture("ru", "titles_ru.txt"))
+        for word in ("СЛАБЫЙ", "РАБОЧИЙ", "СИЛЬНЫЙ"):
+            self.assertNotIn(word, p.stdout)
+        self.assertIn("ИТОГ", p.stdout)
+        self.assertNotIn("band", run_json("yt-script/hookscore.py", "--hook", "Это обзор нового телефона.")[0])
+        self.assertEqual(run_json("yt-script/hookscore.py", "--lang", "en", "--hook", "This is a phone review.")[0]["band"], "WEAK")
+
     def test_russian_report_says_what_the_score_is_for(self):
         from helpers import fixture
         p = run_script("yt-script/hookscore.py", fixture("ru", "titles_ru.txt"))

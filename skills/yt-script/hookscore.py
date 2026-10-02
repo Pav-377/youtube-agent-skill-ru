@@ -196,7 +196,6 @@ def score(t, code="en"):
 
 def band(v): return "STRONG" if v >= 72 else "WORKABLE" if v >= 55 else "WEAK"
 
-BAND_RU = {"STRONG": "СИЛЬНЫЙ", "WORKABLE": "РАБОЧИЙ", "WEAK": "СЛАБЫЙ"}
 PROP_RU = {"SPECIFICITY": "КОНКРЕТИКА", "ADDRESS": "ОБРАЩЕНИЕ", "STAKES": "СТАВКИ",
            "CURIOSITY": "ЛЮБОПЫТСТВО", "BREVITY": "КРАТКОСТЬ"}
 
@@ -217,7 +216,7 @@ def report_ru(t, parts, verdict, name, hits):
     print(f"  {'-' * min(72, max(20, len(t.strip())))}")
     for k, v in parts.items():
         print(f"    {PROP_RU[k]:<13} {v:3d}  {'#' * (v // 5)}")
-    print(f"    {'ИТОГ':<13} {verdict:3d}  {BAND_RU[band(verdict)]}")
+    print(f"    {'ИТОГ':<13} {verdict:3d}")
     print(f"    формула       {name}" + (f"  (совпало шаблонов: {hits})" if hits else
                                          "  (ни одна формула не подошла: обычно это пересказ, а не хук)"))
     low = min(parts, key=parts.get)
@@ -248,8 +247,11 @@ def main():
     for t in lines:
         code = lang.resolve(choice, t)
         parts, verdict, name, hits = score(t, code)
-        out.append({"hook": t.strip(), "properties": parts, "verdict": verdict,
-                    "band": band(verdict), "formula": name, "matched": hits, "lang": code})
+        r = {"hook": t.strip(), "properties": parts, "verdict": verdict,
+             "band": band(verdict), "formula": name, "matched": hits, "lang": code}
+        if code == "ru":
+            del r["band"]  # no Russian bands: the fitted cut failed on held-out hooks (tools/hookbands.py)
+        out.append(r)
     out.sort(key=lambda r: -r["verdict"])
     if as_json:
         print(json.dumps([{k: v for k, v in r.items() if k != "matched"} for r in out], indent=1, ensure_ascii=False)); return
@@ -258,10 +260,10 @@ def main():
     if len(out) > 1:
         w = out[0]
         if w["lang"] == "ru":
-            print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']}, {BAND_RU[w['band']]})")
+            print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']})")
             print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.")
-            print("  Сравнивайте варианты между собой: метки СЛАБЫЙ, РАБОЧИЙ и СИЛЬНЫЙ стоят на порогах")
-            print("  оригинала и для русского пока не откалиброваны.\n")
+            print("  Сравнивайте варианты между собой по баллу. Меток «слабый» и «сильный» в русском режиме")
+            print("  нет: подобранный порог не прошёл проверку на хуках, на которых его не подбирали.\n")
         else:
             print(f"\n  winner: {w['hook'].strip()}  ({w['verdict']}, {w['band']})\n")
 
