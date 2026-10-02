@@ -78,7 +78,8 @@ class P4_TitleRussian(unittest.TestCase):
 
 
 class P5_ChaptersRussian(unittest.TestCase):
-    @unittest.expectedFailure
+    """Fixed in stage 3."""
+
     def test_p5_boundaries_from_vocabulary(self):
         r = run_json("yt-chapters/chapters.py", fixture("ru", "chapters_ru_flat.srt"), "--target", "4")
         starts = [c["start"] for c in r["chapters"]]
