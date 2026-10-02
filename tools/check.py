@@ -231,6 +231,14 @@ def check_skills():
         for m in re.finditer(r"python3?\s+([\w./${}\"]+\.py)", text):
             if "CLAUDE_SKILL_DIR" not in m.group(1):
                 out.append(f"skills/{name}/SKILL.md: '{m.group(0)}' - run tools as python3 \"${{CLAUDE_SKILL_DIR}}/x.py\"")
+    short = build.claude_ai_descriptions()
+    for d in skill_dirs():
+        name = os.path.basename(d)
+        desc = short["descriptions"].get(name)
+        if desc is None:
+            out.append(f"tools/claude_ai_descriptions.json: no short description for {name}")
+        elif len(desc) > short["max_chars"]:
+            out.append(f"tools/claude_ai_descriptions.json: {name} is {len(desc)} chars, claude.ai takes {short['max_chars']}")
     for src, copy in (("templates/voice.md", "shared/voice_template.md"),
                       ("templates/voice.ru.md", "shared/voice_template.ru.md")):
         a, b = os.path.join(ROOT, src), os.path.join(ROOT, copy)
