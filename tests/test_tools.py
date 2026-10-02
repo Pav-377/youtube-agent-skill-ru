@@ -1,7 +1,7 @@
 """tools/build.py and tools/check.py: they pass on the repo, and each check catches what it claims to."""
 import json, os, shutil, sys, tempfile, unittest, zipfile
 
-from helpers import ROOT, run_script
+from helpers import ROOT, fixture, run_script
 from test_known_issues import SMOKE
 
 sys.path.insert(0, os.path.join(ROOT, "tools"))
@@ -167,8 +167,9 @@ class Dist(unittest.TestCase):
 
 class SkillsCheckCatchesProblems(unittest.TestCase):
     def run_check(self, files):
+        short = json.dumps({"max_chars": 200, "descriptions": {"yt-demo": "A demo. Демо."}})
         with tempfile.TemporaryDirectory() as tmp:
-            make_tree(tmp, files)
+            make_tree(tmp, dict(files, **{"tools/claude_ai_descriptions.json": short}))
             with Patched(tmp):
                 return check.check_skills()
 
@@ -181,6 +182,55 @@ class SkillsCheckCatchesProblems(unittest.TestCase):
     def test_missing_section_examples_and_bare_command(self):
         problems = self.run_check({"skills/yt-demo/SKILL.md": GOOD_SKILL + "python3 x.py --json\n"})
         self.assertEqual(len(problems), 3, problems)
+
+
+
+SMOKE_RU = {
+    "hookscore.py": ["--hook", "Почему твои ролики не досматривают?"],
+    "title.py": ["--title", "Монтаж за 10 минут", "--thumb", "БЕЗ НОУТБУКА"],
+    "deadair.py": [fixture("ru", "edit_ru.srt")],
+    "chapters.py": [fixture("ru", "chapters_ru_flat.srt"), "--target", "4"],
+    "retention.py": [fixture("ru", "retention_ru_semicolon.csv")],
+    "swipe.py": [fixture("ru", "swipe_ru.json"), "--min", "0"],
+    "aitells.py": ["--text", "Давайте разберёмся, как это работает."],
+}
+
+
+class ClaudeAiZips(unittest.TestCase):
+    """support.claude.com: the skill folder is the zip's root, the description is 200 characters at most."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.tmp = tempfile.mkdtemp()
+        cls.zips = [z for z in build.dist(cls.tmp) if os.path.basename(z).startswith("yt-")]
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.tmp, ignore_errors=True)
+
+    def test_short_description_and_unchanged_body(self):
+        for z in self.zips:
+            name = os.path.splitext(os.path.basename(z))[0]
+            with self.subTest(name):
+                inside = zipfile.ZipFile(z).read(f"{name}/SKILL.md").decode("utf-8")
+                fm = check.frontmatter(inside)
+                self.assertEqual(fm["name"], name)
+                self.assertLessEqual(len(fm["description"]), 200)
+                with open(os.path.join(ROOT, "skills", name, "SKILL.md"), encoding="utf-8") as fh:
+                    repo = fh.read()
+                body = lambda t: t[t.index("\n---\n", 4):]
+                self.assertEqual(body(inside), body(repo))
+
+    def test_scripts_run_in_russian_from_the_unpacked_zip(self):
+        for z in self.zips:
+            name = os.path.splitext(os.path.basename(z))[0]
+            with self.subTest(name), tempfile.TemporaryDirectory() as tmp:
+                zipfile.ZipFile(z).extractall(tmp)
+                for script in sorted(os.listdir(os.path.join(tmp, name))):
+                    if script in SMOKE_RU:
+                        p = run_script(script, *SMOKE_RU[script], skills_root=os.path.join(tmp, name), cwd=tmp)
+                        self.assertEqual(p.returncode, 0, f"{name}/{script}: {p.stdout[-300:]}{p.stderr[-300:]}")
+                        self.assertRegex(p.stdout, "[а-яА-Я]", f"{name}/{script} did not answer in Russian")
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@ needs; shared/ is the one place those files are edited.
 The zips are deterministic: sorted entries, fixed timestamps, no __pycache__. Building twice gives
 byte-identical files, so a release can be checked against a rebuild.
 """
-import json, os, shutil, sys, zipfile
+import json, os, re, shutil, sys, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHARED = os.path.join(ROOT, "shared")
@@ -75,13 +75,32 @@ def _files(base):
 
 
 def _write_zip(path, entries):
-    """entries: [(name inside the zip, file on disk)]."""
+    """entries: [(name inside the zip, file on disk - or the bytes themselves)]."""
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
-        for arc, src in sorted(entries):
+        for arc, src in sorted(entries, key=lambda e: e[0]):
             info = zipfile.ZipInfo(arc, ZIP_TIME)
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o644 << 16
-            z.writestr(info, read(src))
+            z.writestr(info, src if isinstance(src, bytes) else read(src))
+
+
+def claude_ai_descriptions():
+    with open(os.path.join(ROOT, "tools", "claude_ai_descriptions.json"), encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def claude_ai_skill_md(skill):
+    """SKILL.md for a claude.ai upload: the same file with the short description claude.ai accepts
+    (200 characters there, 1024 in Claude Code and plugins)."""
+    short = claude_ai_descriptions()["descriptions"][skill]
+    with open(os.path.join(SKILLS, skill, "SKILL.md"), encoding="utf-8") as fh:
+        text = fh.read()
+    quoted = '"' + short.replace("\\", "\\\\").replace('"', '\\"') + '"'
+    new, n = re.subn(r"\A(---\nname: [^\n]+\n)description: >-\n(?:  [^\n]*\n)+(---\n)",
+                     lambda m: f"{m.group(1)}description: {quoted}\n{m.group(2)}", text)
+    if n != 1:
+        raise SystemExit(f"skills/{skill}/SKILL.md: frontmatter not in the expected shape")
+    return new.encode("utf-8")
 
 
 def dist(out_dir):
@@ -92,7 +111,8 @@ def dist(out_dir):
         if not os.path.isfile(os.path.join(base, "SKILL.md")):
             continue
         # The skill folder is the top level of its zip: yt-script.zip -> yt-script/SKILL.md
-        entries = [(f"{skill}/{rel}", os.path.join(base, rel)) for rel in _files(base)]
+        entries = [(f"{skill}/{rel}", claude_ai_skill_md(skill) if rel == "SKILL.md" else os.path.join(base, rel))
+                   for rel in _files(base)]
         path = os.path.join(out_dir, f"{skill}.zip")
         _write_zip(path, entries)
         written.append(path)

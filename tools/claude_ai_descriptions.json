@@ -1,0 +1,17 @@
+{
+ "note": "claude.ai accepts a skill description of at most 200 characters (support.claude.com, 'Creating custom skills', checked 2026-10-02); Claude Code and plugins accept 1024. tools/build.py --dist puts these short descriptions into the per-skill zips for claude.ai. The repository and the plugin keep the full ones.",
+ "max_chars": 200,
+ "descriptions": {
+  "yt-script": "YouTube script from an idea: five scored hooks, the spoken script, an AI-stamp check. Сценарий для YouTube: хуки, сценарий, проверка штампов.",
+  "yt-package": "Title and thumbnail text as one pairing, checked before publish. Название и обложка для YouTube: длина, повторы, кликбейт.",
+  "yt-edit": "Edit list from a transcript: pauses, hesitations, filler words, retakes. Монтажный лист: паузы, паразиты, повторы с таймкодами.",
+  "yt-comment": "Triage YouTube comments and draft replies in your voice. Ответы на комментарии YouTube в вашем стиле.",
+  "yt-plan": "A week of YouTube uploads sized to your hours. Контент-план на неделю под ваше время.",
+  "yt-viral": "What works in your niche, ranked by views over each channel's median. Идеи у конкурентов: выбросы по просмотрам.",
+  "yt-retention": "Read a YouTube Studio retention export: hook leak, cliffs, slide. Удержание из YouTube Studio: где уходят зрители.",
+  "yt-shorts": "Find the Shorts inside a long video and write their first lines. Шортсы из длинного ролика.",
+  "yt-seo": "YouTube description, a few honest tags, the queries to win. Описание и теги для YouTube.",
+  "yt-chapters": "YouTube chapters from a transcript, checked against YouTube's rules. Таймкоды и главы для YouTube.",
+  "yt-audit": "Audit a YouTube channel and name the one fix to make first. Аудит YouTube-канала: что исправить первым."
+ }
+}
