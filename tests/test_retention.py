@@ -274,5 +274,20 @@ class ShortVideoHook(unittest.TestCase):
         self.assertNotIn("hook_seconds", r)
 
 
+
+class OtherStudioTables(unittest.TestCase):
+    def test_started_stopped_watching_is_not_read_as_retention(self):
+        """Studio has a table that shares the position column but has no retention column."""
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "segments.csv")
+            with open(path, "w", encoding="utf-8") as fh:
+                fh.write("Video position (%),Started watching,Stopped watching,Number of times each moment was seen\n")
+                fh.writelines(f"{i * 10},{20 - i},{10 + i},{100 - i}\n" for i in range(11))
+            p = run_script(SCRIPT, path)
+        self.assertEqual(p.returncode, 1)
+        self.assertIn("no audience-retention column", p.stdout)
+        self.assertNotIn("Traceback", p.stderr)
+
+
 if __name__ == "__main__":
     unittest.main()

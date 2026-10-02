@@ -13,10 +13,63 @@
  "said_window_pad_seconds": 2,
  "said_max_chars": 140,
  "headers": {
-  "position": ["position", "elapsed", "time", "timestamp", "позиция", "момент", "время", "отметка", "хронометраж"],
-  "retention": ["retention", "watching", "watch ratio", "audience", "удержан", "смотр", "аудитор", "зрител"],
-  "relative": ["relative", "относит", "typical", "типичн", "compared", "сравнен"],
-  "seconds": ["sec", "(s)", "time", "timestamp", "сек", "(с)", "время", "хронометраж"],
-  "percent": ["%", "percent", "ratio", "процент", "доля"]
- }
+  "position": [
+   "position",
+   "elapsed",
+   "time",
+   "timestamp",
+   "позиция",
+   "момент",
+   "время",
+   "отметка",
+   "хронометраж"
+  ],
+  "retention": [
+   "retention",
+   "watching",
+   "watch ratio",
+   "audience",
+   "удержан",
+   "смотр",
+   "аудитор",
+   "зрител"
+  ],
+  "relative": [
+   "relative",
+   "относит",
+   "typical",
+   "типичн",
+   "compared",
+   "сравнен"
+  ],
+  "seconds": [
+   "sec",
+   "(s)",
+   "time",
+   "timestamp",
+   "сек",
+   "(с)",
+   "время",
+   "хронометраж"
+  ],
+  "percent": [
+   "%",
+   "percent",
+   "ratio",
+   "процент",
+   "доля"
+  ],
+  "not_retention": [
+   "started",
+   "stopped",
+   "number of times",
+   "начали",
+   "начало",
+   "перестали",
+   "прекратили",
+   "сколько раз",
+   "количество раз"
+  ]
+ },
+ "headers_status": "NOT CONFIRMED on a real export. English names seen in third-party code: 'Video position (%)', 'Absolute audience retention (%)', and a separate segment table with 'Started watching', 'Stopped watching', 'Number of times each moment was seen'. Russian names are guesses until a real Russian-UI export is checked."
 }

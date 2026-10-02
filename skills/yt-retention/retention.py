@@ -38,6 +38,10 @@ MSG = {
     "few_points": {"en": "could not read at least {n} data points from that csv",
                    "ru": "В файле меньше {n} точек графика, так что это не похоже на выгрузку удержания. "
                          "Нужен файл графика «Удержание аудитории» из YouTube Studio."},
+    "not_retention": {"en": "this table has no audience-retention column (columns: {columns}). It looks like "
+                            "another Studio export; download the \"Audience retention\" chart instead.",
+                      "ru": "В этой таблице нет столбца удержания (столбцы: {columns}). Похоже, это другая "
+                            "выгрузка из Студии. Нужен график «Удержание аудитории»."},
     "zip_none": {"en": "{path} holds no retention table. Files inside: {files}. "
                        "Pass the CSV with the retention chart, or the archive Studio downloads for it.",
                  "ru": "В архиве {path} нет таблицы удержания. Файлы внутри: {files}. "
@@ -152,9 +156,15 @@ def understand(text, code_choice):
     width = max(len(r) for r in data)
     cols = [i for i in range(width) if sum(numeric(r[i]) for r in data if i < len(r)) >= len(data) * 0.8]
     ix = next((i for i in cols if i < len(header) and has(header[i], "position")), None)
-    ret = [i for i in cols if i < len(header) and i != ix and has(header[i], "retention")]
+    ret = [i for i in cols if i < len(header) and i != ix and has(header[i], "retention")
+           and not has(header[i], "not_retention")]
     iy = next((i for i in ret if not has(header[i], "relative")), ret[0] if ret else None)
     if ix is None or iy is None:
+        if iy is None and any(c.strip() for c in header):
+            # Named columns and none of them is retention: another Studio table that shares the
+            # position column (Started watching / Stopped watching). Reading its first two numbers
+            # as retention would print a confident, wrong report.
+            return {"not_retention": [c.strip() for c in header if c.strip()], "lang": code}
         if len(cols) < 2:
             return None
         ix, iy = cols[0], cols[1]
@@ -192,13 +202,15 @@ def load(path, code_choice):
             for n in names:
                 if n.lower().endswith((".csv", ".tsv", ".txt")):
                     got = understand(lang.decode(z.read(n), n), code_choice)
-                    if got and len(got["xs"]) >= CFG["min_points"]:
+                    if got and len(got.get("xs", [])) >= CFG["min_points"]:
                         found.append((len(got["xs"]), n, got))
         if not found:
             raise Problem("zip_none", path=os.path.basename(path), files=", ".join(names) or "-")
         _, name, got = max(found, key=lambda f: f[0])  # the chart has many points, totals have one
         return got, f"{path} -> {name}"
     got = understand(lang.read_text(path), code_choice)
+    if got and "not_retention" in got:
+        raise Problem("not_retention", columns=", ".join(got["not_retention"]))
     return got or {"xs": [], "ys": [], "axis": "percent", "lang": lang.resolve(code_choice, "")}, path
 
 
