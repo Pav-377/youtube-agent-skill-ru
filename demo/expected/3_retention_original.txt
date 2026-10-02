@@ -1,5 +1,5 @@
 
-  E:\Projects\youtube-agent-skill-ru\demo\retention_ru.csv   12 points   1000.0% -> 450.0%
+  retention_ru.csv   12 points   1000.0% -> 450.0%
 
   HOOK LEAK   195.0% lost in the opening   [severe]
               under 25 is healthy for this length. Fix the first line before anything else.

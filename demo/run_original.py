@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """run_original.py - run a script of the ORIGINAL plugin (commit a2feb21) for the before/after demo.
 
-    python demo/run_original.py yt-script/hookscore.py --hook "..."
-    python demo/run_original.py yt-retention/retention.py demo/retention_ru.csv
+    cd demo
+    python run_original.py yt-script/hookscore.py --hook "..."
+    python run_original.py yt-retention/retention.py retention_ru.csv
 
 The original is unpacked from this repository's git history into a temporary folder, so nothing
 needs to be cloned. Needs git and the full history (a normal clone has it).
@@ -22,8 +23,9 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         zipfile.ZipFile(io.BytesIO(data)).extractall(tmp)
         env = dict(os.environ, PYTHONIOENCODING="utf-8")
-        args = [os.path.abspath(a) if os.path.exists(a) else a for a in sys.argv[2:]]
-        p = subprocess.run([sys.executable, os.path.join(tmp, "skills", sys.argv[1])] + args, env=env)
+        # file arguments stay as given: the script runs in the caller's folder, and the original
+        # prints the path it was given at the top of its report
+        p = subprocess.run([sys.executable, os.path.join(tmp, "skills", sys.argv[1])] + sys.argv[2:], env=env)
     sys.exit(p.returncode)
 
 

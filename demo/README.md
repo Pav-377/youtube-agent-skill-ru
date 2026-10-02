@@ -4,7 +4,8 @@
 расшифровок и выгрузок. Ожидаемый вывод каждой команды лежит в `expected/` — сверяйтесь с ним
 перед записью.
 
-Команды запускайте из корня репозитория. На Windows вместо `python3` пишите `python`. Чтобы
+Все команды запускайте из папки `demo`: сначала выполните `cd demo`. На Windows вместо `python3`
+пишите `python`. Чтобы
 показать оригинал, ничего клонировать не нужно: `run_original.py` достаёт его из истории git
 (коммит `a2feb21`).
 
@@ -13,7 +14,7 @@
 До — оригинал видит в русской фразе только Claude и YouTube:
 
 ```bash
-python3 demo/run_original.py yt-script/hookscore.py --hook "Claude только что уничтожил YouTube. Теперь его можно подключить к каналу, и он будет вести весь твой контент за тебя."
+python3 run_original.py yt-script/hookscore.py --hook "Claude только что уничтожил YouTube. Теперь его можно подключить к каналу, и он будет вести весь твой контент за тебя."
 ```
 
 Ожидается `VERDICT 27 WEAK`, краткость 34 (`expected/1_hook_original.txt`).
@@ -21,7 +22,7 @@ python3 demo/run_original.py yt-script/hookscore.py --hook "Claude только 
 После:
 
 ```bash
-python3 skills/yt-script/hookscore.py --hook "Claude только что уничтожил YouTube. Теперь его можно подключить к каналу, и он будет вести весь твой контент за тебя."
+python3 ../skills/yt-script/hookscore.py --hook "Claude только что уничтожил YouTube. Теперь его можно подключить к каналу, и он будет вести весь твой контент за тебя."
 ```
 
 Ожидается разбор по-русски: итог 38, краткость 100 (все 20 слов посчитаны), обращение 66 («твой»,
@@ -31,7 +32,7 @@ python3 skills/yt-script/hookscore.py --hook "Claude только что уни�
 ## 2. Слова-паразиты: что вырезать, а что оставить
 
 ```bash
-python3 skills/yt-edit/deadair.py demo/transcript_ru.vtt
+python3 ../skills/yt-edit/deadair.py transcript_ru.vtt
 ```
 
 Файл сделан в формате автосубтитров YouTube, поэтому время каждого слова точное. Что показать
@@ -47,13 +48,13 @@ python3 skills/yt-edit/deadair.py demo/transcript_ru.vtt
 ## 3. Выгрузка из русской Студии
 
 ```bash
-python3 demo/run_original.py yt-retention/retention.py demo/retention_ru.csv
+python3 run_original.py yt-retention/retention.py retention_ru.csv
 ```
 
 До: `HOOK LEAK 195.0% lost in the opening` (`expected/3_retention_original.txt`).
 
 ```bash
-python3 skills/yt-retention/retention.py demo/retention_ru.csv
+python3 ../skills/yt-retention/retention.py retention_ru.csv
 ```
 
 После: «в начале ушли 19,5% зрителей» (`expected/3_retention.txt`).
@@ -61,7 +62,7 @@ python3 skills/yt-retention/retention.py demo/retention_ru.csv
 ## 4. Проверка на нейросетевые штампы
 
 ```bash
-python3 skills/yt-script/aitells.py demo/script_ai.txt
+python3 ../skills/yt-script/aitells.py script_ai.txt
 ```
 
 Ожидается 6 штампов (`expected/4_aitells.txt`): «Давайте разберёмся», «в современном мире»,
@@ -71,7 +72,7 @@ python3 skills/yt-script/aitells.py demo/script_ai.txt
 ## 5. Поиск идей у конкурентов
 
 ```bash
-python3 skills/yt-viral/swipe.py demo/titles_ru.json --min 2
+python3 ../skills/yt-viral/swipe.py titles_ru.json --min 2
 ```
 
 Ожидается 5 видео, которые обогнали медиану своего канала в 3,8–9,9 раза, с русскими названиями
@@ -79,5 +80,5 @@ python3 skills/yt-viral/swipe.py demo/titles_ru.json --min 2
 
 ## Если вывод не совпал
 
-Выполните `python3 demo/make_demo_files.py --check`: команда скажет, какой файл устарел. Ожидаемые
-выводы обновляет `python3 demo/make_demo_files.py`.
+Выполните `python3 make_demo_files.py --check`: команда скажет, какой файл устарел. Ожидаемые
+выводы обновляет `python3 make_demo_files.py`.
