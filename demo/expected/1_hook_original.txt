@@ -1,0 +1,11 @@
+
+  Claude только что уничтожил YouTube. Теперь его можно подключить к каналу, и он будет вести весь твой контент за тебя.
+  ------------------------------------------------------------------------
+    SPECIFICITY   46  #########
+    ADDRESS       26  #####
+    STAKES        22  ####
+    CURIOSITY     24  ####
+    BREVITY       34  ######
+    VERDICT       27  WEAK
+    formula      Unclassified  (no formula matched - that is usually a summary, not a hook)
+    weakest      STAKES - name what it costs them to keep doing it the current way

@@ -1,109 +1,82 @@
-# The YouTube agent skill
+# YouTube-агент для Claude — русская версия
 
-Eleven Claude skills that run a YouTube channel. Free, MIT, no signup, no API key, nothing to
-connect.
+Одиннадцать скиллов Claude для автора YouTube: сценарий, название и обложка, монтажный лист,
+удержание, шортсы, главы, описание, ответы на комментарии, план на неделю, аудит канала и поиск
+идей у конкурентов. Работает на русском и на английском. Бесплатно, лицензия MIT.
 
-One of them writes your script off 21 hook formulas and scores the hook before you waste a take on
-it. One lints the title and the thumbnail as a single pairing, because writing them separately is
-why half of your click surface says the same thing twice. One reads your audience-retention export
-and tells you the exact second people left and what you were saying when they did. One turns a
-transcript into an edit decision list. One finds the Shorts already hiding inside a long video. One
-goes and finds what is working in your niche and ranks it by how far each video beat its own
-channel, not by how big the channel is.
+Это русская версия плагина [youtube-agent-skill](https://github.com/Jakeschincariol/youtube-agent-skill)
+Джейка Шинкариола (Jake Schincariol). Спасибо ему за оригинал: идеи, формулы хуков и инструменты —
+его работа, мы добавили русский язык и исправили то, что мешало.
 
-**Nothing gets published until you do it.** These skills write. You upload.
+**Плагин ничего не публикует.** Он пишет, проверяет и подсказывает. Загружаете ролики и отвечаете
+зрителям вы.
 
-## Install
+## Установка за 3 шага
 
-Paste this into Claude:
+В Claude Code:
 
-```
-https://github.com/Jakeschincariol/youtube-agent-skill
+1. Добавьте маркетплейс: `/plugin marketplace add Pav-377/youtube-agent-skill-ru`
+2. Установите плагин: `/plugin install youtube-agent-ru@youtube-agent-skill-ru`
+3. Перезапустите Claude Code и напишите: «Напиши сценарий ролика про монтаж на телефоне».
 
-Install this skill, then confirm /yt-script works.
-```
+Для claude.ai и Claude Desktop, ручной установки и проверки, что всё работает, —
+[подробная инструкция](docs/INSTALL.md).
 
-Or do it yourself, in Claude Code:
+Потом потратьте десять минут на [профиль автора](templates/voice.ru.md): как вы говорите, «ты» или
+«вы», ваши словечки. Его читают все скиллы. Можно не заполнять самому: пришлите Claude три своих
+ролика и попросите составить профиль.
 
-```bash
-git clone https://github.com/Jakeschincariol/youtube-agent-skill.git
-cp -r youtube-agent-skill/skills/yt-* ~/.claude/skills/
-```
+## Чем отличается от оригинала
 
-Or as a plugin:
+- **Русский язык везде.** Оригинал видел в русском тексте только латинские слова: русская фраза из
+  20 слов считалась фразой из трёх, и оценка хука выходила 27 из 100 вместо честной.
+- **Выгрузка из русской YouTube Studio читается правильно.** Оригинал удалял запятые из чисел, и
+  потеря на хуке «19,5%» превращалась в «195%». Теперь понимаются десятичная запятая, «;» между
+  столбцами, русские заголовки и архив, который скачивает Студия.
+- **Слова-паразиты с умом.** Заминки («э», «мм») вырезаются всегда. «Ну» и «короче» в начале фразы
+  остаются как живая речь. «Вот этот файл» и «это значит» не трогаются: там слова со смыслом. Время
+  каждого слова точное, если взять автосубтитры YouTube.
+- **Новое: проверка на нейросетевые штампы.** Скрипт находит в сценарии «это не про X, а про Y»,
+  «давайте разберёмся», «Знаешь, почему?» и афоризмы вроде «Голова — его, руки — твои». Claude
+  переписывает эти места своими словами в вашем стиле.
+- **Шортсы:** хук — это первые секунды ролика, а не первые 30 секунд, как у длинного видео.
+- **Каждый скилл работает отдельно,** поэтому в claude.ai его можно загрузить одним архивом.
+- **Русская Windows:** без кракозябр в файлах и без сбоев на эмодзи.
+- **Исправлены ошибки оригинала,** в том числе в английском режиме. Полный список — в
+  [журнале изменений](CHANGELOG.md).
 
-```
-/plugin marketplace add Jakeschincariol/youtube-agent-skill
-/plugin install youtube-agent
-```
+## Одиннадцать команд
 
-Project-local instead of global: copy the same folders into your repo's `.claude/skills/`. No Claude
-Code at all? Paste any single `SKILL.md` at the top of a chat and it runs as a mode. You lose the six
-Python tools, which is most of the point of `/yt-script`, `/yt-retention` and `/yt-edit`, but the
-rest works.
+| Команда | Что делает | Пример запроса |
+| --- | --- | --- |
+| `/yt-script` | Сценарий из идеи: пять вариантов начала, оценка отсеивает слабые, затем сценарий по битам и проверка штампов | «Напиши сценарий про монтаж на телефоне» |
+| `/yt-package` | Название и текст обложки как одна пара: длина, повторы, кликбейт | «Придумай название и обложку» |
+| `/yt-edit` | Монтажный лист по транскрипту: паузы, заминки, паразиты, повторы с таймкодами | «Вырежи паузы и паразиты» |
+| `/yt-comment` | Комментарии по четырём группам и ответы вашим голосом | «Ответь на комментарии» |
+| `/yt-plan` | План на неделю под ваши часы | «Контент-план на неделю, у меня 8 часов» |
+| `/yt-viral` | Что работает в нише: видео, которые обогнали свой канал | «Что сейчас залетает про нейросети» |
+| `/yt-retention` | Удержание из Студии: где уходят зрители и что сказали в этот момент | «Разбери удержание» |
+| `/yt-shorts` | Шортсы из длинного ролика с новой первой фразой | «Нарежь шортсы из этого видео» |
+| `/yt-seo` | Описание, немного честных тегов и запросы, которые ролик должен выигрывать | «Напиши описание и теги» |
+| `/yt-chapters` | Главы по транскрипту, проверенные по правилам YouTube | «Сделай таймкоды» |
+| `/yt-audit` | Аудит канала и одно главное исправление | «Разбери мой канал» |
 
-Then spend ten minutes on [`templates/voice.md`](templates/voice.md). Copy it to
-`~/.claude/youtube/voice.md` and fill it in, or send Claude three of your own videos and say "write
-my voice.md from these". Every skill reads that file. It matters more here than anywhere else,
-because you have to say the words out loud.
+Команды можно не набирать: достаточно написать запрос обычными словами. Как пройти весь путь от
+идеи до плана публикаций — в [руководстве](docs/USAGE.md).
 
-## The eleven
+## Что важно знать
 
-| command | what it does |
-| --- | --- |
-| `/yt-script` | One idea into a script. Five hooks off [21 formulas](skills/yt-script/hooks.json), scored, then the spoken script with the retention beats marked. |
-| `/yt-package` | Title and thumbnail as one pairing, linted for truncation, duplication and vagueness. |
-| `/yt-edit` | A transcript into an edit decision list: dead air, filler cues, retakes, with timecodes. |
-| `/yt-comment` | The comment section triaged into four piles, then replies in your voice. Says which one to pin. |
-| `/yt-plan` | A week that fits the hours you actually have. One anchor, one cheap one, three Shorts. |
-| `/yt-viral` | What is working in your niche, ranked by multiple over each channel's own median. |
-| `/yt-retention` | Your retention export read properly: hook leak, the cliffs, the slide, and what to change. |
-| `/yt-shorts` | The Shorts already inside a long video, with a new first line written for each. |
-| `/yt-seo` | The description, the tags that are worth having, and the three queries this should win. |
-| `/yt-chapters` | Chapters from a transcript, validated against YouTube's own rules so they render. |
-| `/yt-audit` | The whole channel, ending in ONE fix rather than twenty. |
+- Плагин не публикует ролики и не монтирует видеофайл. Его скрипты не обращаются к сети. Скилл
+  `/yt-viral` может предложить собрать открытые списки видео через yt-dlp — только с вашего
+  согласия и без входа в ваш аккаунт.
+- Оценки — это подсказки. Оценка хука **отсеивает слабые начала и подсказывает, что исправить**,
+  но не предсказывает просмотры: на 226 реальных роликах удачные и неудачные начала получили почти
+  одинаковые баллы.
+- Названия столбцов русской Студии пока не сверены с настоящей выгрузкой.
 
-## The six tools
+Все ограничения — в [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
 
-Every one of these runs on a clean Python 3 with no dependencies. They are the reason the skills are
-not just prompts.
+## Лицензия
 
-```bash
-python3 skills/yt-script/hookscore.py --hook "one line"        # 5-property hook panel
-python3 skills/yt-package/title.py --title "..." --thumb "..." # title + thumbnail linter
-python3 skills/yt-edit/deadair.py transcript.srt               # edit decision list
-python3 skills/yt-chapters/chapters.py transcript.srt          # validated chapters
-python3 skills/yt-retention/retention.py retention.csv         # where they left, and why
-python3 skills/yt-viral/swipe.py collected.json --min 2.0      # outliers by own-channel multiple
-```
-
-## The fine print
-
-The part most packs leave out.
-
-**It does not publish.** YouTube's Data API would allow it with your own OAuth, which makes this
-pack different from the LinkedIn and Instagram ones, where posting is not available at all. It is
-still not built here: every skill ends in a block you copy and a question — ship it, or change it?
-Anything that claims to run your channel unattended should be read with that distinction in mind.
-
-**`hookscore.py` is a heuristic, not a predictor.** The panel was built and calibrated against 74
-real short-form hooks (the first 15 seconds of auto-captions, top-8 and bottom-8 by views across
-five channels). It separates deliberately bad hooks from real ones well. It separates a given
-creator's hits from their own misses barely at all. A low score is a reason to look again; a high
-score is not a promise.
-
-**The formula classifier is about the words, not the result.** When `/yt-viral` says a title used
-The Statistic, that is a judgement about the title you can see, not a claim about why the video got
-its views.
-
-**`/yt-viral` reads, it does not scrape.** Public listings only. It never logs in as you and never
-touches your credentials.
-
-**Tags barely matter** and this pack says so instead of selling you a tag generator.
-
-**Nothing invents a number.** If a skill wants a figure it does not have, it asks you for it or
-writes the line without it.
-
-## Licence
-
-MIT. Use it, change it, ship it.
+MIT, как у оригинала. Строка авторства оригинала сохранена в [LICENSE](LICENSE). Оригинал:
+[Jakeschincariol/youtube-agent-skill](https://github.com/Jakeschincariol/youtube-agent-skill).

@@ -117,7 +117,12 @@ def analyse(words):
         if p == "в общем":
             return nxt in G["в_общем_next"]
         if p == "короче":
-            return prev in G["короче_prev"] or nxt in G["короче_next"]
+            if prev in G["короче_prev"] or nxt in G["короче_next"]:
+                return True
+            # "сделай монтаж короче." - a comparative ends the sentence with no comma before it;
+            # the filler at the end of a phrase is set off by one ("вот так, короче.")
+            ends = b == n - 1 or toks[b].text.rstrip().endswith(SENTENCE_END) or toks[b + 1].text[:1].isupper()
+            return ends and a > 0 and not _punct(toks[a - 1].text)
         return False
 
     # 2. decide, left to right, so a stack knows what came before it
