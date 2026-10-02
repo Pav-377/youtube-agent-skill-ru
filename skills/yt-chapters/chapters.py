@@ -63,7 +63,7 @@ def main():
     a = sys.argv[1:]
     choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
-    target = int(a[a.index("--target") + 1]) if "--target" in a else 7
+    target = lang.flag_value(a, "--target", 7, int)
     a = [x for x in a if not x.startswith("--") and not x.isdigit()]
     if not a or not os.path.exists(a[0]): print(__doc__); sys.exit(1)
     cues = load(a[0])

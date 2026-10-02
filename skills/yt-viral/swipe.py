@@ -63,7 +63,7 @@ def main():
     lang.setup_output()
     a = sys.argv[1:]
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
-    lo = float(a[a.index("--min") + 1]) if "--min" in a else 1.5
+    lo = lang.flag_value(a, "--min", 1.5, float)
     files = [x for x in a if not x.startswith("--") and not re.match(r"^[\d.]+$", x)]
     if not files or not os.path.exists(files[0]): print(__doc__); sys.exit(1)
     rows = lang.read_json(files[0])

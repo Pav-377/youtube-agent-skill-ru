@@ -122,12 +122,13 @@ def main():
     choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     if "--long" in a:
-        i = a.index("--long")
+        limit = lang.flag_value(a, "--long", cast=int)
         for code in lang.LANGS:
-            DATA[code]["long"]["max_words"] = int(a[i + 1])
+            DATA[code]["long"]["max_words"] = limit
+        i = a.index("--long")
         a = a[:i] + a[i + 2:]
     if "--text" in a:
-        text = a[a.index("--text") + 1]
+        text = lang.flag_value(a, "--text")
     elif a and os.path.exists(a[0]):
         text = lang.read_text(a[0])
     else:

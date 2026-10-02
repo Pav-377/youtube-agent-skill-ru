@@ -43,11 +43,14 @@ python3 "${CLAUDE_SKILL_DIR}/hookscore.py" --hook "one line"      # score a sing
 click the title promised, open a question the viewer cannot close, and prove the payoff exists.
 
 1. **Hook.** Write FIVE against [the 21 formulas](hooks.json) and run them through `hookscore.py`.
-   The score is a filter: drop the variants it marks WEAK and use its "weakest" line to fix the
-   rest. Then choose the best two of what remains yourself, and for each say in one short line
-   which formula it uses and why it is strong for this idea. Show the user both hooks with their
-   score and that line. Never hand over one hook. Never present the score as a forecast of views:
-   it filters out weak openings and says what to fix, nothing more.
+   The score is a filter: compare the five with each other, drop the lowest-scoring ones (and any
+   that opens with a greeting or a channel intro), and use the "weakest" line to fix the rest. Do
+   not drop a variant for its band word alone: WEAK / WORKABLE / STRONG use the original's
+   thresholds, which put most good hooks in WEAK, in English and in Russian alike. Then choose the
+   best two of what remains yourself, and for each say in one short line which formula it uses and
+   why it is strong for this idea. Show the user both hooks with their score and that line. Never
+   hand over one hook. Never present the score as a forecast of views: it filters out weak
+   openings and says what to fix, nothing more.
 2. **The turn** (0:15-0:45). Say what the video is going to do, in one sentence, and start doing it.
    No channel intro, no "before we get started", no subscribe pitch. Those are the single most
    common cause of the 0:30 cliff.

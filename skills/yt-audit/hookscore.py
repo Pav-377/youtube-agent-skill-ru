@@ -239,7 +239,7 @@ def main():
     as_json = "--json" in a
     a = [x for x in a if x != "--json"]
     if "--hook" in a:
-        lines = [a[a.index("--hook") + 1]]
+        lines = [lang.flag_value(a, "--hook")]
     elif a and os.path.exists(a[0]):
         lines = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
@@ -259,7 +259,9 @@ def main():
         w = out[0]
         if w["lang"] == "ru":
             print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']}, {BAND_RU[w['band']]})")
-            print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.\n")
+            print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.")
+            print("  Сравнивайте варианты между собой: метки СЛАБЫЙ, РАБОЧИЙ и СИЛЬНЫЙ стоят на порогах")
+            print("  оригинала и для русского пока не откалиброваны.\n")
         else:
             print(f"\n  winner: {w['hook'].strip()}  ({w['verdict']}, {w['band']})\n")
 

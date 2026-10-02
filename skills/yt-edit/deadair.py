@@ -33,7 +33,7 @@ def main():
     a = sys.argv[1:]
     choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
-    floor = float(a[a.index("--floor") + 1]) if "--floor" in a else 0.45
+    floor = lang.flag_value(a, "--floor", 0.45, float)
     a = [x for x in a if not x.startswith("--") and not re.match(r"^[\d.]+$", x)]
     if not a or not os.path.exists(a[0]): print(__doc__); sys.exit(1)
     cues = load(a[0])
