@@ -34,6 +34,9 @@ claude plugin marketplace add Pav-377/youtube-agent-skill-ru
 claude plugin install youtube-agent-ru@youtube-agent-skill-ru
 ```
 
+**Если Windows пишет «Filename too long».** Это предел Windows в 260 символов на путь, его
+упирает длинная папка, а не плагин: выполните один раз `git config --global core.longpaths true`.
+
 **Как вызывать.** Пишите запрос обычными словами — нужный скилл включится сам. Если хотите вызвать
 явно, наберите `/yt-script`. Если такое имя уже занято другим плагином, работает полная форма:
 `/youtube-agent-ru:yt-script`. Так же для остальных команд.
@@ -57,9 +60,33 @@ claude plugin install youtube-agent-ru@youtube-agent-skill-ru
 Скиллы доступны на тарифах Free, Pro, Max, Team и Enterprise (по [справке Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude)).
 Скиллы, включённые в claude.ai, подгружаются и в Claude Code, если войти тем же аккаунтом.
 
+## Профиль автора
+
+Напишите Claude: «составь мой профиль по трём роликам» и пришлите ссылки или расшифровки. В Claude
+Code он сам сохранит профиль в `~/.claude/youtube/voice.md` (на Windows —
+`C:\Users\ВашеИмя\.claude\youtube\voice.md`). Этот файл обновления плагина не трогают.
+
+Если заполняете вручную — скопируйте шаблон [`templates/voice.ru.md`](../templates/voice.ru.md) в
+`~/.claude/youtube/voice.md` и правьте копию. Не заполняйте шаблон в папке плагина: при обновлении
+он перезапишется вместе с вашим текстом.
+
 **Профиль автора в claude.ai.** Папки `~/.claude` там нет. Попросите Claude составить профиль по
 трём вашим роликам и вставьте готовый текст в инструкции проекта Claude — тогда все скиллы будут
 его видеть.
+
+## Если нет Python
+
+Скриптам нужен Python 3.9 или новее. Проверьте в терминале: `python3 --version` (на Windows —
+`python --version`). Ответ вида `Python 3.12.4` — всё в порядке.
+
+- **Windows:** выполните `winget install Python.Python.3.12` или скачайте установщик с
+  [python.org](https://www.python.org/downloads/) и отметьте «Add Python to PATH». Если вместо
+  версии открывается Microsoft Store — это заглушка, а не Python: поставьте его одним из способов выше.
+- **macOS:** выполните `xcode-select --install` (поставит `python3` вместе с инструментами
+  разработчика) или скачайте установщик с [python.org](https://www.python.org/downloads/).
+
+После установки перезапустите Claude Code. Без Python скилл прямо скажет, что инструмент не
+запустился, а не выдаст оценку «на глаз» за результат скрипта.
 
 ## Как понять, что всё работает
 
@@ -79,8 +106,7 @@ claude plugin install youtube-agent-ru@youtube-agent-skill-ru
 ## Если что-то не так
 
 - **«python3 не найден» (Windows).** Скилл сам попробует команду `python`. Если нет и её —
-  установите Python 3.9 или новее с [python.org](https://www.python.org/downloads/) и отметьте
-  «Add Python to PATH».
+  смотрите раздел [«Если нет Python»](#если-нет-python).
 - **Ответ на английском, хотя вы пишете по-русски.** Добавьте в запрос «ответь по-русски» или
   проверьте профиль автора.
 - **Архив не загружается в claude.ai.** Загружайте архивы скиллов (`yt-script.zip` и другие), а не

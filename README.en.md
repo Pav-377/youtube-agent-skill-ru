@@ -17,6 +17,11 @@ and fixes what got in the way. The main README is in Russian: [README.md](README
 /plugin install youtube-agent-ru@youtube-agent-skill-ru
 ```
 
+Then send Claude three of your videos and say "build my voice profile from these three": it saves
+the profile to `~/.claude/youtube/voice.md`, which plugin updates never touch. Filling it in by
+hand? Copy [the template](templates/voice.md) there and edit the copy, not the file in the plugin
+folder. The scripts need Python 3.9 or newer.
+
 For claude.ai, download the per-skill zips from the latest GitHub Release and upload them under
 Customize > Skills (code execution must be on). Details in [docs/INSTALL.md](docs/INSTALL.md) (Russian).
 

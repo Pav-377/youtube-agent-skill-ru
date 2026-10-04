@@ -1,6 +1,9 @@
 # voice.md
 
-Copy this to `~/.claude/youtube/voice.md` and fill it in. Every skill in this pack reads it. Ten
+This is a template - do not fill it in here: a plugin update overwrites this file. The easy way:
+send Claude three of your videos and say "build my voice profile from these three"; in Claude Code it
+saves the profile to `~/.claude/youtube/voice.md`, which updates never touch. By hand: copy this
+file to `~/.claude/youtube/voice.md` and fill in the copy. Every skill in this pack reads it. Ten
 minutes here is worth more than any prompt you will ever write, because on YouTube you have to say
 the words out loud and a script in the wrong voice is unreadable on camera.
 
