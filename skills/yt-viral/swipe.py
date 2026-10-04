@@ -59,16 +59,32 @@ def classify(title, code="en"):
     scored.sort(reverse=True)
     return scored[0][1] if scored else ("Без формулы" if code == "ru" else "Unclassified")
 
+USAGE_RU = """swipe.py — ролики, которые набрали больше обычного для своего канала, и формулы их названий.
+
+    python3 swipe.py ролики.json
+    python3 swipe.py ролики.json --min 2.0      # порог: во сколько раз больше медианы канала
+    python3 swipe.py ролики.json --json         # вывод в JSON
+    python3 swipe.py ролики.json --lang ru      # язык: ru, en или auto (по умолчанию)
+
+Вход — список роликов, по объекту на ролик:
+
+    [{"channel":"Канал","title":"...","views":412000,"url":"...","duration":613}, ...]
+
+Нужно не меньше четырёх роликов на канал.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
+    choice, a = lang.take_lang_flag(a)
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     lo = lang.flag_value(a, "--min", 1.5, float)
     files = [x for x in a if not x.startswith("--") and not re.match(r"^[\d.]+$", x)]
-    if not files or not os.path.exists(files[0]): print(__doc__); sys.exit(1)
+    if not files or not os.path.exists(files[0]): lang.usage(__doc__, USAGE_RU, choice, missing=files[0] if files else None)
     rows = lang.read_json(files[0])
     if isinstance(rows, dict): rows = rows.get("videos", [])
-    code = lang.detect(" ".join(str(r.get("title", "")) for r in rows))
+    code = lang.resolve(choice, " ".join(str(r.get("title", "")) for r in rows))
     by, bad = {}, []
     for n, r in enumerate(rows, 1):
         views = views_of(r.get("views", 0))

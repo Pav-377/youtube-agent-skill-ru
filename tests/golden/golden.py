@@ -26,7 +26,8 @@ def run(skills_root, case):
     # PYTHONHASHSEED: the original chapters.py orders tied keywords by set iteration order, which
     # changes from run to run. A fixed seed makes the original reproducible (on one hash algorithm:
     # Python 3.11 moved from siphash24 to siphash13, hence "hash_dependent" in cases.json).
-    env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1", PYTHONHASHSEED="0")
+    env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1", PYTHONHASHSEED="0",
+               LC_ALL="", LC_MESSAGES="", LANGUAGE="", LANG="en_US.UTF-8")  # messages in English
     p = subprocess.run([sys.executable, os.path.join(skills_root, case["script"])] + case["args"],
                        cwd=FIXTURES_EN, env=env, capture_output=True, text=True, encoding="utf-8")
     return f"exit={p.returncode}\n{p.stdout}"

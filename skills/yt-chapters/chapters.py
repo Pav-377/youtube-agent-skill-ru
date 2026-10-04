@@ -58,6 +58,18 @@ def mmss(t):
     t = int(t); h, m, s = t // 3600, (t % 3600) // 60, t % 60
     return f"{h}:{m:02d}:{s:02d}" if h else f"{m}:{s:02d}"
 
+USAGE_RU = """chapters.py — главы YouTube по транскрипту с таймкодами.
+
+    python3 chapters.py транскрипт.vtt                  # или .srt, или .json от Whisper
+    python3 chapters.py транскрипт.vtt --target 8       # сколько глав нужно
+    python3 chapters.py транскрипт.vtt --json           # вывод в JSON
+    python3 chapters.py транскрипт.vtt --lang ru        # язык: ru, en или auto (по умолчанию)
+
+Главы проверяются по правилам YouTube: первая с 00:00, не меньше трёх, каждая от 10 секунд.
+Черновые названия глав нужно переписать своими словами.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
@@ -65,9 +77,12 @@ def main():
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     target = lang.flag_value(a, "--target", 7, int)
     a = [x for x in a if not x.startswith("--") and not x.isdigit()]
-    if not a or not os.path.exists(a[0]): print(__doc__); sys.exit(1)
+    if not a or not os.path.exists(a[0]): lang.usage(__doc__, USAGE_RU, choice, missing=a[0] if a else None)
     cues = load(a[0])
-    if len(cues) < 6: print("too few cues to chapter"); sys.exit(1)
+    if len(cues) < 6:
+        print("too few cues to chapter" if lang.ui_lang(choice) == "en" else
+              "В транскрипте меньше шести реплик, глав из него не составить.")
+        sys.exit(1)
     dur = cues[-1][1]
     code = lang.resolve(choice, " ".join(c[2] for c in cues[:200]))
     cand = []

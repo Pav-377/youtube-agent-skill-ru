@@ -95,6 +95,42 @@ def resolve(choice, text):
     return choice if choice in LANGS else detect(text)
 
 
+def ui_lang(choice="auto"):
+    """Language of help and error messages, which come before there is any text to detect: --lang
+    when given, else the system locale (LC_ALL, LC_MESSAGES, LANG, LANGUAGE; on Windows without
+    them, the user interface language)."""
+    if choice in LANGS:
+        return choice
+    for var in ("LC_ALL", "LC_MESSAGES", "LANG", "LANGUAGE"):
+        value = os.environ.get(var)
+        if value:
+            return "ru" if value.lower().startswith("ru") else "en"
+    if sys.platform == "win32":
+        try:
+            import ctypes
+            return "ru" if ctypes.windll.kernel32.GetUserDefaultUILanguage() & 0x3FF == 0x19 else "en"
+        except (AttributeError, OSError):
+            pass
+    try:
+        import locale
+        name = (locale.getlocale()[0] or "").lower()
+    except ValueError:
+        name = ""
+    return "ru" if name.startswith(("ru", "russian")) else "en"
+
+
+def usage(doc, ru_text, choice="auto", missing=None, status=1):
+    """Print the script's help and stop. English shows the module docstring as it always did; a
+    Russian system gets ru_text, after a line about the missing file when there is one."""
+    if ui_lang(choice) == "ru":
+        if missing:
+            print(f"Файл не найден: {missing}. Проверьте путь и имя файла.\n")
+        print(ru_text)
+    else:
+        print(doc)
+    sys.exit(status)
+
+
 def plural(n, one, few, many):
     """Russian plural: plural(1, "слово", "слова", "слов") -> "слово"; 3 -> "слова"; 5, 11, 12 -> "слов"."""
     n = abs(int(n))

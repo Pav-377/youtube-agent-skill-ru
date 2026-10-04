@@ -164,12 +164,18 @@ class Rebrand(unittest.TestCase):
         self.assertNotIn("Петров", read_text(os.path.join(repo, "LICENSE")))
 
     def test_empty_values_are_refused(self):
+        """Holds before and after the names are filled in: nothing but branding.json is touched."""
         repo = os.path.join(self.tmp, "empty")
         copy_repo(repo)
+
+        def snapshot():
+            return {rel: hashlib.sha256(readb(p)).hexdigest() for rel, p in files(repo) if rel != "branding.json"}
+
+        before = snapshot()
         p = rebrand(repo, owner="", repo="", author="")
         self.assertEqual(p.returncode, 1)
         self.assertIn("fill in 'owner'", p.stdout)
-        self.assertTrue(TOKEN.search(read_text(os.path.join(repo, "README.md"))))
+        self.assertEqual(snapshot(), before)
 
 
 if __name__ == "__main__":

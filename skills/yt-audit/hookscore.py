@@ -231,6 +231,17 @@ FIX = {
  "BREVITY": "9 to 24 words. Read it out loud and stop where you run out of breath",
 }
 
+USAGE_RU = """hookscore.py — оценка хука (первых секунд ролика).
+
+    python3 hookscore.py хуки.txt              # по одному хуку в строке
+    python3 hookscore.py --hook "одна фраза"   # один хук
+    python3 hookscore.py --json хуки.txt       # вывод в JSON
+    python3 hookscore.py хуки.txt --lang ru    # язык: ru, en или auto (по умолчанию)
+
+Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
@@ -242,7 +253,7 @@ def main():
     elif a and os.path.exists(a[0]):
         lines = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
-        print(__doc__); sys.exit(1 if not a else 0)
+        lang.usage(__doc__, USAGE_RU, choice, missing=a[0] if a else None, status=1 if not a else 0)
     out = []
     for t in lines:
         code = lang.resolve(choice, t)
