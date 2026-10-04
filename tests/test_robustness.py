@@ -1,4 +1,4 @@
-"""Every script answers bad input with a sentence, never a traceback (brief, quality rule 4)."""
+"""Every script answers bad input with a sentence, never a traceback."""
 import os, tempfile, unittest
 
 from helpers import run_script

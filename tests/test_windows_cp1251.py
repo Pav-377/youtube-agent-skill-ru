@@ -1,4 +1,4 @@
-"""The stage 0 scenario: a Russian Windows (cp1251), on any OS through tests/winsim.py.
+"""A Russian Windows (cp1251), on any OS through tests/winsim.py.
 
 Each case runs twice - on the original commit, where the problem must show (otherwise the
 simulation proves nothing), and on this version, where it must not.

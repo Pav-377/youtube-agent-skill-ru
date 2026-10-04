@@ -115,7 +115,7 @@ def main():
     if code == "ru":
         print(f"\n  глав: {len(chapters)}"
               f"{'' if ok else '  -- НЕ ПОДОЙДЁТ: YouTube нужны минимум 3 главы, первая с 0:00, каждая от 10 секунд'}")
-        print("  Переименуйте каждую строку перед вставкой: это слова темы, а не ваши слова.\n")
+        print("  Переименуйте каждую строку перед вставкой: черновые названия собраны из слов темы.\n")
         return
     print(f"\n  {len(chapters)} chapters"
           f"{'' if ok else '  -- INVALID: YouTube needs 3+, a 00:00 first entry and 10s minimum each'}")

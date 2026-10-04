@@ -1,4 +1,4 @@
-"""swipe.py: view counts as people copy them (N7). The formula classifier is tested elsewhere (P6)."""
+"""swipe.py: view counts as people copy them. The formula classifier is tested elsewhere."""
 import json, os, sys, tempfile, unittest
 
 from helpers import SKILLS, run_script

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""fillers_ru.py - Russian hesitations, filler words and stumbles, word by word (brief 5.3).
+"""fillers_ru.py - Russian hesitations, filler words and stumbles, word by word.
 
     from fillers_ru import analyse
     marks = analyse(words)    # words from transcript.load_words(); returns a list of dicts

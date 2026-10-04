@@ -1,5 +1,5 @@
 {
- "note": "claude.ai accepts a skill description of at most 200 characters (support.claude.com, 'Creating custom skills', checked 2026-10-02); Claude Code and plugins accept 1024. tools/build.py --dist puts these short descriptions into the per-skill zips for claude.ai. The repository and the plugin keep the full ones.",
+ "note": "claude.ai accepts a skill description of at most 200 characters (support.claude.com, 'Creating custom skills'); Claude Code and plugins accept 1024. tools/build.py --dist puts these short descriptions into the per-skill zips for claude.ai. The repository and the plugin keep the full ones.",
  "max_chars": 200,
  "descriptions": {
   "yt-script": "YouTube script from an idea: five scored hooks, the spoken script, an AI-stamp check. Сценарий для YouTube: хуки, сценарий, проверка штампов.",

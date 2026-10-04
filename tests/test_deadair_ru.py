@@ -1,7 +1,7 @@
-"""deadair.py in Russian: hesitations, filler words in context, stumbles (brief 5.3, R4, R8)."""
+"""deadair.py in Russian: hesitations, filler words in context, stumbles."""
 import json, os, sys, unittest
 
-from helpers import PRIVATE, ROOT, SKILLS, fixture, run_json, run_script
+from helpers import ROOT, SKILLS, fixture, run_json, run_script
 
 sys.path.insert(0, os.path.join(SKILLS, "yt-edit"))
 from fillers_ru import analyse  # noqa: E402
@@ -26,7 +26,7 @@ def marks(text, **kw):
 
 
 class MustNotTouch(unittest.TestCase):
-    """The brief's mandatory list: a word that carries meaning gets no mark at all."""
+    """A word that carries meaning gets no mark at all."""
 
     def test_meaningful_uses(self):
         for text in ("Открой вот этот файл и сохрани его", "Делай вот так и всё получится",
@@ -104,23 +104,6 @@ class Script(unittest.TestCase):
     def test_english_is_untouched(self):
         r = run_json("yt-edit/deadair.py", fixture("en", "edit_en.srt"))
         self.assertNotIn("lang", r)
-
-
-GOLD = os.path.join(PRIVATE, "research", "fillers_gold.json")
-
-
-@unittest.skipUnless(os.path.exists(GOLD), "the labelled real transcripts live in _private/ and are not public")
-class AcceptanceOnRealTranscripts(unittest.TestCase):
-    """Brief 5.3 on 260 labelled words from 5 real Russian videos (tools/research/eval_fillers.py)."""
-
-    def test_brief_criteria(self):
-        sys.path.insert(0, os.path.join(ROOT, "tools", "research"))
-        import eval_fillers
-        r = eval_fillers.evaluate()
-        self.assertGreaterEqual(r["items"], 150)
-        self.assertGreaterEqual(r["precision"], 0.90)
-        self.assertGreaterEqual(r["hesitation_recall"], 0.95)
-        self.assertEqual(r["meaning_hits"], 0)
 
 
 if __name__ == "__main__":

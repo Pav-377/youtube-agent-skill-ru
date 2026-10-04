@@ -18,7 +18,8 @@ import json, os, re, shutil, sys, zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHARED = os.path.join(ROOT, "shared")
 SKILLS = os.path.join(ROOT, "skills")
-PLUGIN_NAME = "youtube-agent-skill-ru"
+with open(os.path.join(ROOT, ".claude-plugin", "marketplace.json"), encoding="utf-8") as _fh:
+    PLUGIN_NAME = json.load(_fh)["name"]  # the whole-plugin zip is named after the marketplace
 # What goes into the whole-plugin zip, in addition to skills/. Missing entries are skipped.
 PLUGIN_EXTRA = [".claude-plugin", "templates", "docs", "README.md", "README.en.md", "LICENSE", "CHANGELOG.md"]
 ZIP_TIME = (2026, 1, 1, 0, 0, 0)

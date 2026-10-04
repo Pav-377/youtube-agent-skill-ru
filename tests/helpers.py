@@ -4,7 +4,6 @@ import json, os, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS = os.path.join(ROOT, "skills")
 FIXTURES = os.path.join(ROOT, "tests", "fixtures")
-PRIVATE = os.path.join(ROOT, "_private")
 
 
 def run_script(script, *args, cwd=None, env=None, skills_root=SKILLS):

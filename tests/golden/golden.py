@@ -6,7 +6,7 @@
 The expected output in tests/golden/orig/ is never edited by hand. It is what the original scripts
 at ORIGINAL_REF print for each case in cases.json. When our version changes English behaviour on
 purpose, the new expectation goes into tests/golden/current/<id>.txt and the change is listed in
-CHANGELOG.md. test_golden.py prefers current/ over orig/.
+tests/golden/CHANGES.md. test_golden.py prefers current/ over orig/.
 """
 import io, json, os, subprocess, sys, tempfile, zipfile
 
@@ -65,7 +65,7 @@ def regenerate():
 
 
 def accept(ids):
-    """Record a deliberate change. Every accepted id must also be named in CHANGELOG.md."""
+    """Record a deliberate change. Every accepted id must also be listed in tests/golden/CHANGES.md."""
     known = {c["id"]: c for c in cases()}
     out = os.path.join(HERE, "current")
     os.makedirs(out, exist_ok=True)
@@ -74,7 +74,7 @@ def accept(ids):
             raise SystemExit(f"unknown case {case_id}")
         with open(os.path.join(out, case_id + ".txt"), "w", encoding="utf-8", newline="\n") as fh:
             fh.write(run(os.path.join(ROOT, "skills"), known[case_id]))
-        print(f"  accepted {case_id} - name it in CHANGELOG.md")
+        print(f"  accepted {case_id} - list it in tests/golden/CHANGES.md")
 
 
 if __name__ == "__main__":

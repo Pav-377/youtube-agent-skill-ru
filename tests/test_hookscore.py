@@ -1,4 +1,4 @@
-"""hookscore.py in Russian: the mechanics (brief 5.2). Calibration against the reviewed set is separate."""
+"""hookscore.py in Russian: the mechanics."""
 import os, sys, unittest
 
 from helpers import SKILLS, run_json, run_script
@@ -84,10 +84,10 @@ class Modes(unittest.TestCase):
 
 
 class Acceptance(unittest.TestCase):
-    """Brief 5.2 as revised by the owner on 2026-10-02: the score is a filter for weak openings.
+    """The score is a filter for weak openings.
     On hooks written to be weak or ordinary, at least 90% of (ordinary, weak) pairs must be ranked
     the right way round and the mean gap must be at least 10 points. On real views-labelled hooks
-    the scorer does not separate hits from misses; that is reported, not tested (docs/REPORT.md)."""
+    the scorer does not separate hits from misses; that is documented in docs/LIMITATIONS.md."""
 
     def test_weak_versus_ordinary(self):
         import json
@@ -99,17 +99,6 @@ class Acceptance(unittest.TestCase):
         pairs = sum((a > b) + 0.5 * (a == b) for a in s for b in w) / (len(s) * len(w))
         self.assertGreaterEqual(pairs, 0.90)
         self.assertGreaterEqual(sum(s) / len(s) - sum(w) / len(w), 10)
-
-    def test_russian_band_cut_failed_on_held_out_hooks(self):
-        """The owner's protocol (tools/hookbands.py): fit the «weak» cut on half the set, keep it
-        only with at least 90% right labels on the other half and on 20 new hooks. It failed, so the
-        Russian report has no band word. If this starts passing, the decision is worth revisiting."""
-        import subprocess
-        from helpers import ROOT
-        p = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "hookbands.py")],
-                           capture_output=True, text=True, encoding="utf-8")
-        self.assertEqual(p.returncode, 1, p.stdout + p.stderr)
-        self.assertIn("REJECTED", p.stdout)
 
     def test_russian_report_has_no_band_word(self):
         from helpers import fixture

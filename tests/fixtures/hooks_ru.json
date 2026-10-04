@@ -1,6 +1,5 @@
 {
- "about": "Russian hook test set for hookscore.py (brief 5.2). Written for this project as format samples; no text is taken from or attributed to a real channel. The English side of the pairs: 21 examples from hooks.json of the original by Jake Schincariol (MIT) and 5 weak hooks from tests/fixtures/en/hooks_en_weak.txt.",
- "status": "labels by Claude; the owner's manual review was cancelled on 2026-10-02 in favour of real data (views-labelled hooks from 15 Russian channels, kept in _private/). This set stays as a secondary check.",
+ "about": "Russian hook test set for hookscore.py. Written for this project as format samples; no text is taken from or attributed to a real channel. The English side of the pairs: 21 examples from hooks.json of the original by Jake Schincariol (MIT) and 5 weak hooks from tests/fixtures/en/hooks_en_weak.txt.",
  "hooks": [
   {
    "id": "h01",

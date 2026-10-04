@@ -4,7 +4,7 @@
     python tests/fixtures/make_fixtures.py
 
 Every file written here is invented for testing. None of it comes from a real channel, a real
-transcript or a real Studio export. Real files from the channel owner live in _private/ and never
+transcript or a real Studio export. Real files never
 reach the repository.
 
 Hand-written fixtures (hooks_en_*.txt, titles_en.txt) are not touched by this script.

@@ -2,7 +2,7 @@
 
 Each test is marked expectedFailure while the problem is open. When a fix lands, unittest reports an
 "unexpected success" and the run fails - that is the signal to delete the decorator, so a fixed
-problem can never silently regress. IDs match the brief (P1-P7) and the stage 0 audit (N1-N12).
+problem can never silently regress. IDs P1-P7 and N1-N12 label the problems of the original.
 """
 import ast, json, os, shutil, sys, tempfile, unittest
 
@@ -32,7 +32,7 @@ def load_cues(path):
 
 
 class P1_HookscoreRussian(unittest.TestCase):
-    """Fixed in stage 3 (mechanics); calibration on the reviewed set follows."""
+    """Fixed."""
 
     def test_p1_phrase_scored_as_russian(self):
         ru, en = hook(P1_RU), hook(P1_EN)
@@ -42,7 +42,7 @@ class P1_HookscoreRussian(unittest.TestCase):
 
 
 class P2_RetentionDecimalComma(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_p2_decimal_comma(self):
         r = run_json("yt-retention/retention.py", fixture("ru", "retention_ru_comma.csv"))
@@ -56,7 +56,7 @@ class P2_RetentionDecimalComma(unittest.TestCase):
 
 class P3_DeadairRussian(unittest.TestCase):
     def test_p3_hesitation_and_restart(self):
-        """Fixed in stage 3. A hesitation is its own class now: HESITATION, not FILLER."""
+        """Fixed. A hesitation is its own class now: HESITATION, not FILLER."""
         cuts = run_json("yt-edit/deadair.py", fixture("ru", "edit_ru.srt"))["cuts"]
         kinds = {(c["kind"], c["start"]) for c in cuts}
         self.assertIn(("HESITATION", 2.1), kinds, "«Эээ...» not cut")
@@ -64,7 +64,7 @@ class P3_DeadairRussian(unittest.TestCase):
 
 
 class P4_TitleRussian(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_p4_duplicate_by_stem(self):
         r = run_json("yt-package/title.py", "--title", "Монтаж ролика за 10 минут",
@@ -78,7 +78,7 @@ class P4_TitleRussian(unittest.TestCase):
 
 
 class P5_ChaptersRussian(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_p5_boundaries_from_vocabulary(self):
         r = run_json("yt-chapters/chapters.py", fixture("ru", "chapters_ru_flat.srt"), "--target", "4")
@@ -90,7 +90,7 @@ class P5_ChaptersRussian(unittest.TestCase):
 
 class P6_SwipeRussian(unittest.TestCase):
     def test_p6_formulas_on_russian_titles(self):
-        """Fixed in stage 3: Russian patterns in hooks.json; Russian titles get Russian formula names."""
+        """Fixed: Russian patterns in hooks.json; Russian titles get Russian formula names."""
         with open(os.path.join(SKILLS, "yt-viral", "hooks.json"), encoding="utf-8") as fh:
             ru_name = {h["name"]: h["name_ru"] for h in json.load(fh)["hooks"]}
         with open(fixture("ru", "swipe_ru.json"), encoding="utf-8") as fh:
@@ -114,7 +114,7 @@ SMOKE = {
 
 
 class P7_SelfContainedSkills(unittest.TestCase):
-    """Fixed in stage 1: shared/ + tools/build.py."""
+    """Fixed: shared/ + tools/build.py."""
     def test_p7_each_skill_runs_alone(self):
         failures = []
         for skill in sorted(os.listdir(SKILLS)):
@@ -145,7 +145,7 @@ class P7_SelfContainedSkills(unittest.TestCase):
 
 
 class N_Encoding(unittest.TestCase):
-    """Fixed in stage 2: shared/lang.py."""
+    """Fixed: shared/lang.py."""
 
     def test_n1_every_open_names_its_encoding(self):
         """On a Russian Windows open() defaults to cp1251 and UTF-8 input turns into mojibake."""
@@ -175,7 +175,7 @@ class N_Encoding(unittest.TestCase):
 
 
 class N_YouTubeAutoCaptions(unittest.TestCase):
-    """Fixed in stage 3: shared/transcript.py."""
+    """Fixed: shared/transcript.py."""
 
     def test_n3_tags_stripped_and_rolling_lines_merged(self):
         cues = load_cues(fixture("ru", "auto_ru.vtt"))
@@ -185,7 +185,7 @@ class N_YouTubeAutoCaptions(unittest.TestCase):
 
 
 class N_Retention(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_n4_transcript_on_percent_axis_without_duration(self):
         """--transcript used to print nothing at all when the axis is a percentage."""
@@ -220,7 +220,7 @@ class N_Retention(unittest.TestCase):
 
 
 class N_Swipe(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_n7_view_counts_as_text(self):
         views = ["1,2K", "1.2M", "1,2 тыс.", "3 млн", "200 000", "200 000"]
@@ -244,7 +244,7 @@ class N_Swipe(unittest.TestCase):
 
 
 class N_Thumbnail(unittest.TestCase):
-    """Fixed in stage 3."""
+    """Fixed."""
 
     def test_n9_thumb_small_repeating_the_title_is_flagged(self):
         """The small caption is checked on its own: here it repeats "videos" and "die" from the title."""
@@ -269,7 +269,7 @@ class N_HookscoreEnglishBugs(unittest.TestCase):
     def test_n10_sentence_start_quirk_is_kept_in_english(self):
         """Decision A: in English the first word of a second sentence still counts as a name.
         Fixing it made strong and weak hooks harder to tell apart. If this test fails, the quirk
-        changed - re-run tools/hookeval.py and update CHANGELOG.md before accepting it."""
+        changed - list it in tests/golden/CHANGES.md before accepting it."""
         a = hook("Now you can do it. Then you can rest.")["properties"]["SPECIFICITY"]
         b = hook("now you can do it. then you can rest.")["properties"]["SPECIFICITY"]
         self.assertEqual(a - b, 6)
@@ -281,7 +281,7 @@ class N_HookscoreEnglishBugs(unittest.TestCase):
 
 
 class N_Chapters(unittest.TestCase):
-    """Fixed in stage 1."""
+    """Fixed."""
 
     def test_n13_titles_do_not_depend_on_hash_seed(self):
         """Tied keywords were ordered by set iteration, so titles changed between runs."""

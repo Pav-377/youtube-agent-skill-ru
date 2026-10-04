@@ -1,4 +1,4 @@
-"""title.py in Russian (brief 5.4, P4) and the two-size thumbnail rule (decision C)."""
+"""title.py in Russian and the two-size thumbnail rule."""
 import unittest
 
 from helpers import run_json, run_script

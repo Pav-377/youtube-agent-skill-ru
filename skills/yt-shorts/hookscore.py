@@ -18,7 +18,7 @@ auto-captions, top-8 and bottom-8 by views across five channels): it separates d
 hooks from real ones well, and it separates a creator's own hits from their own misses barely at
 all. Treat a low score as a reason to look again, never a high score as a promise.
 
-The Russian mode was measured the same way (tools/research/eval_hooks.py): on hooks written to be
+The Russian mode was measured the same way: on hooks written to be
 weak or ordinary it ranks the ordinary one higher in 98% of pairs, with a 15-point gap; on the first
 15 seconds of 226 real Russian videos, strong (2x the channel median views) and weak (under 0.5x)
 score the same on average. A filter for weak openings, not a forecast.
@@ -218,7 +218,7 @@ def report_ru(t, parts, verdict, name, hits):
         print(f"    {PROP_RU[k]:<13} {v:3d}  {'#' * (v // 5)}")
     print(f"    {'ИТОГ':<13} {verdict:3d}")
     print(f"    формула       {name}" + (f"  (совпало шаблонов: {hits})" if hits else
-                                         "  (ни одна формула не подошла: обычно это пересказ, а не хук)"))
+                                         "  (ни одна формула не подошла: так обычно выглядит пересказ темы)"))
     low = min(parts, key=parts.get)
     fix = RU["fix_ru"][low].format(**RU["brevity_ru"])
     print(f"    слабое место  {PROP_RU[low].lower()}: {fix}")
@@ -250,7 +250,7 @@ def main():
         r = {"hook": t.strip(), "properties": parts, "verdict": verdict,
              "band": band(verdict), "formula": name, "matched": hits, "lang": code}
         if code == "ru":
-            del r["band"]  # no Russian bands: the fitted cut failed on held-out hooks (tools/hookbands.py)
+            del r["band"]  # no Russian bands: a fitted cut failed on held-out hooks
         out.append(r)
     out.sort(key=lambda r: -r["verdict"])
     if as_json:
@@ -262,8 +262,7 @@ def main():
         if w["lang"] == "ru":
             print(f"\n  лучший: {w['hook'].strip()}  ({w['verdict']})")
             print("  Оценка отсеивает слабые начала и подсказывает, что исправить. Просмотры она не предсказывает.")
-            print("  Сравнивайте варианты между собой по баллу. Меток «слабый» и «сильный» в русском режиме")
-            print("  нет: подобранный порог не прошёл проверку на хуках, на которых его не подбирали.\n")
+            print("  Сравнивайте варианты между собой по баллу.\n")
         else:
             print(f"\n  winner: {w['hook'].strip()}  ({w['verdict']}, {w['band']})\n")
 
