@@ -28,6 +28,17 @@ from transcript import load, parse_ts  # noqa: E402,F401  (one parser for every 
 
 def norm(t): return re.sub(r"[^a-z ]", "", t.lower()).split()
 
+USAGE_RU = """deadair.py — монтажный лист по транскрипту с таймкодами.
+
+    python3 deadair.py транскрипт.vtt                   # или .srt, или .json от Whisper
+    python3 deadair.py транскрипт.vtt --floor 0.35      # порог паузы в секундах
+    python3 deadair.py транскрипт.vtt --json            # вывод в JSON
+    python3 deadair.py транскрипт.vtt --lang ru         # язык: ru, en или auto (по умолчанию)
+
+Скрипт не режет видео. Он выводит список того, что вырезать и что оставить.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
@@ -35,9 +46,12 @@ def main():
     as_json = "--json" in a; a = [x for x in a if x != "--json"]
     floor = lang.flag_value(a, "--floor", 0.45, float)
     a = [x for x in a if not x.startswith("--") and not re.match(r"^[\d.]+$", x)]
-    if not a or not os.path.exists(a[0]): print(__doc__); sys.exit(1)
+    if not a or not os.path.exists(a[0]): lang.usage(__doc__, USAGE_RU, choice, missing=a[0] if a else None)
     cues = load(a[0])
-    if not cues: print("no cues found - is this an srt, vtt or whisper json?"); sys.exit(1)
+    if not cues:
+        print("no cues found - is this an srt, vtt or whisper json?" if lang.ui_lang(choice) == "en" else
+              "В файле нет реплик с таймкодами. Нужен транскрипт .srt, .vtt или .json от Whisper.")
+        sys.exit(1)
     if lang.resolve(choice, " ".join(c[2] for c in cues[:200])) == "ru":
         from deadair_ru import run
         return run(a[0], cues, floor, as_json)

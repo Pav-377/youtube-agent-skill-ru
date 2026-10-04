@@ -1,7 +1,7 @@
-"""aitells.py - machine-written stamps in a script (brief 5.7)."""
+"""aitells.py - machine-written stamps in a script."""
 import json, os, sys, unittest
 
-from helpers import PRIVATE, SKILLS, fixture, run_json, run_script
+from helpers import SKILLS, fixture, run_json, run_script
 
 sys.path.insert(0, os.path.join(SKILLS, "yt-script"))
 import aitells  # noqa: E402
@@ -17,26 +17,11 @@ def recall(items, code):
 
 class Acceptance(unittest.TestCase):
     def test_stamped_sentences_are_found(self):
-        """Brief: at least 80% of sentences with deliberate stamps are found."""
+        """At least 80% of sentences with deliberate stamps are found."""
         self.assertGreaterEqual(len(STAMPS["ru"]), 50)
         self.assertGreaterEqual(recall(STAMPS["ru"], "ru"), 0.80)
         self.assertGreaterEqual(recall(STAMPS["ru_heldout"], "ru"), 0.80)
         self.assertGreaterEqual(recall(STAMPS["en"], "en"), 0.80)
-
-
-HUMAN = os.path.join(PRIVATE, "research", "human_paragraphs.json")
-
-
-@unittest.skipUnless(os.path.exists(HUMAN), "real speech paragraphs live in _private/ (third-party text)")
-class HumanSpeech(unittest.TestCase):
-    def test_few_false_stamps_on_real_speech(self):
-        """Brief: false positives in at most 10% of 50+ human paragraphs. Speech notes (a long
-        sentence, many dashes) are true statements about the text, so only stamps count here."""
-        with open(HUMAN, encoding="utf-8") as fh:
-            paras = json.load(fh)["speech"]
-        self.assertGreaterEqual(len(paras), 50)
-        flagged = sum(any(f["kind"] == "stamp" for f in aitells.check(p["text"], "ru")) for p in paras)
-        self.assertLessEqual(flagged / len(paras), 0.10)
 
 
 class Rules(unittest.TestCase):

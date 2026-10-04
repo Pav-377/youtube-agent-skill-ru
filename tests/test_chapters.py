@@ -1,4 +1,4 @@
-"""chapters.py: Russian titles and chapters spread over a long video (P5)."""
+"""chapters.py: Russian titles and chapters spread over a long video."""
 import os, tempfile, unittest
 
 from helpers import fixture, run_json

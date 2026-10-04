@@ -1,43 +1,56 @@
-# The YouTube agent skill — Russian-language version
+# YouTube agent for Claude
 
-Eleven Claude skills for YouTube creators, working in Russian and English: script, title and
-thumbnail, edit list, retention, Shorts, chapters, description, comment replies, a weekly plan, a
-channel audit and a virality engine. Free, MIT.
+A Claude plugin with 11 commands for YouTube creators: script, title and thumbnail, edit list,
+retention, Shorts and more. Works in Russian and English. The main documentation is in Russian:
+[README.md](README.md).
 
-This is a fork of [youtube-agent-skill](https://github.com/Jakeschincariol/youtube-agent-skill) by
-Jake Schincariol. The ideas, the 21 hook formulas and the tools are his; this version adds Russian
-and fixes what got in the way. The main README is in Russian: [README.md](README.md).
+## Commands
 
-**Nothing gets published by the plugin.** It writes and checks. You upload.
+| Command | What it does | Example request |
+| --- | --- | --- |
+| `/yt-script` | Writes a script: five scored hook options, then the script in beats | "Write a script about editing on a phone" |
+| `/yt-package` | Writes the title and thumbnail text, checks length, overlap and clickbait | "Title and thumbnail ideas" |
+| `/yt-edit` | Builds an edit list from a transcript: pauses, hesitations, filler words, retakes | "Here are the captions. What do I cut?" |
+| `/yt-retention` | Reads a YouTube Studio retention export: where viewers leave and why | "Why do people stop watching?" |
+| `/yt-shorts` | Finds Shorts in a long video and writes their first lines | "Cut this into Shorts" |
+| `/yt-chapters` | Writes chapters that follow YouTube's rules | "Add chapters" |
+| `/yt-seo` | Writes the description and tags for search | "Write the description and tags" |
+| `/yt-comment` | Sorts comments and drafts replies in the creator's voice | "Reply to my comments" |
+| `/yt-plan` | Plans uploads around the time you have | "Plan my week, I have 8 hours" |
+| `/yt-audit` | Audits a channel and names the one fix that matters most | "Audit my channel" |
+| `/yt-viral` | Finds videos in a niche that beat their channel's usual views | "What's working in my niche" |
+
+## Requirements
+
+- Claude Code, or claude.ai with code execution turned on.
+- Python 3.9 or newer. No third-party packages.
 
 ## Install
 
+In Claude Code, send: "Install this plugin: {{REPO_URL}}", then open a new chat.
+
+Or run these two commands in Claude Code:
+
 ```
-/plugin marketplace add Pav-377/youtube-agent-skill-ru
+/plugin marketplace add {{OWNER}}/{{REPO}}
+```
+
+```
 /plugin install youtube-agent-ru@youtube-agent-skill-ru
 ```
 
-Then send Claude three of your videos and say "build my voice profile from these three": it saves
-the profile to `~/.claude/youtube/voice.md`, which plugin updates never touch. Filling it in by
-hand? Copy [the template](templates/voice.md) there and edit the copy, not the file in the plugin
-folder. The scripts need Python 3.9 or newer.
+For claude.ai, download the per-skill zips from {{REPO_URL}}/releases and upload each one under
+Customize > Skills. Details: [docs/INSTALL.md](docs/INSTALL.md) (Russian).
 
-For claude.ai, download the per-skill zips from the latest GitHub Release and upload them under
-Customize > Skills (code execution must be on). Details in [docs/INSTALL.md](docs/INSTALL.md) (Russian).
+## Limitations
 
-## What changed from the original
+- The plugin does not publish, edit video files or sign in to YouTube.
+- The hook score filters out weak openings and says what to fix. It does not predict views.
+- Russian YouTube Studio column names are not yet checked against a real export.
 
-- Russian everywhere: every script detects the language, uses Russian word lists, reports in Russian.
-- Russian YouTube Studio exports (decimal comma, semicolons, Russian headers, the zip) read correctly.
-- Russian filler words handled by context: hesitations always cut, connectors at the start of a
-  phrase kept, meaningful uses never touched; exact word times from YouTube's automatic captions.
-- New: `aitells.py`, a check for machine-written stamps in scripts, in Russian and English.
-- Every skill is self-contained, so each uploads to claude.ai on its own.
-- Bugs fixed, including in English mode. Everything is listed in [CHANGELOG.md](CHANGELOG.md).
-
-The hook score filters out weak openings and says what to fix. It does not predict views: on 226 real
-Russian videos, hits and misses scored the same. See [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+Full list: [docs/LIMITATIONS.md](docs/LIMITATIONS.md) (Russian).
 
 ## Licence
 
-MIT, like the original. The original copyright line is kept in [LICENSE](LICENSE).
+MIT. Based on [youtube-agent-skill](https://github.com/Jakeschincariol/youtube-agent-skill) by
+Jake Schincariol. The original copyright line is kept in [LICENSE](LICENSE).

@@ -116,6 +116,18 @@ def report(found, code):
         print(f"\n  {stamps} AI tells, {len(found) - stamps} speech notes. Nothing was rewritten.\n")
 
 
+USAGE_RU = """aitells.py — поиск штампов машинного текста в сценарии.
+
+    python3 aitells.py сценарий.txt              # абзацы разделены пустой строкой
+    python3 aitells.py --text "Это не просто монтаж, а целая философия."
+    python3 aitells.py сценарий.txt --json       # вывод в JSON
+    python3 aitells.py сценарий.txt --lang ru    # язык: ru, en или auto (по умолчанию)
+    python3 aitells.py сценарий.txt --long 22    # другой порог длинного предложения
+
+Скрипт ничего не переписывает. Для каждой находки он показывает цитату и подсказку.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
@@ -132,7 +144,7 @@ def main():
     elif a and os.path.exists(a[0]):
         text = lang.read_text(a[0])
     else:
-        print(__doc__); sys.exit(1)
+        lang.usage(__doc__, USAGE_RU, choice, missing=a[0] if a else None)
     code = lang.resolve(choice, text)
     found = check(text, code)
     if as_json:

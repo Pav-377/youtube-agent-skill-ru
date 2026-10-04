@@ -15,15 +15,15 @@ class GoldenEnglish(unittest.TestCase):
 
 
 class DeliberateChangesAreDocumented(unittest.TestCase):
-    def test_every_current_expectation_is_in_changelog(self):
+    def test_every_current_expectation_is_listed(self):
         current = os.path.join(golden.HERE, "current")
         ids = [f[:-4] for f in sorted(os.listdir(current))] if os.path.isdir(current) else []
         if not ids:
             return
-        with open(os.path.join(golden.ROOT, "CHANGELOG.md"), encoding="utf-8") as fh:
+        with open(os.path.join(golden.HERE, "CHANGES.md"), encoding="utf-8") as fh:
             log = fh.read()
         self.assertEqual([i for i in ids if f"`{i}`" not in log], [],
-                         "tests/golden/current/ holds a change CHANGELOG.md does not mention")
+                         "tests/golden/current/ holds a change tests/golden/CHANGES.md does not list")
 
 
 def _has_original_ref():

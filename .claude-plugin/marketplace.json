@@ -1,15 +1,18 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "youtube-agent-skill-ru",
-  "description": "Russian-language version of the YouTube agent skill pack for Claude (original: github.com/Jakeschincariol/youtube-agent-skill)",
-  "owner": { "name": "Pav-377", "url": "https://github.com/Pav-377" },
+  "description": "YouTube-агент для Claude на русском языке. Основан на youtube-agent-skill Jake Schincariol: https://github.com/Jakeschincariol/youtube-agent-skill",
+  "owner": {
+    "name": "{{AUTHOR}}",
+    "url": "https://github.com/{{OWNER}}"
+  },
   "plugins": [
     {
       "name": "youtube-agent-ru",
-      "description": "Eleven Claude skills for YouTube creators, in Russian and English: a scored hook panel, a title and thumbnail linter, an edit decision list, a retention reader and a virality engine.",
+      "description": "Одиннадцать скиллов Claude для автора YouTube: сценарий, название и обложка, монтажный лист, удержание, шортсы, главы, описание, комментарии, план, аудит канала, идеи в нише.",
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/Pav-377/youtube-agent-skill-ru"
+      "homepage": "{{REPO_URL}}"
     }
   ]
 }

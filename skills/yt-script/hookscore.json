@@ -3,7 +3,7 @@
  "brevity_ru": {
   "low": 9,
   "high": 24,
-  "status": "Calibrated 2026-10-02 on real data: the first 15 s of 226 Russian videos hold 37.6 words on average - about 150 words a minute, the original's English rate - so a hook of up to 10 seconds is up to ~24 words and the original band stays. Not tuned on the synthetic set (circular)."
+  "status": "Calibrated on real data: the first 15 s of 226 Russian videos hold 37.6 words on average - about 150 words a minute, the original's English rate - so a hook of up to 10 seconds is up to ~24 words and the original band stays. Not tuned on the synthetic set (circular)."
  },
  "address_ru": {
   "pronouns": [

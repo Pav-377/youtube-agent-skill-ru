@@ -1,0 +1,9 @@
+{
+ "_help": "Fill in owner (GitHub user or organisation), repo (repository name) and author (name for LICENSE and the plugin manifests), then run: python tools/rebrand.py. repo_url may stay empty: it becomes https://github.com/<owner>/<repo>. plugin and marketplace are the names in the install commands; change them only if other names are needed.",
+ "owner": "",
+ "repo": "",
+ "author": "",
+ "repo_url": "",
+ "plugin": "youtube-agent-ru",
+ "marketplace": "youtube-agent-skill-ru"
+}

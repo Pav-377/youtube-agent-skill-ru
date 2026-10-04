@@ -1,5 +1,5 @@
 {
- "note": "Data for fillers_ru.py (brief 5.3). Words are compared in lower case with ё = е and punctuation stripped. Add words and guards here, not in the code.",
+ "note": "Data for fillers_ru.py. Words are compared in lower case with ё = е and punctuation stripped. Add words and guards here, not in the code.",
  "hesitation_regex": "^(э+|э+м+|м+|а-а+|м-м+|э-э+)$",
  "hesitation_note": "Always cut. YouTube's automatic captions drop most hesitation sounds before we ever see them; Whisper keeps more of them.",
  "pause_seconds": 0.3,
@@ -7,7 +7,7 @@
  "density": {
   "window_seconds": 30,
   "max_fillers": 6,
-  "note": "More than max_fillers filler words (hesitations not counted) inside window_seconds and a filler kept as a connector is cut too: the brief's density rule. Set conservatively - see docs/REPORT.md for how it was chosen."
+  "note": "More than max_fillers filler words (hesitations not counted) inside window_seconds and a filler kept as a connector is cut too: the density rule. Set conservatively."
  },
  "fillers": {
   "ну": {
@@ -313,7 +313,7 @@
    "блин"
   ],
   "interjections_note": "A filler next to an interjection is part of an exclamation (вау ну вау) - never cut.",
-  "ну_note": "ну + one of ну_idioms_next is an idiom or a rhetorical question (ну и что, ну как же, ну да) - never a filler. \"как\" was added after the held-out check (docs/REPORT.md).",
+  "ну_note": "ну + one of ну_idioms_next is an idiom or a rhetorical question (ну и что, ну как же, ну да) - never a filler.",
   "короче_note": "короче as a comparative (стал короче, станет короче, короче на треть, короче чем) is not a filler."
  },
  "repeat": {

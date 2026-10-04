@@ -1,4 +1,4 @@
-"""hooks.json: the Russian fields (brief 5.2)."""
+"""hooks.json: the Russian fields."""
 import json, os, re, unittest
 
 from helpers import ROOT
@@ -24,7 +24,7 @@ class RussianFields(unittest.TestCase):
                              {"id", "name", "shape", "example", "fails_when", "match"})
 
     def test_each_pattern_finds_its_own_and_not_three_others(self):
-        """The brief: a Russian pattern matches at least one example of its formula and no example
+        """A Russian pattern matches at least one example of its formula and no example
         of at least three other formulas."""
         for h in HOOKS:
             for p in h["match_ru"]:

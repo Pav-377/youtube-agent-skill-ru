@@ -1,10 +1,10 @@
 {
- "note": "Data for aitells.py (brief 5.7). Phrases are matched in lower case with ё = е as whole words; a * at the end matches any ending. Regex entries are Python regular expressions, matched case-insensitively against one sentence. Add patterns here, not in the code.",
+ "note": "Data for aitells.py. Phrases are matched in lower case with ё = е as whole words; a * at the end matches any ending. Regex entries are Python regular expressions, matched case-insensitively against one sentence. Add patterns here, not in the code.",
  "ru": {
   "contrast": {
    "kind": "stamp",
    "label": "противопоставление «не X, а Y»",
-   "hint": "Скажите прямо, что есть, без того, чего нет: «не X, а Y» — любимый приём нейросетей.",
+   "hint": "Скажите прямо, что есть, без того, чего нет.",
    "regex": [
     "\\b(?:это|речь|дело|вопрос|история|проблема|секрет|смысл)\\s+не\\s+(?:про|о|об|в|во|только|просто)?\\s*[^.!?;]{1,50}?[,—–-]\\s*(?:а|это)\\s+(?:про|о|об|в|во)?\\b",
     "\\bне\\s+просто\\s+[^.!?;]{1,50}?,\\s*а\\b",

@@ -1,10 +1,23 @@
 {
   "name": "youtube-agent-ru",
-  "description": "Russian-language version of youtube-agent-skill by Jake Schincariol (MIT): eleven Claude skills for YouTube creators that work in Russian and English - scripts off 21 hook formulas with a scored hook, title and thumbnail linted as one pairing, an edit decision list from your transcript, a retention reader that finds the exact moments people leave, a Shorts cutter, chapters, search, comments, the weekly plan, a channel audit, and a virality engine that ranks your niche by outlier multiple rather than by channel size.",
+  "description": "Одиннадцать скиллов Claude для автора YouTube на русском и английском: сценарий с оценкой начала, название и текст обложки, монтажный лист по транскрипту, разбор удержания, шортсы, главы, описание и теги, ответы на комментарии, план на неделю, аудит канала и поиск идей в нише. Основан на youtube-agent-skill Jake Schincariol (MIT).",
   "version": "1.0.0",
-  "author": { "name": "Jake Schincariol", "url": "https://opusjake.ai" },
-  "homepage": "https://github.com/Pav-377/youtube-agent-skill-ru",
-  "repository": "https://github.com/Pav-377/youtube-agent-skill-ru",
+  "author": {
+    "name": "{{AUTHOR}}",
+    "url": "https://github.com/{{OWNER}}"
+  },
+  "homepage": "{{REPO_URL}}",
+  "repository": "{{REPO_URL}}",
   "license": "MIT",
-  "keywords": ["youtube", "russian", "shorts", "retention", "thumbnails", "titles", "content", "video", "seo"]
+  "keywords": [
+    "youtube",
+    "russian",
+    "shorts",
+    "retention",
+    "thumbnails",
+    "titles",
+    "content",
+    "video",
+    "seo"
+  ]
 }

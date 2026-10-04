@@ -1,4 +1,4 @@
-"""shared/lang.py - brief section 5.1."""
+"""shared/lang.py."""
 import io, os, subprocess, sys, tempfile, unittest
 
 from helpers import ROOT
@@ -118,7 +118,7 @@ class Stem(unittest.TestCase):
 
     def test_official_snowball_sample(self):
         """400 pairs from the official Snowball test vocabulary (tests/fixtures/snowball_ru, BSD-3).
-        The full 49785-word vocabulary matched 100% on 2026-10-01: tools/snowball_check.py."""
+        The full 49785-word vocabulary matches 100%: tools/snowball_check.py."""
         path = os.path.join(ROOT, "tests", "fixtures", "snowball_ru", "sample.tsv")
         with open(path, encoding="utf-8") as fh:
             pairs = [line.rstrip("\n").split("\t") for line in fh if not line.startswith("#")]
@@ -231,7 +231,7 @@ class Output(unittest.TestCase):
 
 
 class NoResourceWarnings(unittest.TestCase):
-    """Stage 0 left a ResourceWarning: transcripts were opened and never closed."""
+    """The original left a ResourceWarning: transcripts were opened and never closed."""
 
     def test_scripts_close_their_files(self):
         from helpers import fixture, run_script

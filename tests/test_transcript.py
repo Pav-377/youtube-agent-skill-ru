@@ -1,4 +1,4 @@
-"""shared/transcript.py: SRT, VTT, YouTube automatic captions and whisper JSON (brief 5.3, N3)."""
+"""shared/transcript.py: SRT, VTT, YouTube automatic captions and whisper JSON."""
 import json, os, sys, tempfile, unittest
 
 from helpers import ROOT, fixture

@@ -1,4 +1,4 @@
-"""retention.py on every export shape we know of (brief 5.5).
+"""retention.py on every export shape we know of.
 
 One retention curve is written in every combination that makes sense - column separator, decimal
 mark, thousands separator, % sign, 0..1 ratios, time format, header language, file encoding - and
@@ -145,7 +145,7 @@ class EveryFormat(unittest.TestCase):
 
 class Locale(unittest.TestCase):
     def test_p2_demo_reads_19_5(self):
-        """The video's demo: decimal comma, Russian report."""
+        """Decimal comma, Russian report."""
         p = run_script(SCRIPT, fixture("ru", "retention_ru_comma.csv"))
         self.assertEqual(p.returncode, 0, p.stdout)
         self.assertIn("в начале ушли 19,5% зрителей", p.stdout)

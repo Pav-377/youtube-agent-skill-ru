@@ -182,6 +182,18 @@ def show(r):
     for m in r["good"]:      print(f"    {'ок' if ru else 'ok'}              {m}")
 
 
+USAGE_RU = """title.py — проверка названия и текста обложки перед публикацией.
+
+    python3 title.py --title "..." --thumb "БЕЗ МОНТАЖА"
+    python3 title.py --title "..." --thumb "БЕЗ МОНТАЖА" --thumb-small "и без программ"
+    python3 title.py названия.txt              # по одному в строке, по убыванию оценки
+    python3 title.py --title "..." --json      # вывод в JSON
+    python3 title.py --title "..." --lang ru   # язык: ru, en или auto (по умолчанию)
+
+--thumb — крупный текст обложки, --thumb-small — мелкая подпись под ним.
+"""
+
+
 def main():
     lang.setup_output()
     a = sys.argv[1:]
@@ -194,7 +206,7 @@ def main():
     elif a and os.path.exists(a[0]):
         titles = [l for l in lang.read_text(a[0]).splitlines() if l.strip()]
     else:
-        print(__doc__); sys.exit(1)
+        lang.usage(__doc__, USAGE_RU, choice, missing=a[0] if a else None)
     rows = [check(t, thumb, small, lang.resolve(choice, " ".join([t, thumb or "", small or ""])))
             for t in titles]
     rows.sort(key=lambda r: -r["score"])

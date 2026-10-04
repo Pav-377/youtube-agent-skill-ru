@@ -105,7 +105,7 @@ def _youtube_auto(blocks):
 
 
 def _estimate(start, end, text):
-    """Share a cue's time out by characters before each word (the owner's rule for .srt)."""
+    """Share a cue's time out by characters before each word (the rule for .srt)."""
     toks = text.split()
     if not toks:
         return []

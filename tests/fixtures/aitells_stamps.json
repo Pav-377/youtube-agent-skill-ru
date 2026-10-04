@@ -1,5 +1,5 @@
 {
- "about": "Sentences with deliberate AI tells for aitells.py (brief 5.7). Written for this project. About a quarter of the Russian ones are variations that are not in aitells.json word for word, so the recall measured on them is not just the lists repeated back. 'ru' was used while setting the rules (in-sample); 'ru_heldout' was written after the rules were frozen and was never used to change them.",
+ "about": "Sentences with deliberate AI tells for aitells.py. Written for this project. About a quarter of the Russian ones are variations that are not in aitells.json word for word, so the recall measured on them is not just the lists repeated back. 'ru' was used while setting the rules (in-sample); 'ru_heldout' was written after the rules were frozen and was never used to change them.",
  "ru": [
   {
    "type": "contrast",

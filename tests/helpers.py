@@ -4,12 +4,15 @@ import json, os, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS = os.path.join(ROOT, "skills")
 FIXTURES = os.path.join(ROOT, "tests", "fixtures")
-PRIVATE = os.path.join(ROOT, "_private")
+# Help and error messages follow the system locale. Tests pin it, so a run does not depend on the
+# machine: English unless a test passes LOCALE_RU.
+LOCALE_EN = {"LC_ALL": "", "LC_MESSAGES": "", "LANGUAGE": "", "LANG": "en_US.UTF-8"}
+LOCALE_RU = {"LC_ALL": "", "LC_MESSAGES": "", "LANGUAGE": "", "LANG": "ru_RU.UTF-8"}
 
 
 def run_script(script, *args, cwd=None, env=None, skills_root=SKILLS):
     """Run skills/<script> with args. Returns CompletedProcess with text stdout/stderr (UTF-8)."""
-    e = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1")
+    e = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONDONTWRITEBYTECODE="1", **LOCALE_EN)
     if env:
         e.update(env)
     return subprocess.run([sys.executable, os.path.join(skills_root, script)] + [str(a) for a in args],

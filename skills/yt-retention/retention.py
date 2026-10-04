@@ -325,10 +325,24 @@ def report_ru(src, d, out, notes):
         print(f"    -{fmt(c['lost'], 1, 'ru'):>5}%  на {where(c, 'ru', d['axis']):>10}"
               + (f"   «{said.get(str(c['from']), '')}»" if said else ""))
     if not cliffs:
-        print("    обрывов круче 0,8% нет: зрители уходят постепенно, а не в конкретный момент")
+        print("    обрывов круче 0,8% нет: зрители уходят постепенно")
     unit = "за 1% длины ролика" if d["axis"] == "percent" else "в секунду"
     print(f"\n  СПАД        {fmt(out['slide_per_unit'], 3, 'ru')}% {unit} в середине ролика")
-    print("              Ровный спад — это темп, а не содержание. Сократите середину, не переписывайте её.\n")
+    print("              Ровный спад говорит о темпе. Сократите середину, переписывать её не нужно.\n")
+
+
+USAGE_RU = """retention.py — разбор выгрузки удержания аудитории из YouTube Studio.
+
+    python3 retention.py удержание.csv
+    python3 retention.py удержание.csv --transcript транскрипт.vtt   # что звучало в момент обрыва
+    python3 retention.py удержание.csv --duration 600                # длина ролика в секундах
+    python3 retention.py выгрузка.zip                                # архив, который скачивает Studio
+    python3 retention.py удержание.csv --json                        # вывод в JSON
+    python3 retention.py удержание.csv --lang ru                     # язык: ru, en или auto (по умолчанию)
+
+Где взять файл: в YouTube Studio откройте аналитику ролика, найдите график удержания аудитории
+и нажмите значок загрузки.
+"""
 
 
 def main():
@@ -343,8 +357,8 @@ def main():
     dur_arg = a[a.index("--duration") + 1] if "--duration" in a and a.index("--duration") + 1 < len(a) else None
     files = [x for x in a if not x.startswith("--") and x not in (tr, dur_arg)]
     if not files:
-        print(__doc__); sys.exit(1)
-    code = choice if choice in lang.LANGS else "en"
+        lang.usage(__doc__, USAGE_RU, choice)
+    code = lang.ui_lang(choice)
     try:
         d, src = load(files[0], choice)
         code = d["lang"]

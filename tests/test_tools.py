@@ -124,7 +124,7 @@ class OtherChecksCatchProblems(unittest.TestCase):
 
 
 class Dist(unittest.TestCase):
-    """Brief 6.2: every zip, unpacked alone into an empty folder, runs its scripts."""
+    """Every zip, unpacked alone into an empty folder, runs its scripts."""
 
     @classmethod
     def setUpClass(cls):

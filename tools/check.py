@@ -12,7 +12,7 @@
   imports      skill scripts use the standard library only, and nothing that talks to a network
   skills       a Russian-language mode and examples_ru.md in every skill; tools run from the skill folder
 
-Limits are from the official docs (checked 2026-10-01):
+Limits are from the official docs:
   platform.claude.com/docs/en/agents-and-tools/agent-skills/overview  - SKILL.md frontmatter
   code.claude.com/docs/en/plugins/marketplace-reference              - plugin and marketplace names
 """
